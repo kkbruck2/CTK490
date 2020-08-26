@@ -9,7 +9,7 @@ var x = 0; // acceleration data
 var y = 0;
 var z = 0;
 var cars = [];
-var frogPos;
+var catPos;
 var angle = 0.0;
 
 function setup() {
@@ -24,7 +24,7 @@ function setup() {
   for (var i = 0; i < 10; i++) {
     cars.push(new car())
   }
-  frogPos = createVector(width / 2, height - 80);
+  catPos = createVector(width / 2, height - 80);
 
   bunnyImage = loadImage("assets/bunny.jpg");
   imageMode(CENTER);
@@ -34,12 +34,15 @@ function setup() {
 
 function draw() {
 
-push();
+
   background('#c6f5ff'); // light blue
-  translate(mouseX, mouseX);
+
+  push();
+  translate(mouseX, mouseY);
+
   rotate(angle);
   cat(-300, -300);
-  angle += 0.1;
+  angle += 0.01;
   pop();
 
 
@@ -57,17 +60,17 @@ push();
 
   rotate(radians(alpha)); // using alpha in here so it doesn't feel bad
 
-  image(bunnyImage, 0, 0, 500, 500);
+  cat (0, 0, 500, 500);
   //  	rect(0, 0, 100, 100) ;
   pop();
 
-  frogPos.x = xPosition
-  frogPos.y = yPosition
+  catPos.x = xPosition
+  catPos.y = yPosition
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
     cars[i].drive();
-    if (cars[i].pos.dist(frogPos) < 50) {
+    if (cars[i].pos.dist(catPos) < 50) {
       cars.splice(i, 1);
     }
   }
@@ -117,14 +120,16 @@ window.addEventListener('devicemotion', function(e) {
 });
 
 function cat() {
-  translate(-300, -300);
-  fill(100, 0, 100);
-  ellipse(300, 300, 150, 200);
   fill(150);
-  ellipse(300, 215, 70, 70);
+  translate(-300, -300);
+  ellipse(300, 300, 70, 70);
+  fill(100, 0, 100);
+  ellipse(300, 385, 150, 200);
+
+
   stroke(0);
   strokeWeight(6);
-  line(300, 300, 322, 454);
+  line(300, 385, 322, 594);
 
 }
 
