@@ -20,7 +20,7 @@ function setup() {
   beta = 0;
   gamma = 0;
 
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < 40; i++) {
     cars.push(new car())
   }
   frogPos = createVector(width / 2, height - 80);
@@ -34,10 +34,6 @@ function setup() {
 function draw() {
 
   background('#c6f5ff'); // light blue
-  fill(100, 0, 100);
-  ellipse(0, 0, 150, 200);
-  fill(150);
-  ellipse(0,0, 70, 70);
 
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
