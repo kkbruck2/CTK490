@@ -37,13 +37,14 @@ function draw() {
 
   background('#c6f5ff'); // light blue
 
-  push();
-  translate(mouseX, mouseY);
-
-  rotate(angle);
-  cat(-300, -300);
-  angle += 0.01;
-  pop();
+//code for test mouse moving cat
+  // push();
+  // translate(mouseX, mouseY);
+  //
+  // rotate(angle);
+  // cat(-300, -300);
+  // angle += 0.01;
+  // pop();
 
 
 
