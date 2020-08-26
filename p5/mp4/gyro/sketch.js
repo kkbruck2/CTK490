@@ -48,7 +48,7 @@ function draw() {
 
 
 
-  noStroke();
+  // noStroke();
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
