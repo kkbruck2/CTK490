@@ -10,6 +10,7 @@ var y = 0;
 var z = 0;
 var cars = [];
 var frogPos;
+var angle = 0.0;
 
 function setup() {
 
@@ -33,12 +34,17 @@ function setup() {
 
 function draw() {
 
+push();
   background('#c6f5ff'); // light blue
-  fill(100, 0, 100);
-  ellipse(0, 0, 150, 200);
-  fill(150);
-  ellipse(0, 0, 70, 70);
+  translate(mouseX, mouseX);
+  rotate(angle);
+  cat(-300, -300);
+  angle += 0.1;
+  pop();
 
+
+
+  noStroke();
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
@@ -55,8 +61,8 @@ function draw() {
   //  	rect(0, 0, 100, 100) ;
   pop();
 
-frogPos.x = xPosition
-frogPos.y = yPosition
+  frogPos.x = xPosition
+  frogPos.y = yPosition
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
@@ -109,6 +115,18 @@ window.addEventListener('devicemotion', function(e) {
   y = e.acceleration.y;
   z = e.acceleration.z;
 });
+
+function cat() {
+  translate(-300, -300);
+  fill(100, 0, 100);
+  ellipse(300, 300, 150, 200);
+  fill(150);
+  ellipse(300, 215, 70, 70);
+  stroke(0);
+  strokeWeight(6);
+  line(300, 300, 322, 454);
+
+}
 
 function car() {
   //attributes
