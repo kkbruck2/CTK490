@@ -37,7 +37,7 @@ function draw() {
   fill(100, 0, 100);
   ellipse(0, 0, 150, 200);
   fill(150);
-  ellipse(0,0, 70, 70);
+  ellipse(0, 0, 70, 70);
 
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
