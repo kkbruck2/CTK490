@@ -5,7 +5,7 @@ var alpha, beta, gamma; // orientation data
 var bunnyImage;
 var xPosition = 0;
 var yPosition = 0;
-var x = 0; // acceleration data
+var x = 0; // acceleratiobn data
 var y = 0;
 var z = 0;
 var cars = [];
