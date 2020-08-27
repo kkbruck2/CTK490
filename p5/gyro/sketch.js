@@ -11,10 +11,11 @@ var z = 0;
 var cars = [];
 var catPos;
 var angle = 0.0;
-
+//---------------------------------------------------------Set up
 function setup() {
 
   createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES);
 
   // initialize accelerometer variables
   alpha = 0;
@@ -31,22 +32,20 @@ function setup() {
   rectMode(CENTER);
 
 }
-
+//--------------------------------------------------------Draw
 function draw() {
-
 
   background('#c6f5ff'); // light blue
 
-//code for test mouse moving cat
-  // push();
-  // translate(mouseX, mouseY);
-  //
-  // rotate(angle);
-  // cat(-300, -300);
-  // angle += 0.01;
-  // pop();
+//-------------------------------code for test mouse moving cat
+  push();
+  translate(mouseX, mouseY);
 
-
+  rotate(angle);
+  cat(-300, -300);
+  angle += 2;
+  pop();
+  //-------------------------------code for test mouse moving cat END
 
   // noStroke();
   // the map command !!!!
@@ -59,9 +58,10 @@ function draw() {
 
   translate(xPosition, yPosition); // move everything over by x, y
 
-  rotate(radians(alpha)); // using alpha in here so it doesn't feel bad
+  rotate(angle); // using alpha in here so it doesn't feel bad
 
-  cat (0, 0, 500, 500);
+  cat (width/2, height/2);
+    angle += 2;
   //  	rect(0, 0, 100, 100) ;
   pop();
 
@@ -101,7 +101,7 @@ function draw() {
   text("atk", width / 2, height / 2);
 
 }
-
+//----------------------------------------------------------end of draw
 // HERE'S THE STUFF YOU NEED FOR READING IN DATA!!!
 
 // Read in accelerometer data
@@ -119,39 +119,36 @@ window.addEventListener('devicemotion', function(e) {
   y = e.acceleration.y;
   z = e.acceleration.z;
 });
-
+//----------------------------------------------------------element definitions
+//----------------------------------------------------------cat
 function cat() {
   fill(150);
   translate(-300, -300);
   ellipse(300, 300, 70, 70);
   fill(100, 0, 100);
   ellipse(300, 385, 150, 200);
-
-
   stroke(0);
   strokeWeight(6);
   line(300, 385, 322, 594);
 
 }
-
+//-------------------------------------------------------------Car(mice)
 function car() {
-  //attributes
+  //-----------------------attributes
   this.pos = createVector(100, 100);
   this.vel = createVector(random(-5, 5), random(-5, 5));
   this.r = random(255);
   this.g = random(255);
   this.b = random(255);
-  //vector
 
-
+  //----------------------vector
 
   this.display = function() {
     fill(this.r, this.g, this.b);
     rect(this.pos.x, this.pos.y, 100, 50);
-
   }
 
-  //methods
+  //----------------------methods
   this.drive = function() {
     this.pos.add(this.vel);
 
@@ -159,7 +156,7 @@ function car() {
     if (this.pos.x < 0) this.pos.x = width;
     if (this.pos.y > height) this.pos.y = 0;
     if (this.pos.y < 0) this.pos.y = height;
-
-
   }
+
 }
+//----------------------------------------------------------------end of mice
