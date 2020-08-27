@@ -61,7 +61,7 @@ function draw() {
   rotate(angle); // using alpha in here so it doesn't feel bad
 
   cat (width/2, height/2);
-    angle += 180;
+    angle += 0;
   //  	rect(0, 0, 100, 100) ;
   pop();
 
@@ -93,12 +93,7 @@ function draw() {
   text("y = " + y.toFixed(2), 25, 170);
   text("z = " + z.toFixed(4), 25, 190);
 
-  // MORE DECORATIONS - write that pretty ATK type on top.
-  fill('white');
-  noStroke();
-  textSize(300);
-  textAlign(CENTER);
-  text("atk", width / 2, height / 2);
+
 
 }
 //----------------------------------------------------------end of draw
