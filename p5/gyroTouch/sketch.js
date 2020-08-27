@@ -38,13 +38,13 @@ function draw() {
   background('#c6f5ff'); // light blue
 
 //-------------------------------code for test mouse moving cat
-  // push();
-  // translate(mouseX, mouseY);
-  //
-  // rotate(angle);
-  // cat(-300, -300);
-  // angle += 2;
-  // pop();
+  push();
+  translate(mouseX, mouseY);
+
+  rotate(angle);
+  cat(-300, -300);
+  angle += 2;
+  pop();
   //-------------------------------code for test mouse moving cat END
 
   // noStroke();
@@ -61,7 +61,7 @@ function draw() {
   rotate(angle); // using alpha in here so it doesn't feel bad
 
   cat (width/2, height/2);
-    angle += 180;
+    angle += 2;
   //  	rect(0, 0, 100, 100) ;
   pop();
 
