@@ -2,7 +2,7 @@
 Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
-
+var catImg;
 var xPosition = 0;
 var yPosition = 0;
 var x = 0; // acceleratiobn data
@@ -16,9 +16,9 @@ function setup() {
 
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
+  catImg = loadImage("assets/1x/catPlace.png");
 
-  let v0 = createVector(0, 0);
-  let v1 = createVector(mouseX, mouseY);
+
 
 
 
@@ -30,6 +30,8 @@ function setup() {
   for (var i = 0; i < 10; i++) {
     cars.push(new car())
   }
+  catPos = createVector(width / 2, height - 80);
+
 
   imageMode(CENTER);
   rectMode(CENTER);
@@ -40,45 +42,46 @@ function draw() {
 
   background('#c6f5ff'); // light blue
 
-  // cat(catPos.x, catPos.y, mouseX, mouseY)
-//
-// var myHeading = catPos.heading();
+  let v0 = createVector(windowWidth /2, windowHeight / 2);
+  let v1 = createVector(mouseX - windowWidth /2, mouseY - windowHeight / 2);
 
-  // catPos.x = xPosition
-  // catPos.y = yPosition
+  drawArrow(v0, v1, 'black');
+
+  let myHeading = v1.heading();
 
 
 
 
 //-------------------------------code for test mouse moving cat
   push();
+
   translate(mouseX, mouseY);
-  rotate(angle);
-  cat(-300, -300);
+
+
   pop();
+
   //-------------------------------code for test mouse moving cat END
 
-  noStroke();
-  //the map command !!!!
-  //takes your variable and maps it from range 1 to range 2
-  //map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-  xPosition = map(gamma, -60, 60, 0, width);
-  yPosition = map(beta, -30, 30, 0, height);
-  //--------------------------------------------------Codev for gyro cat
-  push(); // before you use translate, rotate, or scale commands, push and then pop after
+  // noStroke();
+  // the map command !!!!
+  // takes your variable and maps it from range 1 to range 2
+  // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
+  // xPosition = map(gamma, -60, 60, 0, width);
+  // yPosition = map(beta, -30, 30, 0, height);
 
-  translate(xPosition, yPosition); // move everything over by x, y
+  // push(); // before you use translate, rotate, or scale commands, push and then pop after
+  //
+  // translate(xPosition, yPosition); // move everything over by x, y
+  //
+  // rotate(angle); // using alpha in here so it doesn't feel bad
+  //
+  // // cat (width/2, height/2);
+  // //   angle += 0;
+  // //  	rect(0, 0, 100, 100) ;
+  // pop();
 
-  rotate(angle); // using alpha in here so it doesn't feel bad
-
-  cat (width/2, height/2);
-    angle += 2;
-  //  	rect(0, 0, 100, 100) ;
-  pop();
-
-    //--------------------------------------------------END Codev for gyro cat
-
-
+  // catPos.x = xPosition
+  // catPos.y = yPosition
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
@@ -105,36 +108,24 @@ function draw() {
   text("y = " + y.toFixed(2), 25, 170);
   text("z = " + z.toFixed(4), 25, 190);
 
-  // MORE DECORATIONS - write that pretty ATK type on top.
 
 
 }
 //----------------------------------------------------------end of draw
 // HERE'S THE STUFF YOU NEED FOR READING IN DATA!!!
-function catHunt(catPos, vec) {
+
+function drawArrow(base, vec, myColor) {
 push();
-  translate(catPos.x, catPos.y, mouseX, mouseY);
-  rotate(vec.heading());
-  // catPos.x = xPosition
-  // catPos.y = yPosition
+noStroke();
+
+fill(myColor);
+translate(base.x, base.y);
+line(0, 0, vec.x, vec.y);
+rotate(vec.heading());
+// let arrowSize = 7;
+translate(vec.mag(), 0);
+cat(0, 0);
 pop();
-  //----------------------vector
-
-  this.display = function() {
-
-    translate(this.pos.x, this.pos.y);
-    rotate(this.vel.heading());
-    cat(mouseX, mouseY);
-
-
-  }
-
-  //----------------------methods
-  this.drive = function() {
-    this.pos.add(this.vel);
-
-
-  }
 }
 
 // Read in accelerometer data
@@ -155,17 +146,25 @@ window.addEventListener('devicemotion', function(e) {
 //----------------------------------------------------------element definitions
 //----------------------------------------------------------cat
 function cat() {
-  fill(150);
-  translate(-300, -300);
-  ellipse(300, 300, 70, 70);
-  fill(100, 0, 100);
-  ellipse(300, 385, 150, 200);
-  stroke(0);
-  strokeWeight(6);
-  line(300, 385, 322, 594);
-  noStroke();
+rotate(90);
+    image(catImg, 0, 113);
+    fill(150, 0, 150, 150);
+    translate(-300, -300);
+    ellipse(300, 300, 70, 70);
 
-}
+
+    // fill(100, 0, 100);
+    // ellipse(300, 385, 150, 200);
+    // stroke(0);
+    // strokeWeight(6);
+    // line(300, 385, 322, 594);
+
+
+  }
+
+
+
+
 //-------------------------------------------------------------Car(mice)
 function car() {
   //-----------------------attributes

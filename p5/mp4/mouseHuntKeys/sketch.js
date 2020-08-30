@@ -304,14 +304,14 @@ function game() {
 
 
 //--------------------------------------------------------------cat function
-function cat() {
-
-  push();
-  image(myLegs, 100, 165);
-  image(myBody, 104, 209, stomachX, stomachY);
-  image(head, 105, 226);
-
-  pop();
-
-  checkForKeys();
-}
+// function cat() {
+//
+//   push();
+//   image(myLegs, 100, 165);
+//   image(myBody, 104, 209, stomachX, stomachY);
+//   image(head, 105, 226);
+//
+//   pop();
+//
+//   checkForKeys();
+// }
