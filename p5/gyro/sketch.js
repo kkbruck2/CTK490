@@ -29,7 +29,6 @@ function setup() {
   }
 
 
-  bunnyImage = loadImage("assets/bunny.jpg");
   imageMode(CENTER);
   rectMode(CENTER);
 
@@ -37,9 +36,7 @@ function setup() {
 //--------------------------------------------------------Draw
 function draw() {
 
-  background('#c6f5ff'); // light blue
 
-  //-------------------------------------------vector for myHeading
   let v0 = createVector(windowWidth /2, windowHeight / 2);
   let v1 = createVector(mouseX - windowWidth /2, mouseY - windowHeight / 2);
 
@@ -69,8 +66,6 @@ function draw() {
   push(); // before you use translate, rotate, or scale commands, push and then pop after
 
   translate(xPosition, yPosition); // move everything over by x, y
-
-
 
 
   pop();
@@ -120,7 +115,6 @@ rotate(vec.heading());
 translate(vec.mag(), 0);
 cat(0, 0);
 pop();
-}
 
 // Read in accelerometer data
 window.addEventListener('deviceorientation', function(e) {
@@ -140,26 +134,20 @@ window.addEventListener('devicemotion', function(e) {
 //----------------------------------------------------------element definitions
 //----------------------------------------------------------cat
 function cat() {
-rotate(90);
-    image(catImg, 0, 113);
-    fill(150, 0, 150, 150);
-    translate(-300, -300);
-    ellipse(300, 300, 70, 70);
 
 
-  }
+  rotate(90);
+      image(catImg, 0, 113);
+      fill(150, 0, 150, 150);
+      translate(-300, -300);
+      ellipse(300, 300, 70, 70);
+}
+
+
+
+
 // //----------------------------------------------------------cat
-// function cat() {
-//   fill(150);
-//   translate(-300, -300);
-//   ellipse(300, 300, 70, 70);
-//   fill(100, 0, 100);
-//   ellipse(300, 385, 150, 200);
-//   stroke(0);
-//   strokeWeight(6);
-//   line(300, 385, 322, 594);
-//
-// }
+
 //-------------------------------------------------------------Car(mice)
 function car() {
   //-----------------------attributes
