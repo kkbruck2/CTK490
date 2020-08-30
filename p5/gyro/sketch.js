@@ -71,8 +71,8 @@ function draw() {
   translate(xPosition, yPosition); // move everything over by x, y
 
 
-  cat (width/2, height/2);
-;
+
+
   pop();
 
   catPos.x = xPosition
