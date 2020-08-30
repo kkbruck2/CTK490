@@ -37,6 +37,20 @@ function draw() {
 
   background('#c6f5ff'); // light blue
 
+  //-------------------------------------------vector for myHeading
+  let v0 = createVector(windowWidth /2, windowHeight / 2);
+  let v1 = createVector(mouseX - windowWidth /2, mouseY - windowHeight / 2);
+
+  drawArrow(v0, v1, 'black');
+
+  let myHeading = v1.heading();
+  //---------------------------------------cat translate
+  push();
+
+  translate(mouseX, mouseY);
+
+  pop();
+
 //-------------------------------code for test mouse moving cat
   // push();
   // translate(mouseX, mouseY);
