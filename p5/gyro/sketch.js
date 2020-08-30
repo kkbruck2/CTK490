@@ -18,6 +18,7 @@ function setup() {
   angleMode(DEGREES);
   catImg = loadImage("assets/1x/catPlace.png");
 
+
   // initialize accelerometer variables
   alpha = 0;
   beta = 0;
@@ -26,7 +27,7 @@ function setup() {
   for (var i = 0; i < 10; i++) {
     cars.push(new car())
   }
-  catPos = createVector(width / 2, height - 80);
+
 
   imageMode(CENTER);
   rectMode(CENTER);
@@ -35,7 +36,6 @@ function setup() {
 //--------------------------------------------------------Draw
 function draw() {
 
-  background('#c6f5ff'); // light blue
 
   let v0 = createVector(windowWidth /2, windowHeight / 2);
   let v1 = createVector(mouseX - windowWidth /2, mouseY - windowHeight / 2);
@@ -43,6 +43,8 @@ function draw() {
   drawArrow(v0, v1, 'black');
 
   let myHeading = v1.heading();
+
+
 
 //-------------------------------code for test mouse moving cat
   // push();
@@ -64,6 +66,7 @@ function draw() {
   push(); // before you use translate, rotate, or scale commands, push and then pop after
 
   translate(xPosition, yPosition); // move everything over by x, y
+
 
   pop();
 
@@ -112,7 +115,7 @@ rotate(vec.heading());
 translate(vec.mag(), 0);
 cat(0, 0);
 pop();
-}
+
 // Read in accelerometer data
 window.addEventListener('deviceorientation', function(e) {
   alpha = e.alpha;
@@ -132,12 +135,19 @@ window.addEventListener('devicemotion', function(e) {
 //----------------------------------------------------------cat
 function cat() {
 
+
   rotate(90);
       image(catImg, 0, 113);
       fill(150, 0, 150, 150);
       translate(-300, -300);
       ellipse(300, 300, 70, 70);
 }
+
+
+
+  
+// //----------------------------------------------------------cat
+
 //-------------------------------------------------------------Car(mice)
 function car() {
   //-----------------------attributes
