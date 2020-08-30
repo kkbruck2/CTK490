@@ -18,6 +18,7 @@ function setup() {
   angleMode(DEGREES);
   catImg = loadImage("assets/1x/catPlace.png");
 
+
   // initialize accelerometer variables
   alpha = 0;
   beta = 0;
@@ -26,7 +27,7 @@ function setup() {
   for (var i = 0; i < 10; i++) {
     cars.push(new car())
   }
-  catPos = createVector(width / 2, height - 80);
+
 
   imageMode(CENTER);
   rectMode(CENTER);
@@ -37,12 +38,17 @@ function draw() {
 
   background('#c6f5ff'); // light blue
 
+
+  //-------------------------------------------vector for myHeading
   let v0 = createVector(windowWidth /2, windowHeight / 2);
-  let v1 = createVector(mouseX - windowWidth /2, mouseY - windowHeight / 2);
+  let catPos = createVector(mouseX - windowWidth /2, mouseY - windowHeight / 2);
 
-  drawArrow(v0, v1, 'black');
+  drawArrow(v0, catPos, 'black');
 
-  let myHeading = v1.heading();
+  let myHeading = catPos.heading();
+  //---------------------------------------cat translate
+
+
 
 //-------------------------------code for test mouse moving cat
   // push();
@@ -65,11 +71,9 @@ function draw() {
 
   translate(xPosition, yPosition); // move everything over by x, y
 
-  rotate(angle); // using alpha in here so it doesn't feel bad
 
-  cat (width/2, height/2);
-    angle += 0;
-  //  	rect(0, 0, 100, 100) ;
+
+
   pop();
 
   catPos.x = xPosition
@@ -105,6 +109,19 @@ function draw() {
 }
 //----------------------------------------------------------end of draw
 // HERE'S THE STUFF YOU NEED FOR READING IN DATA!!!
+function drawArrow(base, vec, myColor) {
+push();
+noStroke();
+
+fill(myColor);
+translate(base.x, base.y);
+line(0, 0, vec.x, vec.y);
+rotate(vec.heading());
+// let arrowSize = 7;
+translate(vec.mag(), 0);
+cat(0, 0);
+pop();
+}
 
 // Read in accelerometer data
 window.addEventListener('deviceorientation', function(e) {
@@ -124,16 +141,26 @@ window.addEventListener('devicemotion', function(e) {
 //----------------------------------------------------------element definitions
 //----------------------------------------------------------cat
 function cat() {
-  fill(150);
-  translate(-300, -300);
-  ellipse(300, 300, 70, 70);
-  fill(100, 0, 100);
-  ellipse(300, 385, 150, 200);
-  stroke(0);
-  strokeWeight(6);
-  line(300, 385, 322, 594);
+rotate(90);
+    image(catImg, 0, 113);
+    fill(150, 0, 150, 150);
+    translate(-300, -300);
+    ellipse(300, 300, 70, 70);
 
-}
+
+  }
+// //----------------------------------------------------------cat
+// function cat() {
+//   fill(150);
+//   translate(-300, -300);
+//   ellipse(300, 300, 70, 70);
+//   fill(100, 0, 100);
+//   ellipse(300, 385, 150, 200);
+//   stroke(0);
+//   strokeWeight(6);
+//   line(300, 385, 322, 594);
+//
+// }
 //-------------------------------------------------------------Car(mice)
 function car() {
   //-----------------------attributes
