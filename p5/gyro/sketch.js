@@ -16,6 +16,7 @@ function setup() {
 
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
+  catImg = loadImage("assets/1x/catPlace.png");
 
   // initialize accelerometer variables
   alpha = 0;
@@ -27,7 +28,6 @@ function setup() {
   }
   catPos = createVector(width / 2, height - 80);
 
-  bunnyImage = loadImage("assets/bunny.jpg");
   imageMode(CENTER);
   rectMode(CENTER);
 
@@ -36,6 +36,13 @@ function setup() {
 function draw() {
 
   background('#c6f5ff'); // light blue
+
+  let v0 = createVector(windowWidth /2, windowHeight / 2);
+  let v1 = createVector(mouseX - windowWidth /2, mouseY - windowHeight / 2);
+
+  drawArrow(v0, v1, 'black');
+
+  let myHeading = v1.heading();
 
 //-------------------------------code for test mouse moving cat
   // push();
