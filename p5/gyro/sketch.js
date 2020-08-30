@@ -42,7 +42,7 @@ function draw() {
 
 
   let catPos = createVector(windowWidth / 2, windowHeight / 2);
-  let catPos1= createVector(catPos.x - windowWidth / 2, catPos.y - windowHeight / 2);
+  let catPos1= createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
 
   drawArrow(catPos, catPos1, 'black');
 
