@@ -38,6 +38,13 @@ function draw() {
 
     background('#c6f5ff'); // light blue
 
+    push(); // before you use translate, rotate, or scale commands, push and then pop after
+
+    translate(xPosition, yPosition); // move everything over by x, y
+
+
+    pop();
+
 
   let catPos = createVector(windowWidth / 2, windowHeight / 2);
   let catPos1= createVector(mouseX - windowWidth / 2, mouseY - windowHeight / 2);
@@ -65,12 +72,7 @@ function draw() {
   xPosition = map(gamma, -60, 60, 0, width);
   yPosition = map(beta, -30, 30, 0, height);
 
-  push(); // before you use translate, rotate, or scale commands, push and then pop after
 
-  translate(xPosition, yPosition); // move everything over by x, y
-
-
-  pop();
 
   catPos.x = xPosition
   catPos.y = yPosition
