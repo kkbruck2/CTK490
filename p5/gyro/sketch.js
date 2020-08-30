@@ -115,64 +115,61 @@ function drawArrow(base, vec, myColor) {
   translate(vec.mag(), 0);
   cat(0, 0);
   pop();
-
-  // Read in accelerometer data
-  window.addEventListener('deviceorientation', function(e) {
-    alpha = e.alpha;
-    beta = e.beta;
-    gamma = e.gamma;
-  });
-
-
-  // accelerometer Data
-  window.addEventListener('devicemotion', function(e) {
-    // get accelerometer values
-    x = e.acceleration.x;
-    y = e.acceleration.y;
-    z = e.acceleration.z;
-  });
-  //----------------------------------------------------------element definitions
-  //----------------------------------------------------------cat
-  function cat() {
+} // Read in accelerometer data
+window.addEventListener('deviceorientation', function(e) {
+  alpha = e.alpha;
+  beta = e.beta;
+  gamma = e.gamma;
+});
 
 
-    rotate(90);
-    image(catImg, 0, 113);
-    fill(150, 0, 150, 150);
-    translate(-300, -300);
-    ellipse(300, 300, 70, 70);
+// accelerometer Data
+window.addEventListener('devicemotion', function(e) {
+  // get accelerometer values
+  x = e.acceleration.x;
+  y = e.acceleration.y;
+  z = e.acceleration.z;
+});
+//----------------------------------------------------------element definitions
+//----------------------------------------------------------cat
+function cat() {
+
+
+  rotate(90);
+  image(catImg, 0, 113);
+  fill(150, 0, 150, 150);
+  translate(-300, -300);
+  ellipse(300, 300, 70, 70);
+}
+
+
+
+
+// //----------------------------------------------------------cat
+
+//-------------------------------------------------------------Car(mice)
+function car() {
+  //-----------------------attributes
+  this.pos = createVector(100, 100);
+  this.vel = createVector(random(-5, 5), random(-5, 5));
+  this.r = random(255);
+  this.g = random(255);
+  this.b = random(255);
+
+  //----------------------vector
+
+  this.display = function() {
+    fill(this.r, this.g, this.b);
+    rect(this.pos.x, this.pos.y, 100, 50);
   }
 
+  //----------------------methods
+  this.drive = function() {
+    this.pos.add(this.vel);
 
-
-
-  // //----------------------------------------------------------cat
-
-  //-------------------------------------------------------------Car(mice)
-  function car() {
-    //-----------------------attributes
-    this.pos = createVector(100, 100);
-    this.vel = createVector(random(-5, 5), random(-5, 5));
-    this.r = random(255);
-    this.g = random(255);
-    this.b = random(255);
-
-    //----------------------vector
-
-    this.display = function() {
-      fill(this.r, this.g, this.b);
-      rect(this.pos.x, this.pos.y, 100, 50);
-    }
-
-    //----------------------methods
-    this.drive = function() {
-      this.pos.add(this.vel);
-
-      if (this.pos.x > width) this.pos.x = 0;
-      if (this.pos.x < 0) this.pos.x = width;
-      if (this.pos.y > height) this.pos.y = 0;
-      if (this.pos.y < 0) this.pos.y = height;
-    }
-
+    if (this.pos.x > width) this.pos.x = 0;
+    if (this.pos.x < 0) this.pos.x = width;
+    if (this.pos.y > height) this.pos.y = 0;
+    if (this.pos.y < 0) this.pos.y = height;
   }
-  //----------------------------------------------------------------end of mice
+}
