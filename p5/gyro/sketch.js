@@ -45,11 +45,11 @@ function draw() {
 
   let myHeading = v1.heading();
   //---------------------------------------cat translate
-  push();
-
-  translate(mouseX, mouseY);
-
-  pop();
+  // push();
+  //
+  // translate(mouseX, mouseY);
+  //
+  // pop();
 
 //-------------------------------code for test mouse moving cat
   // push();
@@ -112,6 +112,19 @@ function draw() {
 }
 //----------------------------------------------------------end of draw
 // HERE'S THE STUFF YOU NEED FOR READING IN DATA!!!
+function drawArrow(base, vec, myColor) {
+push();
+noStroke();
+
+fill(myColor);
+translate(base.x, base.y);
+line(0, 0, vec.x, vec.y);
+rotate(vec.heading());
+// let arrowSize = 7;
+translate(vec.mag(), 0);
+cat(0, 0);
+pop();
+}
 
 // Read in accelerometer data
 window.addEventListener('deviceorientation', function(e) {
@@ -131,16 +144,26 @@ window.addEventListener('devicemotion', function(e) {
 //----------------------------------------------------------element definitions
 //----------------------------------------------------------cat
 function cat() {
-  fill(150);
-  translate(-300, -300);
-  ellipse(300, 300, 70, 70);
-  fill(100, 0, 100);
-  ellipse(300, 385, 150, 200);
-  stroke(0);
-  strokeWeight(6);
-  line(300, 385, 322, 594);
+rotate(90);
+    image(catImg, 0, 113);
+    fill(150, 0, 150, 150);
+    translate(-300, -300);
+    ellipse(300, 300, 70, 70);
 
-}
+
+  }
+// //----------------------------------------------------------cat
+// function cat() {
+//   fill(150);
+//   translate(-300, -300);
+//   ellipse(300, 300, 70, 70);
+//   fill(100, 0, 100);
+//   ellipse(300, 385, 150, 200);
+//   stroke(0);
+//   strokeWeight(6);
+//   line(300, 385, 322, 594);
+//
+// }
 //-------------------------------------------------------------Car(mice)
 function car() {
   //-----------------------attributes
