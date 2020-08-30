@@ -41,11 +41,11 @@ function draw() {
 
   //-------------------------------------------vector for myHeading
   let v0 = createVector(windowWidth /2, windowHeight / 2);
-  let catPos = createVector(mouseX - windowWidth /2, mouseY - windowHeight / 2);
+  let v1 = createVector(mouseX - windowWidth /2, mouseY - windowHeight / 2);
 
-  drawArrow(v0, catPos, 'black');
+  drawArrow(v0, v1, 'black');
 
-  let myHeading = catPos.heading();
+  let myHeading = v1.heading();
   //---------------------------------------cat translate
 
 
