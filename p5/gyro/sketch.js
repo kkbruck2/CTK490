@@ -38,22 +38,11 @@ function draw() {
 
     background('#c6f5ff'); // light blue
 
+
+
+
   let catPos = createVector(windowWidth / 2, windowHeight / 2);
-  let catPos1= createVector(mouseX - windowWidth / 2, mouseY - windowHeight / 2);
-
-  push(); // before you use translate, rotate, or scale commands, push and then pop after
-
-  translate(xPosition, yPosition); // move everything over by x, y
-
-  rotate(radians(alpha)); // using alpha in here so it doesn't feel bad
-
- // image(bunnyImage, 0, 0, 500, 500);
- drawArrow(catPos, catPos1, 'black');
-
- let myHeading = catPos1.heading();
-
-  ellipse(0, 0, 200, 200) ;
-  pop();
+  let catPos1= createVector(catPos.x - windowWidth / 2, catPos.y - windowHeight / 2);
 
   drawArrow(catPos, catPos1, 'black');
 
@@ -117,7 +106,7 @@ function drawArrow(base, vec, myColor) {
   push();
   noStroke();
 
-  fill(myColor);
+
   translate(base.x, base.y);
   line(0, 0, vec.x, vec.y);
   rotate(vec.heading());
