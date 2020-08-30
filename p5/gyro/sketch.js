@@ -41,12 +41,12 @@ function draw() {
 
 
 
-  let catPos = createVector(windowWidth / 2, windowHeight / 2);
-  let catPos1= createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
+  let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
+  let catPos= createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
 
-  drawArrow(catPos, catPos1, 'black');
+  drawArrow(catPos0, catPos, 'black');
 
-  let myHeading = catPos1.heading();
+  let myHeading = catPos.heading();
   //---------------------------------------cat translate
 
 
@@ -106,7 +106,7 @@ function drawArrow(base, vec, myColor) {
   push();
   noStroke();
 
-
+  fill(myColor);
   translate(base.x, base.y);
   line(0, 0, vec.x, vec.y);
   rotate(vec.heading());
