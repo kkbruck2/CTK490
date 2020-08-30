@@ -48,10 +48,13 @@ function draw() {
   rotate(radians(alpha)); // using alpha in here so it doesn't feel bad
 
  // image(bunnyImage, 0, 0, 500, 500);
+ drawArrow(catPos, catPos1, 'black');
 
-    	ellipse(0, 0, 200, 200) ;
+ let myHeading = catPos1.heading();
+
+  ellipse(0, 0, 200, 200) ;
   pop();
-  
+
   drawArrow(catPos, catPos1, 'black');
 
   let myHeading = catPos1.heading();
