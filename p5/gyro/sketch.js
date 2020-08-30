@@ -16,6 +16,8 @@ function setup() {
 
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
+  catImg = loadImage("assets/1x/catPlace.png");
+
 
   // initialize accelerometer variables
   alpha = 0;
@@ -25,7 +27,7 @@ function setup() {
   for (var i = 0; i < 10; i++) {
     cars.push(new car())
   }
-  catPos = createVector(width / 2, height - 80);
+
 
   bunnyImage = loadImage("assets/bunny.jpg");
   imageMode(CENTER);
@@ -39,17 +41,13 @@ function draw() {
 
   //-------------------------------------------vector for myHeading
   let v0 = createVector(windowWidth /2, windowHeight / 2);
-  let v1 = createVector(mouseX - windowWidth /2, mouseY - windowHeight / 2);
+  let catPos = createVector(mouseX - windowWidth /2, mouseY - windowHeight / 2);
 
-  drawArrow(v0, v1, 'black');
+  drawArrow(v0, catPos, 'black');
 
-  let myHeading = v1.heading();
+  let myHeading = catPos.heading();
   //---------------------------------------cat translate
-  // push();
-  //
-  // translate(mouseX, mouseY);
-  //
-  // pop();
+
 
 //-------------------------------code for test mouse moving cat
   // push();
@@ -72,11 +70,9 @@ function draw() {
 
   translate(xPosition, yPosition); // move everything over by x, y
 
-  rotate(angle); // using alpha in here so it doesn't feel bad
 
   cat (width/2, height/2);
-    angle += 0;
-  //  	rect(0, 0, 100, 100) ;
+;
   pop();
 
   catPos.x = xPosition
