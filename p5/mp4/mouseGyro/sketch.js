@@ -14,9 +14,9 @@ var alreadyTouched = false;
 
 
 function setup() {
-
-  createCanvas(displayWidth, displayHeight);
   deviceOrientation(LANDSCAPE);
+  createCanvas(displayWidth, displayHeight);
+
  // requestT() ;
 
   // initialize accelerometer variables
