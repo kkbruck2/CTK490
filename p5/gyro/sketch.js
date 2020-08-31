@@ -11,10 +11,11 @@ var z = 0;
 var cars = [];
 var catPos;
 var angle = 0.0;
+
 //===============================================================Set up
 function setup() {
   deviceOrientation(LANDSCAPE);
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(displayWidth, displayHeight);
   angleMode(DEGREES);
   catImg = loadImage("assets/1x/catPlace.png");
 
