@@ -15,8 +15,8 @@ var angle = 0.0;
 //===============================================================Set up
 function setup() {
 
-  createCanvas(windowWidth, windowHeight);
-
+  createCanvas(windowWidth, windHeight);
+  woodFloor = loadImage("assets/1x/floor.png")
 
   angleMode(DEGREES);
   catImg = loadImage("assets/1x/catPlace.png");
@@ -39,7 +39,9 @@ function setup() {
 //============================================================End of set-up
 //=============================================================Draw
 function draw() {
-    background('#c6f5ff'); // light blue
+    background('#CE9B64'); // background fill
+    image(woodFloor,)
+
 //-----------------------------
   let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
   let catPos= createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
@@ -98,6 +100,10 @@ function draw() {
   text("z = " + z.toFixed(4), 25, 190);
 }
 //================================================================ end of draw
+
+function windowResized() {
+resizeCanvas(windowWidth, windowHeight);
+}
 
 // ----------------------------------------------------------- Cat motion
 function drawArrow(base, vec, myColor) {
