@@ -36,10 +36,29 @@ function setup() {
   imageMode(CENTER);
   rectMode(CENTER);
 
+}
+//--------------------------------------------------------Draw
+function draw() {
+
+  background('#CE9B64'); // background fill
+  image(woodFloor, windowWidth / 2, windowHeight / 2);
+
+  background('#c6f5ff'); // light blue
+
+  let v0 = createVector(windowWidth /2, windowHeight / 2);
+  let v1 = createVector(mouseX - windowWidth /2, mouseY - windowHeight / 2);
+
+  drawArrow(v0, v1, 'black');
+
+  let myHeading = v1.heading();
+
+
+
+
+//-------------------------------code for test mouse moving cat
   push();
 
   translate(mouseX, mouseY);
-
 
   pop();
 
@@ -134,6 +153,13 @@ rotate(90);
     fill(150, 0, 150, 150);
     translate(-300, -300);
     ellipse(300, 300, 70, 70);
+
+
+    // fill(100, 0, 100);
+    // ellipse(300, 385, 150, 200);
+    // stroke(0);
+    // strokeWeight(6);
+    // line(300, 385, 322, 594);
 
 
   }

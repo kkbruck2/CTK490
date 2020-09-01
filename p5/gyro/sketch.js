@@ -42,7 +42,7 @@ function setup() {
 //=============================================================Draw
 function draw() {
     background('#CE9B64'); // background fill
-    image(woodFloor, windowWidth / 2, windowHeight / 2)
+    image(woodFloor, windowWidth / 2, windowHeight / 2);
 
 //-----------------------------
   let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
