@@ -16,7 +16,9 @@ var angle = 0.0;
 function setup() {
 
   createCanvas(windowWidth, windHeight);
-  woodFloor = loadImage("assets/1x/floor.png")
+  woodFloor = loadImage("assets/1x/floor.png");
+
+  deviceOrientation(LANDSCAPE);
 
   angleMode(DEGREES);
   catImg = loadImage("assets/1x/catPlace.png");
