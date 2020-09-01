@@ -11,15 +11,18 @@ var z = 0;
 var cars = [];
 var catPos;
 var angle = 0.0;
-//---------------------------------------------------------Set up
+
+//===============================================================Set up
 function setup() {
 
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windHeight);
+  woodFloor = loadImage("assets/1x/floor.png")
+
   angleMode(DEGREES);
   catImg = loadImage("assets/1x/catPlace.png");
 
 
-  // initialize accelerometer variables
+  //------------------------------------- initialize accelerometer variables
   alpha = 0;
   beta = 0;
   gamma = 0;
@@ -27,20 +30,19 @@ function setup() {
   for (var i = 0; i < 10; i++) {
     cars.push(new car())
   }
-
+//------------------------------------------------- piece splice
 
   imageMode(CENTER);
   rectMode(CENTER);
 
 }
-//--------------------------------------------------------Draw
+//============================================================End of set-up
+//=============================================================Draw
 function draw() {
+    background('#CE9B64'); // background fill
+    image(woodFloor,)
 
-    background('#c6f5ff'); // light blue
-
-
-
-
+//-----------------------------
   let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
   let catPos= createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
 
@@ -96,33 +98,34 @@ function draw() {
   text("x = " + x.toFixed(2), 25, 150); // .toFixed means just show (x) decimal places
   text("y = " + y.toFixed(2), 25, 170);
   text("z = " + z.toFixed(4), 25, 190);
-
-
-
 }
-//----------------------------------------------------------end of draw
-// HERE'S THE STUFF YOU NEED FOR READING IN DATA!!!
+//================================================================ end of draw
+
+function windowResized() {
+resizeCanvas(windowWidth, windowHeight);
+}
+
+// ----------------------------------------------------------- Cat motion
 function drawArrow(base, vec, myColor) {
   push();
   noStroke();
-
   fill(myColor);
   translate(base.x, base.y);
   line(0, 0, vec.x, vec.y);
   rotate(vec.heading());
-  // let arrowSize = 7;
   translate(vec.mag(), 0);
   cat(0, 0);
   pop();
-} // Read in accelerometer data
+}
+//-----------------------------------------------------------End of cat motion
+//------------------------------------------------- Read in accelerometer data
 window.addEventListener('deviceorientation', function(e) {
   alpha = e.alpha;
   beta = e.beta;
   gamma = e.gamma;
 });
 
-
-// accelerometer Data
+// ------------------------------------------------------accelerometer Data
 window.addEventListener('devicemotion', function(e) {
   // get accelerometer values
   x = e.acceleration.x;
@@ -130,10 +133,9 @@ window.addEventListener('devicemotion', function(e) {
   z = e.acceleration.z;
 });
 //----------------------------------------------------------element definitions
-//----------------------------------------------------------cat
+
+//========================================================== cat definition
 function cat() {
-
-
   rotate(90);
   image(catImg, 0, 113);
   fill(150, 0, 150, 150);
@@ -141,12 +143,9 @@ function cat() {
   ellipse(300, 300, 70, 70);
 }
 
+//============================================================ End of cat definition
 
-
-
-// //----------------------------------------------------------cat
-
-//-------------------------------------------------------------Car(mice)
+//============================================================= Car(mice)
 function car() {
   //-----------------------attributes
   this.pos = createVector(100, 100);
@@ -172,3 +171,4 @@ function car() {
     if (this.pos.y < 0) this.pos.y = height;
   }
 }
+// =========================================================== End of Car(mice)
