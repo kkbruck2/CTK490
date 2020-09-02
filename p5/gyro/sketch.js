@@ -12,14 +12,18 @@ var cars = [];
 var catPos;
 var angle = 0.0;
 
+
+
 //===============================================================Set up
 function setup() {
+  // deviceOrientation(LANDSCAPE);
 
-  createCanvas(windowWidth, windHeight);
-  woodFloor = loadImage("assets/1x/floor.png")
-
+  createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
+
   catImg = loadImage("assets/1x/catPlace.png");
+
+  woodFloor = loadImage("assets/1x/floor.png");
 
 
   //------------------------------------- initialize accelerometer variables
@@ -31,6 +35,8 @@ function setup() {
     cars.push(new car())
   }
 //------------------------------------------------- piece splice
+// catPos vector in gyrozmouse
+// catPos = createVector(width / 2, height - 80);
 
   imageMode(CENTER);
   rectMode(CENTER);
@@ -40,7 +46,8 @@ function setup() {
 //=============================================================Draw
 function draw() {
     background('#CE9B64'); // background fill
-    image(woodFloor,)
+    image(woodFloor, windowWidth / 2, windowHeight / 2);
+
 
 //-----------------------------
   let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
@@ -101,9 +108,6 @@ function draw() {
 }
 //================================================================ end of draw
 
-function windowResized() {
-resizeCanvas(windowWidth, windowHeight);
-}
 
 // ----------------------------------------------------------- Cat motion
 function drawArrow(base, vec, myColor) {
