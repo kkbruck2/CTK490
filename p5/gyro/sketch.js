@@ -18,7 +18,7 @@ var angle = 0.0;
 function setup() {
   // deviceOrientation(LANDSCAPE);
 
-  createCanvas(windowWidth, windHeight);
+  createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
 
   catImg = loadImage("assets/1x/catPlace.png");
