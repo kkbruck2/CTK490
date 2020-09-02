@@ -17,7 +17,7 @@ var angle = 0.0;
 
 //===============================================================Set up
 function setup() {
-  
+
 
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
@@ -108,8 +108,9 @@ function draw() {
   text("z = " + z.toFixed(4), 25, 190);
 }
 //================================================================ end of draw
-
-
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
 // ----------------------------------------------------------- Cat motion
 function drawArrow(base, vec, myColor) {
   push();
