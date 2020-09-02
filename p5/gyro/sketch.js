@@ -16,7 +16,7 @@ var angle = 0.0;
 
 //===============================================================Set up
 function setup() {
-  deviceOrientation(LANDSCAPE);
+  // deviceOrientation(LANDSCAPE);
 
   createCanvas(windowWidth, windHeight);
   angleMode(DEGREES);
