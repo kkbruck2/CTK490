@@ -11,6 +11,7 @@ var z = 0;
 var cars = [];
 var catPos;
 var angle = 0.0;
+deviceOrientation(LANDSCAPE);
 
 //===============================================================Set up
 function setup() {
@@ -18,7 +19,7 @@ function setup() {
   createCanvas(windowWidth, windHeight);
   woodFloor = loadImage("assets/1x/floor.png");
 
-  deviceOrientation(LANDSCAPE);
+
 
   angleMode(DEGREES);
   catImg = loadImage("assets/1x/catPlace.png");
@@ -43,6 +44,7 @@ function setup() {
 function draw() {
     background('#CE9B64'); // background fill
     image(woodFloor, windowWidth / 2, windowHeight / 2);
+
 
 //-----------------------------
   let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
