@@ -12,7 +12,12 @@ var cars = [];
 var catPos;
 var angle = 0.0;
 
+//===============================================================Preload
+function preload() {
+  catImg = loadImage("assets/1x/catPlace.png");
+  woodFloor = loadImage("assets/1x/floor.png");
 
+}
 
 
 //===============================================================Set up
@@ -22,9 +27,6 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
 
-  catImg = loadImage("assets/1x/catPlace.png");
-
-  woodFloor = loadImage("assets/1x/floor.png");
 
 
   //------------------------------------- initialize accelerometer variables
@@ -32,7 +34,7 @@ function setup() {
   beta = 0;
   gamma = 0;
 
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
 //------------------------------------------------- piece splice
@@ -146,7 +148,7 @@ function cat() {
   image(catImg, 0, 113);
   fill(150, 0, 150, 150);
   translate(-300, -300);
-  ellipse(300, 300, 70, 70);
+  // ellipse(300, 300, 70, 70);
 }
 
 //============================================================ End of cat definition
