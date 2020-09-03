@@ -12,7 +12,6 @@ var cars = [];
 var catPos;
 var angle = 0.0;
 var threshold = 30;
-var deviceOrientation = LANDSCAPE;
 //===============================================================Preload
 function preload() {
   catImg = loadImage("assets/1x/catPlace.png");
@@ -50,7 +49,7 @@ function setup() {
 //=============================================================Draw
 function draw() {
   background('#CE9B64'); // background fill
-  image(woodFloor, windowWidth / 2, windowHeight / 2);
+  image(woodFloor, deviceWidth / 2, deviceHeight / 2);
 
 
   //-----------------------------
@@ -183,8 +182,7 @@ function car() {
 // =========================================================== End of Car(mice)
 
 function deviceShaken() {
-  cars.reset();
-
+  cars = [];
   //--------------------------Spawn cars
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
