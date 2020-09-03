@@ -24,7 +24,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
-  
+
   setShakeThreshold(threshold);
 
 
@@ -181,14 +181,9 @@ function car() {
 // =========================================================== End of Car(mice)
 
 function deviceShaken() {
-  value = value + 5;
-  if (value > 255) {
-    value = 0;
+    i.reset();
   }
   //--------------------------Spawn cars
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
-
-
-}
