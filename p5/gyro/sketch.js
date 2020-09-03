@@ -12,7 +12,7 @@ var cars = [];
 var catPos;
 var angle = 0.0;
 var threshold = 30;
-
+var deviceOrientation = LANDSCAPE;
 //===============================================================Preload
 function preload() {
   catImg = loadImage("assets/1x/catPlace.png");
@@ -25,6 +25,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
+
 
   setShakeThreshold(threshold);
 
@@ -182,7 +183,7 @@ function car() {
 // =========================================================== End of Car(mice)
 
 function deviceShaken() {
-  car.reset();
+  cars.reset();
 
   //--------------------------Spawn cars
   for (var i = 0; i < 20; i++) {
