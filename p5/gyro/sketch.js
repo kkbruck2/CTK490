@@ -11,6 +11,7 @@ var z = 0;
 var cars = [];
 var catPos;
 var angle = 0.0;
+var threshold = 30;
 
 //===============================================================Preload
 function preload() {
@@ -181,9 +182,10 @@ function car() {
 // =========================================================== End of Car(mice)
 
 function deviceShaken() {
-    i.reset();
-  }
+  car.reset();
+
   //--------------------------Spawn cars
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
+}
