@@ -185,5 +185,6 @@ function deviceShaken() {
   value = value + 5;
   if (value > 255) {
     value = 0;
+    reset();
   }
 }
