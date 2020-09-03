@@ -11,7 +11,6 @@ var z = 0;
 var cars = [];
 var catPos;
 var angle = 0.0;
-deviceOrientation(LANDSCAPE);
 //---------------------------------------------------------Set up
 function setup() {
 
@@ -154,9 +153,9 @@ window.addEventListener('devicemotion', function(e) {
 function cat() {
 rotate(90);
     image(catImg, 0, 113);
-    fill(150, 0, 150, 150);
+    // fill(150, 0, 150, 150);
     translate(-300, -300);
-    ellipse(300, 300, 70, 70);
+    // ellipse(300, 300, 70, 70);
 
 
     // fill(100, 0, 100);

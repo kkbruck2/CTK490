@@ -12,7 +12,12 @@ var cars = [];
 var catPos;
 var angle = 0.0;
 
+//===============================================================Preload
+function preload() {
+  catImg = loadImage("assets/1x/catPlace.png");
+  woodFloor = loadImage("assets/1x/floor.png");
 
+}
 
 
 //===============================================================Set up
@@ -22,9 +27,6 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
 
-  catImg = loadImage("assets/1x/catPlace.png");
-
-  woodFloor = loadImage("assets/1x/floor.png");
 
 
   //------------------------------------- initialize accelerometer variables
@@ -32,12 +34,12 @@ function setup() {
   beta = 0;
   gamma = 0;
 
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
-//------------------------------------------------- piece splice
-// catPos vector in gyrozmouse
-// catPos = createVector(width / 2, height - 80);
+  //------------------------------------------------- piece splice
+  // catPos vector in gyrozmouse
+  // catPos = createVector(width / 2, height - 80);
 
   imageMode(CENTER);
   rectMode(CENTER);
@@ -46,13 +48,13 @@ function setup() {
 //============================================================End of set-up
 //=============================================================Draw
 function draw() {
-    background('#CE9B64'); // background fill
-    image(woodFloor, windowWidth / 2, windowHeight / 2);
+  background('#CE9B64'); // background fill
+  image(woodFloor, windowWidth / 2, windowHeight / 2);
 
 
-//-----------------------------
+  //-----------------------------
   let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
-  let catPos= createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
+  let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
 
   drawArrow(catPos0, catPos, 'black');
 
@@ -144,9 +146,9 @@ window.addEventListener('devicemotion', function(e) {
 function cat() {
   rotate(90);
   image(catImg, 0, 113);
-  fill(150, 0, 150, 150);
+  // fill(150, 0, 150, 150);
   translate(-300, -300);
-  ellipse(300, 300, 70, 70);
+  // ellipse(300, 300, 70, 70);
 }
 
 //============================================================ End of cat definition
@@ -178,3 +180,16 @@ function car() {
   }
 }
 // =========================================================== End of Car(mice)
+
+function deviceShaken() {
+  value = value + 5;
+  if (value > 255) {
+    value = 0;
+  }
+  //--------------------------Spawn cars
+  for (var i = 0; i < 20; i++) {
+    cars.push(new car())
+  }
+
+
+}
