@@ -22,11 +22,10 @@ function preload() {
 
 //===============================================================Set up
 function setup() {
-
-
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
-
+  
+  setShakeThreshold(threshold);
 
 
   //------------------------------------- initialize accelerometer variables
