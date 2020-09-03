@@ -37,9 +37,9 @@ function setup() {
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
-//------------------------------------------------- piece splice
-// catPos vector in gyrozmouse
-// catPos = createVector(width / 2, height - 80);
+  //------------------------------------------------- piece splice
+  // catPos vector in gyrozmouse
+  // catPos = createVector(width / 2, height - 80);
 
   imageMode(CENTER);
   rectMode(CENTER);
@@ -48,13 +48,13 @@ function setup() {
 //============================================================End of set-up
 //=============================================================Draw
 function draw() {
-    background('#CE9B64'); // background fill
-    image(woodFloor, windowWidth / 2, windowHeight / 2);
+  background('#CE9B64'); // background fill
+  image(woodFloor, windowWidth / 2, windowHeight / 2);
 
 
-//-----------------------------
+  //-----------------------------
   let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
-  let catPos= createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
+  let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
 
   drawArrow(catPos0, catPos, 'black');
 
@@ -185,6 +185,11 @@ function deviceShaken() {
   value = value + 5;
   if (value > 255) {
     value = 0;
-    reset();
   }
+  //--------------------------Spawn cars
+  for (var i = 0; i < 20; i++) {
+    cars.push(new car())
+  }
+
+
 }
