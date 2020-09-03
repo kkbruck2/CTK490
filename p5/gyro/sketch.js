@@ -11,7 +11,7 @@ var z = 0;
 var cars = [];
 var catPos;
 var angle = 0.0;
-
+var threshold = 30;
 //===============================================================Preload
 function preload() {
   catImg = loadImage("assets/1x/catPlace.png");
@@ -24,7 +24,8 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
-  
+
+
   setShakeThreshold(threshold);
 
 
@@ -48,7 +49,7 @@ function setup() {
 //=============================================================Draw
 function draw() {
   background('#CE9B64'); // background fill
-  image(woodFloor, windowWidth / 2, windowHeight / 2);
+  image(woodFloor, deviceWidth / 2, deviceHeight / 2);
 
 
   //-----------------------------
@@ -181,14 +182,9 @@ function car() {
 // =========================================================== End of Car(mice)
 
 function deviceShaken() {
-  value = value + 5;
-  if (value > 255) {
-    value = 0;
-  }
+  cars = [];
   //--------------------------Spawn cars
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
-
-
 }
