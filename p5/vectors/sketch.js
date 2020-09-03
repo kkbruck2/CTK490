@@ -14,5 +14,5 @@ function deviceShaken() {
     value = 0;
     threshold = 30;
   }
-  setShakeThreshold(threshold);
+
 }
