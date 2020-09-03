@@ -1,8 +1,12 @@
+//new p5.Vector([x], [y], [z])
 let value = 0;
 let threshold = 30;
+
 function setup() {
   setShakeThreshold(threshold);
+
 }
+
 function draw() {
   fill(value);
   rect(25, 25, 50, 50);
@@ -14,5 +18,4 @@ function deviceShaken() {
     value = 0;
     threshold = 30;
   }
-
 }
