@@ -29,7 +29,7 @@ function setup() {
   beta = 0;
   gamma = 0;
 
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
   catPos = createVector(width / 2, height - 80);
@@ -63,24 +63,10 @@ function draw() {
 
   //-------------------------------code for test mouse moving cat END
 
-  // noStroke();
-  // the map command !!!!
-  // takes your variable and maps it from range 1 to range 2
-  // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
 //============================================================ mapping
   xPosition = map(gamma, -60, 60, 0, width);
   yPosition = map(beta, -30, 30, 0, height);
 
-  // push(); // before you use translate, rotate, or scale commands, push and then pop after
-  //
-  // translate(xPosition, yPosition); // move everything over by x, y
-  //
-  // rotate(angle); // using alpha in here so it doesn't feel bad
-  //
-  // // cat (width/2, height/2);
-  // //   angle += 0;
-  // //  	rect(0, 0, 100, 100) ;
-  // pop();
 
   catPos.x = xPosition
   catPos.y = yPosition
@@ -109,8 +95,6 @@ function draw() {
   text("x = " + x.toFixed(2), 25, 150); // .toFixed means just show (x) decimal places
   text("y = " + y.toFixed(2), 25, 170);
   text("z = " + z.toFixed(4), 25, 190);
-
-
 
 }
 //----------------------------------------------------------end of draw
@@ -152,18 +136,7 @@ rotate(90);
     translate(-300, -300);
     // ellipse(300, 300, 70, 70);
 
-
-    // fill(100, 0, 100);
-    // ellipse(300, 385, 150, 200);
-    // stroke(0);
-    // strokeWeight(6);
-    // line(300, 385, 322, 594);
-
-
   }
-
-
-
 
 //-------------------------------------------------------------Car(mice)
 function car() {

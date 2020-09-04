@@ -2,7 +2,6 @@
 Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
-var bunnyImage;
 var catimg;
 var xPosition = 0;
 var yPosition = 0;
@@ -16,21 +15,15 @@ var threshold = 30;
 
 //===============================================================Preload
 function preload() {
-
+  catImg = loadImage("assets/1x/catPlace.png");
+  woodFloor = loadImage("assets/1x/floor.png");
 }
-
-
 //===============================================================Set up
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  catImg = loadImage("assets/1x/catPlace.png");
-  woodFloor = loadImage("assets/1x/floor.png");
-
   angleMode(DEGREES);
 
-
   setShakeThreshold(threshold);
-
 
   //------------------------------------- initialize accelerometer variables
   alpha = 0;
@@ -62,22 +55,13 @@ function draw() {
 
   let myHeading = catPos.heading();
   //---------------------------------------cat translate
+  push();
 
+  translate(mouseX, mouseY);
 
-  //-------------------------------code for test mouse moving cat
-  // push();
-  // translate(mouseX, mouseY);
-  //
-  // rotate(angle);
-  // cat(-300, -300);
-  // angle += 2;
-  // pop();
-  //-------------------------------code for test mouse moving cat END
+  pop();
 
-  // noStroke();
-  // the map command !!!!
-  // takes your variable and maps it from range 1 to range 2
-  // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
+  //===========================code for test mouse moving cat
   xPosition = map(gamma, -60, 60, 0, width);
   yPosition = map(beta, -30, 30, 0, height);
 
