@@ -12,16 +12,15 @@ var cars = [];
 var catPos;
 var angle = 0.0;
 //---------------------------------------------------------Set up
+function preload() {
+  catImg = loadImage("assets/1x/catPlace.png");
+  woodFloor = loadImage("assets/1x/floor.png");
+}
+
 function setup() {
 
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
-
-  catImg = loadImage("assets/1x/catPlace.png");
-
-
-  woodFloor = loadImage("assets/1x/floor.png");
-
 
 
 
@@ -48,15 +47,12 @@ function draw() {
 
 
 
-  let v0 = createVector(windowWidth /2, windowHeight / 2);
-  let v1 = createVector(mouseX - windowWidth /2, mouseY - windowHeight / 2);
+  let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
+  let catPos = createVector(mouseX - windowWidth /2, mouseY - windowHeight / 2);
 
-  drawArrow(v0, v1, 'black');
+  drawArrow(catPos0, catPos, 'black');
 
-  let myHeading = v1.heading();
-
-
-
+  let myHeading = catPos.heading();
 
 //-------------------------------code for test mouse moving cat
   push();
@@ -71,8 +67,9 @@ function draw() {
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-  // xPosition = map(gamma, -60, 60, 0, width);
-  // yPosition = map(beta, -30, 30, 0, height);
+//============================================================ mapping
+  xPosition = map(gamma, -60, 60, 0, width);
+  yPosition = map(beta, -30, 30, 0, height);
 
   // push(); // before you use translate, rotate, or scale commands, push and then pop after
   //
@@ -85,8 +82,8 @@ function draw() {
   // //  	rect(0, 0, 100, 100) ;
   // pop();
 
-  // catPos.x = xPosition
-  // catPos.y = yPosition
+  catPos.x = xPosition
+  catPos.y = yPosition
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
@@ -123,11 +120,9 @@ function drawArrow(base, vec, myColor) {
 push();
 noStroke();
 
-fill(myColor);
 translate(base.x, base.y);
 line(0, 0, vec.x, vec.y);
 rotate(vec.heading());
-// let arrowSize = 7;
 translate(vec.mag(), 0);
 cat(0, 0);
 pop();
