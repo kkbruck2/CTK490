@@ -22,7 +22,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
-
+  deviceOreientation = LANDSCAPE;
   setShakeThreshold(threshold);
 
   //------------------------------------- initialize accelerometer variables
@@ -51,7 +51,7 @@ function draw() {
   let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
   let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
 
-  drawArrow(catPos0, catPos, 'black');
+  drawArrow(catPos0, catPos);
 
   let myHeading = catPos.heading();
   //---------------------------------------cat translate

@@ -48,13 +48,13 @@ function draw() {
 
 
   let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
-  let catPos = createVector(mouseX - windowWidth /2, mouseY - windowHeight / 2);
+  let catPos = createVector(mouseX - windowWidth / 2, mouseY - windowHeight / 2);
 
-  drawArrow(catPos0, catPos, 'black');
+  drawArrow(catPos0, catPos);
 
   let myHeading = catPos.heading();
 
-//-------------------------------code for test mouse moving cat
+  //-------------------------------code for test mouse moving cat
   push();
 
   translate(mouseX, mouseY);
@@ -63,7 +63,7 @@ function draw() {
 
   //-------------------------------code for test mouse moving cat END
 
-//============================================================ mapping
+  //============================================================ mapping
   xPosition = map(gamma, -60, 60, 0, width);
   yPosition = map(beta, -30, 30, 0, height);
 
@@ -101,15 +101,15 @@ function draw() {
 // HERE'S THE STUFF YOU NEED FOR READING IN DATA!!!
 
 function drawArrow(base, vec) {
-push();
-noStroke();
+  push();
+  noStroke();
 
-translate(base.x, base.y);
-line(0, 0, vec.x, vec.y);
-rotate(vec.heading());
-translate(vec.mag(), 0);
-cat(0, 0);
-pop();
+  translate(base.x, base.y);
+  line(0, 0, vec.x, vec.y);
+  rotate(vec.heading());
+  translate(vec.mag(), 0);
+  cat(0, 0);
+  pop();
 }
 
 // Read in accelerometer data
@@ -130,13 +130,13 @@ window.addEventListener('devicemotion', function(e) {
 //----------------------------------------------------------element definitions
 //----------------------------------------------------------cat
 function cat() {
-rotate(90);
-    image(catImg, 0, 113);
-    // fill(150, 0, 150, 150);
-    translate(-300, -300);
-    // ellipse(300, 300, 70, 70);
+  rotate(90);
+  image(catImg, 0, 113);
+  // fill(150, 0, 150, 150);
+  translate(-300, -300);
+  // ellipse(300, 300, 70, 70);
 
-  }
+}
 
 //-------------------------------------------------------------Car(mice)
 function car() {
