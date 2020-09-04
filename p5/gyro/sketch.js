@@ -11,7 +11,9 @@ var z = 0;
 var cars = [];
 var catPos;
 var angle = 0.0;
-var threshold = 30;
+
+var threshold = 25;
+
 //===============================================================Preload
 function preload() {
   catImg = loadImage("assets/1x/catPlace.png");
@@ -38,8 +40,6 @@ function setup() {
     cars.push(new car())
   }
   //------------------------------------------------- piece splice
-  // catPos vector in gyrozmouse
-  // catPos = createVector(width / 2, height - 80);
 
   imageMode(CENTER);
   rectMode(CENTER);
@@ -50,7 +50,6 @@ function setup() {
 function draw() {
   background('#CE9B64'); // background fill
   image(woodFloor, deviceWidth / 2, deviceHeight / 2);
-
 
   //-----------------------------
   let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
@@ -110,14 +109,12 @@ function draw() {
   text("z = " + z.toFixed(4), 25, 190);
 }
 //================================================================ end of draw
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
+
 // ----------------------------------------------------------- Cat motion
 function drawArrow(base, vec, myColor) {
   push();
   noStroke();
-  fill(myColor);
+
   translate(base.x, base.y);
   line(0, 0, vec.x, vec.y);
   rotate(vec.heading());
@@ -182,7 +179,10 @@ function car() {
 // =========================================================== End of Car(mice)
 
 function deviceShaken() {
-  cars = [];
+
+  cars.reset();
+
+
   //--------------------------Spawn cars
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
