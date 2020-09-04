@@ -11,7 +11,6 @@ function draw() {
   fill(value);
   rect(25, 25, 50, 50);
 }
-
 function deviceShaken() {
   value = value + 5;
   threshold = threshold + 5;
@@ -19,5 +18,4 @@ function deviceShaken() {
     value = 0;
     threshold = 30;
   }
-  setShakeThreshold(threshold);
 }
