@@ -3,6 +3,7 @@ Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
 var bunnyImage;
+var catimg;
 var xPosition = 0;
 var yPosition = 0;
 var x = 0; // acceleratiobn data
@@ -11,7 +12,7 @@ var z = 0;
 var cars = [];
 var catPos;
 var angle = 0.0;
-var threshold = 25;
+var threshold = 30;
 
 //===============================================================Preload
 function preload() {
@@ -37,6 +38,8 @@ function setup() {
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
+  catPos = createVector(width / 2, height - 80);
+
   //------------------------------------------------- piece splice
 
   imageMode(CENTER);
@@ -109,7 +112,7 @@ function draw() {
 //================================================================ end of draw
 
 // ----------------------------------------------------------- Cat motion
-function drawArrow(base, vec, myColor) {
+function drawArrow(base, vec) {
   push();
   noStroke();
 

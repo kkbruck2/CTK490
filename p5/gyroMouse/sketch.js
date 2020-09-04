@@ -116,7 +116,7 @@ function draw() {
 //----------------------------------------------------------end of draw
 // HERE'S THE STUFF YOU NEED FOR READING IN DATA!!!
 
-function drawArrow(base, vec, myColor) {
+function drawArrow(base, vec) {
 push();
 noStroke();
 
