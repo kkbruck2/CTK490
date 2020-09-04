@@ -16,8 +16,6 @@ var threshold = 30;
 
 //===============================================================Preload
 function preload() {
-  catImg = loadImage("assets/1x/catPlace.png");
-  woodFloor = loadImage("assets/1x/floor.png");
 
 }
 
@@ -25,7 +23,11 @@ function preload() {
 //===============================================================Set up
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  catImg = loadImage("assets/1x/catPlace.png");
+  woodFloor = loadImage("assets/1x/floor.png");
+
   angleMode(DEGREES);
+
 
   setShakeThreshold(threshold);
 
@@ -180,11 +182,12 @@ function car() {
 // =========================================================== End of Car(mice)
 
 function deviceShaken() {
+
   cars.reset();
+
+
   //--------------------------Spawn cars
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
-
-
 }
