@@ -16,13 +16,13 @@ var threshold = 30;
 //===============================================================Preload
 function preload() {
   catImg = loadImage("assets/1x/catPlace.png");
-  woodFloor = loadImage("assets/1x/floor.png");
 }
 //===============================================================Set up
 function setup() {
+
   createCanvas(windowWidth, windowHeight);
+  woodFloor = loadImage("assets/1x/floor.png");
   angleMode(DEGREES);
-  deviceOreientation = LANDSCAPE;
   setShakeThreshold(threshold);
 
   //------------------------------------- initialize accelerometer variables
@@ -42,7 +42,7 @@ function setup() {
 
 }
 //============================================================End of set-up
-//=============================================================Draw
+//====== draw =======================================================Draw
 function draw() {
   background('#CE9B64'); // background fill
   image(woodFloor, windowWidth / 2, windowHeight / 2);
@@ -65,35 +65,34 @@ function draw() {
   xPosition = map(gamma, -60, 60, 0, width);
   yPosition = map(beta, -30, 30, 0, height);
 
-
-
   catPos.x = xPosition
   catPos.y = yPosition
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
     cars[i].drive();
-    if (cars[i].pos.dist(catPos) < 50) {
+    if (cars[i].pos.dist(catPos) < 20) {
       cars.splice(i, 1);
     }
   }
 
   // DECORATIONS
   // Just a bunch of text commands to display data coming in from addEventListeners
-  textAlign(LEFT);
-  textSize(20);
-  fill('black');
-  text("orientation data:", 25, 25);
-  textSize(15);
-  text("alpha: " + alpha, 25, 50);
-  text("beta: " + beta, 25, 70);
-  text("gamma: " + gamma, 25, 90);
-  textSize(20);
-  text("acceleration data:", 25, 125);
-  textSize(15);
-  text("x = " + x.toFixed(2), 25, 150); // .toFixed means just show (x) decimal places
-  text("y = " + y.toFixed(2), 25, 170);
-  text("z = " + z.toFixed(4), 25, 190);
+  // textAlign(LEFT);
+  // textSize(20);
+  // fill('black');
+  // text("orientation data:", 25, 25);
+  // textSize(15);
+  // text("alpha: " + alpha, 25, 50);
+  // text("beta: " + beta, 25, 70);
+  // text("gamma: " + gamma, 25, 90);
+  // textSize(20);
+  // text("acceleration data:", 25, 125);
+  // textSize(15);
+  // text("x = " + x.toFixed(2), 25, 150); // .toFixed means just show (x) decimal places
+  // text("y = " + y.toFixed(2), 25, 170);
+  // text("z = " + z.toFixed(4), 25, 190);
+
 }
 //================================================================ end of draw
 
@@ -137,7 +136,7 @@ function cat() {
 
 //============================================================ End of cat definition
 
-//============================================================= Car(mice)
+//====peice code========================================================= Car(mice)
 function car() {
   //-----------------------attributes
   this.pos = createVector(100, 100);
@@ -150,7 +149,7 @@ function car() {
 
   this.display = function() {
     fill(this.r, this.g, this.b);
-    rect(this.pos.x, this.pos.y, 100, 50);
+    rect(this.pos.x, this.pos.y, 30, 55);
   }
 
   //----------------------methods
@@ -164,14 +163,10 @@ function car() {
   }
 }
 // =========================================================== End of Car(mice)
-
-function deviceShaken() {
-
-  cars.reset();
-
-
-  //--------------------------Spawn cars
-  for (var i = 0; i < 20; i++) {
-    cars.push(new car())
-  }
-}
+//
+// function deviceShaken(threshold) {
+//  //--------------------------Spawn cars
+//   for (var i <= 0; i < 20; i++) {
+//     cars.push(new car())
+//   }
+// }

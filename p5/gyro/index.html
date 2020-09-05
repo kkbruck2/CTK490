@@ -13,53 +13,62 @@
 
 	<script src="../libs/p5.min.js"></script>
 
-	<button   id="request"  style="height: 50px; width: 150px; top: 20px; right: 20px; position: fixed; z-index: 5;">Request Permission</button>
+	<button id="request" style="height: 50px; width: 150px; top: 20px; right: 20px; position: fixed; z-index: 5;">Request Permission</button>
 
-<style> body {padding: 0; margin: 0;} body::-webkit-scrollbar { display: none; }</style>
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+		}
 
-<script>
-// if (location.protocol != 'https:') {
-//  location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
-// }
+		body::-webkit-scrollbar {
+			display: none;
+		}
+	</style>
 
-function requestT () {
+	<script>
+		// if (location.protocol != 'https:') {
+		//  location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+		// }
 
-	 if (typeof(DeviceMotionEvent) !== 'undefined' && typeof(DeviceMotionEvent.requestPermission) === 'function') {
-			 alert('enter');
-			 DeviceMotionEvent.requestPermission()
-			 .then(response => {
-			 	 alert('resp'+ response);
-				 if (response == 'granted') {
-					 window.addEventListener('devicemotion', (e) => {
-						 // do something with e
-						 // hide the button here
-						 document.getElementById('request').style.display = 'none';
-					 })
-				 }
-			 })
+		function requestT() {
 
-	 .catch(console.error)
-	 }else {
-			 alert('DeviceMotionEvent is not defined');
-	 }
-}
-document.getElementById('request').onclick = requestT;
-</script>
-<style id="container">
+			if (typeof(DeviceMotionEvent) !== 'undefined' && typeof(DeviceMotionEvent.requestPermission) === 'function') {
+				alert('enter');
+				DeviceMotionEvent.requestPermission()
+					.then(response => {
+						alert('resp' + response);
+						if (response == 'granted') {
+							window.addEventListener('devicemotion', (e) => {
+								// do something with e
+								// hide the button here
+								document.getElementById('request').style.display = 'none';
+							})
+						}
+					})
 
-</style>
+					.catch(console.error)
+			} else {
+				alert('DeviceMotionEvent is not defined');
+			}
+		}
+		document.getElementById('request').onclick = requestT;
+	</script>
+	<style id="container">
 
-<script>
-let sketch = function(p) {
-	p.setup = function(){
-		p.createCanvas(windowWidth, windowHeight);;
-		p.background("#CE9B64");
+	</style>
+
+	<script>
+		let sketch = function(p) {
+			p.setup = function() {
+				p.createCanvas(windowWidth, windowHeight);;
+				p.background("#CE9B64");
 
 
-	}
-};
-new p5(sketch, 'container');
-</script>
+			}
+		};
+		new p5(sketch, 'container');
+	</script>
 
 	<!-- sketch -->
 	<script language="javascript" src="sketch.js"></script>
