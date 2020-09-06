@@ -16,6 +16,8 @@ var threshold = 30;
 //===============================================================Preload
 function preload() {
   catImg = loadImage("assets/1x/catPlace.png");
+  woodFloor = loadImage("assets/1x/floor.png");
+
 }
 //===============================================================Set up
 function setup() {
