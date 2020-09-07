@@ -11,8 +11,9 @@ var z = 0;
 var cars = [];
 var catPos;
 var angle = 0.0;
+var value = 20;
 
-var threshold = 25;
+var threshold = 30;
 
 //===============================================================Preload
 function preload() {
@@ -28,7 +29,7 @@ function setup() {
   angleMode(DEGREES);
 
 
-  setShakeThreshold(threshold);
+
 
 
   //------------------------------------- initialize accelerometer variables
@@ -39,6 +40,8 @@ function setup() {
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
+  catPos = createVector(width / 2, height - 80);
+
   //------------------------------------------------- piece splice
 
   imageMode(CENTER);
@@ -177,14 +180,9 @@ function car() {
   }
 }
 // =========================================================== End of Car(mice)
-// 
-// function deviceShaken() {
 //
-//   cars.reset();
-//
-//
-//   //--------------------------Spawn cars
-//   for (var i = 0; i < 20; i++) {
-//     cars.push(new car())
-//   }
-// }
+function deviceShaken() {
+
+  cars.reset();
+
+  }

@@ -71,16 +71,7 @@ function draw() {
   xPosition = map(gamma, -60, 60, 0, width);
   yPosition = map(beta, -30, 30, 0, height);
 
-  // push(); // before you use translate, rotate, or scale commands, push and then pop after
-  //
-  // translate(xPosition, yPosition); // move everything over by x, y
-  //
-  // rotate(angle); // using alpha in here so it doesn't feel bad
-  //
-  // // cat (width/2, height/2);
-  // //   angle += 0;
-  // //  	rect(0, 0, 100, 100) ;
-  // pop();
+
 
   catPos.x = xPosition
   catPos.y = yPosition
