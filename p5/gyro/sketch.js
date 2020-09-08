@@ -11,8 +11,9 @@ var z = 0;
 var cars = [];
 var catPos;
 var angle = 0.0;
+var value = 0;
 
-
+var threshold = 30;
 
 //===============================================================Preload
 function preload() {
@@ -26,7 +27,6 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
-
 
 
 
@@ -111,15 +111,8 @@ function draw() {
   text("y = " + y.toFixed(2), 25, 170);
   text("z = " + z.toFixed(4), 25, 190);
 }
-
 //================================================================ end of draw
-function deviceShaken() {
-  // re-spawn cars
-  cars = []; // clear the array first
-  for (var i = 0; i < 40; i++) {
-    cars.push(new Car());
-  }
-}
+
 // ----------------------------------------------------------- Cat motion
 function drawArrow(base, vec, myColor) {
   push();
@@ -188,3 +181,8 @@ function car() {
 }
 // =========================================================== End of Car(mice)
 //
+function deviceShaken() {
+
+  cars.reset();
+
+  }

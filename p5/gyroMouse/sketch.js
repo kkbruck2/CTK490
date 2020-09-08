@@ -57,8 +57,9 @@ function draw() {
   //-------------------------------code for test mouse moving cat
   push();
 
-  translate(mouseX, mouseY);
+  translate(catPos.x - 100, catPos.y - 65);
 
+  cat();
   pop();
 
   //-------------------------------code for test mouse moving cat END
