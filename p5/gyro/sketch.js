@@ -11,9 +11,9 @@ var z = 0;
 var cars = [];
 var catPos;
 var angle = 0.0;
-var value = 20;
 
-var threshold = 30;
+
+var threshold > 0;
 
 //===============================================================Preload
 function preload() {
@@ -27,6 +27,8 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
+
+  setShakeThreshold(threshold);
 
 
 
