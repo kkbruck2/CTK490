@@ -113,8 +113,15 @@ function draw() {
   text("y = " + y.toFixed(2), 25, 170);
   text("z = " + z.toFixed(4), 25, 190);
 }
-//================================================================ end of draw
 
+//================================================================ end of draw
+function deviceShaken() {
+  // re-spawn cars
+  cars = []; // clear the array first
+  for (var i = 0; i < 40; i++) {
+    cars.push(new Car());
+  }
+}
 // ----------------------------------------------------------- Cat motion
 function drawArrow(base, vec, myColor) {
   push();
@@ -183,16 +190,3 @@ function car() {
 }
 // =========================================================== End of Car(mice)
 //
-function deviceShaken() {
-
-  cars = [];
-  //------------ -- -- -- -- -- -- --Spawn cars
-
-  for (var i = 0; i < cars.length; i++) {
-    cars[i].display();
-    cars[i].drive();
-    if (cars[i].pos.dist(catPos) < 50) {
-      cars.splice(i, 1);
-    }
-  }
-}
