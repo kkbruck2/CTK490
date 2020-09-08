@@ -183,6 +183,14 @@ function car() {
 //
 function deviceShaken() {
 
-  cars.reset();
+  cars = [];
+  //------------ -- -- -- -- -- -- --Spawn cars
 
+  for (var i = 0; i < cars.length; i++) {
+    cars[i].display();
+    cars[i].drive();
+    if (cars[i].pos.dist(catPos) < 50) {
+      cars.splice(i, 1);
+    }
   }
+}
