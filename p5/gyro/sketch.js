@@ -13,7 +13,6 @@ var catPos;
 var angle = 0.0;
 
 
-var threshold > 0;
 
 //===============================================================Preload
 function preload() {
@@ -28,7 +27,6 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
 
-  setShakeThreshold(threshold);
 
 
 
