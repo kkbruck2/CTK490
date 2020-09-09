@@ -11,6 +11,7 @@ var z = 0;
 var cars = [];
 var catPos;
 var angle = 0.0;
+
 //---------------------------------------------------------Set up
 function preload() {
   catImg = loadImage("assets/1x/catPlace.png");
@@ -55,12 +56,12 @@ function draw() {
   let myHeading = catPos.heading();
 
   //-------------------------------code for test mouse moving cat
-  push();
-
-  translate(catPos.x - 100, catPos.y - 65);
-
-  cat();
-  pop();
+  // push();
+  //
+  // translate(catPos.x - 100, catPos.y - 65);
+  //
+  // cat();
+  // pop();
 
   //-------------------------------code for test mouse moving cat END
 
@@ -142,7 +143,8 @@ function cat() {
   image(catImg, 0, 113);
   // fill(150, 0, 150, 150);
   translate(-300, -300);
-  // ellipse(300, 300, 70, 70);
+  noFill();
+  ellipse(300, 300, 70, 70);
 
 
   // fill(100, 0, 100);
@@ -185,3 +187,10 @@ function car() {
 
 }
 //----------------------------------------------------------------end of mice
+function deviceShaken() {
+cars = [];
+
+  for (var i = 0; i < 20; i++) {
+    cars.push(new car())
+  }
+}
