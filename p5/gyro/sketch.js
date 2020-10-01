@@ -146,9 +146,9 @@ window.addEventListener('devicemotion', function(e) {
 function cat() {
   rotate(90);
   image(catImg, 0, 113);
-  // fill(150, 0, 150, 150);
+  fill(150, 0, 150, 150);
   translate(-300, -300);
-  // ellipse(300, 300, 70, 70);
+  ellipse(300, 300, 70, 70);
 }
 
 //============================================================ End of cat definition
