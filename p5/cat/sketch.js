@@ -9,7 +9,10 @@ var pawrightB;
 var woodFloor;
 var activeArea;
 var stomachX = 67;
-var stomachY = 162;
+var stomachY = 150;
+var angle = 0;
+var angleDirection = 1
+
 
 function preload() {
   catHead = loadImage("assets/1x/head.png");
@@ -27,7 +30,7 @@ function preload() {
 
 function setup() {
 
-  createCanvas(600, 600);
+  createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
   imageMode(CENTER);
 
@@ -43,14 +46,20 @@ function draw() {
   // fill(255, 255, 255, 80)
   // rect(0, 0, 400, 400);
   //template END
-  //activeArea
-  fill(0, 0, 0, 50);
-  ellipse(95, 30, 60, 60);
+
+  translate(mouseX, mouseY);
+  rotate(angle);
+
   cat();
 
 }
 
 function cat() {
+
+  translate(-95, -30);
+
+  fill(0, 0, 0, 50);
+  ellipse(95, 30, 60, 60);
   //front Legs
   image(legleftF, 62, 54);
   //right front Leg
@@ -66,6 +75,8 @@ function cat() {
   image(catHead, 100, 40);
   image(cattail, 119, 275);
 
+}
 
-
+function mouseReleased() {
+    image(catbody, 100, 150, stomachX += 5, stomachY);
 }
