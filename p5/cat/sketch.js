@@ -8,10 +8,11 @@ var pawleftB;
 var pawrightB;
 var woodFloor;
 var activeArea;
-var stomachX = 67;
-var stomachY = 150;
+var stomachX = 64;
+var stomachY = 160;
 var angle = 0;
-var angleDirection = 1
+var angleDirection = 1;
+var marks
 
 
 function preload() {
@@ -24,6 +25,7 @@ function preload() {
   pawrightB = loadImage("assets/1x/backR.png");
   activeArea = loadImage("assets/1x/Asset106.png");
   catWhole = loadImage("assets/1x/catPlace.png");
+  marks = loadImage("assets/1x/marking.png");
 }
 
 
@@ -55,28 +57,40 @@ function draw() {
 }
 
 function cat() {
-
+  //set translation point
   translate(-95, -30);
-
+  //active area
   fill(0, 0, 0, 50);
   ellipse(95, 30, 60, 60);
-  //front Legs
+  noFill();
+  //front Legs left
+  push();
+  rotate(angle++);
+  translate(20, 30);
+  pop();
   image(legleftF, 62, 54);
   //right front Leg
   image(legrightF, 131, 63);
+  //back Legs left
+  image(pawleftB, 62, 176);
+  //back right
+  image(pawrightB, 134, 177);
 
-  //back Legs
-  image(pawleftB, 62, 169);
-  image(pawrightB, 134, 170);
 
-  //cat head, body, and tail
-
-  image(catbody, 100, 150, stomachX, stomachY);
+  //Cat body gets fat
+  fill(115, 99, 87);
+  stroke(0);
+  strokeWeight(2);
+  ellipse(100, 145, stomachX, 165);
+  //body markings
+  noStroke();
+  image(marks, 100, 144, stomachX, stomachY);
+  //head and tail
   image(catHead, 100, 40);
-  image(cattail, 119, 275);
+  image(cattail, 120, 277);
 
 }
 
 function mouseReleased() {
-    image(catbody, 100, 150, stomachX += 5, stomachY);
+  image(marks, 100, 150, stomachX += 5, stomachY);
 }
