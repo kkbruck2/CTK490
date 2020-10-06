@@ -57,18 +57,24 @@ function draw() {
 }
 
 function cat() {
+
   //set translation point
   translate(-95, -30);
   //active area
+
+  push();
   fill(0, 0, 0, 50);
   ellipse(95, 30, 60, 60);
   noFill();
-  //front Legs left
-  push();
-  rotate(angle++);
   translate(20, 30);
   pop();
+  //==end of active area
+
+  //==frontpaw
+
   image(frontL, 62, 54);
+
+
   //right front Leg
   image(frontR, 131, 63);
   //back Legs left
