@@ -98,7 +98,7 @@ function draw() {
     if (cars[i].pos.dist(catPos) < 50) {
       cars.splice(i, 1);
       stomachX += 3;
-      image(marks + 2, stomachX + 2, 160)
+      marks.x += 3
 
     }
   }
@@ -159,7 +159,7 @@ function cat() {
   fill(115, 99, 87);
   stroke(0);
   strokeWeight(2);
-  ellipse(-3, 77, stomachX, 165);
+  ellipse(-3, 77, stomachX, stomachY);
   //body markings
   noStroke();
   image(marks, -3, 77, stomachX, stomachY);
