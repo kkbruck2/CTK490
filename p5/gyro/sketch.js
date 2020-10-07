@@ -98,7 +98,7 @@ function draw() {
     if (cars[i].pos.dist(catPos) < 50) {
       cars.splice(i, 1);
       stomachX += 3;
-      image(marks, stomachX, 160)
+      image(marks + 2, stomachX + 2, 160)
 
     }
   }
