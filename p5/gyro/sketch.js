@@ -12,14 +12,20 @@ var cars = [];
 var catPos;
 var angle = 0.0;
 var timer = 0;
-
+var limbs;
+var headTail;
+var marks;
+var stomachX = 64;
+var stomachY = 160;
 
 
 //===============================================================Preload
 function preload() {
   catImg = loadImage("assets/1x/catPlace.png");
   woodFloor = loadImage("assets/1x/floor.png");
-
+  limbs = loadImage("assets/1x/limbs.png");
+  headTail = loadImage("assets/1x/headTail.png");
+  marks = loadImage("assets/1x/marking.png")
 }
 
 
@@ -91,6 +97,9 @@ function draw() {
     cars[i].drive();
     if (cars[i].pos.dist(catPos) < 50) {
       cars.splice(i, 1);
+      stomachX += 3;
+      image(marks, stomachX, 160)
+
     }
   }
 
@@ -145,10 +154,20 @@ window.addEventListener('devicemotion', function(e) {
 //========================================================== cat definition
 function cat() {
   rotate(90);
-  image(catImg, 0, 113);
-  fill(150, 0, 150, 150);
-  translate(-300, -300);
-  ellipse(300, 300, 70, 70);
+    image(limbs, -4, 50);
+
+  fill(115, 99, 87);
+  stroke(0);
+  strokeWeight(2);
+  ellipse(-3, 77, stomachX, 165);
+  //body markings
+  noStroke();
+  image(marks, -3, 77, stomachX, stomachY);
+  image(headTail, 0, 113)
+
+  // fill(150, 0, 150, 150);
+  // translate(-300, -300);
+  // ellipse(300, 300, 70, 70);
 }
 
 //============================================================ End of cat definition
@@ -182,6 +201,7 @@ function car() {
 // =========================================================== End of Car(mice)
 //
 function deviceShaken() {
+  reset();
 cars = [];
 
   for (var i = 0; i < 20; i++) {

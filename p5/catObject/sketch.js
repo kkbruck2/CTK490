@@ -36,8 +36,7 @@ function setup() {
   angleMode(DEGREES);
   imageMode(CENTER);
 
-  cat = new Cat(mouseX, mouseY)
-
+  catPos = new Cat(mouseX, mouseY);
 
 
 
@@ -45,11 +44,6 @@ function setup() {
 
 function draw() {
   background(255);
-  //template
-  // image(catWhole, 100,160);
-  // fill(255, 255, 255, 80)
-  // rect(0, 0, 400, 400);
-  //template END
 
   translate(mouseX, mouseY);
   rotate(angle);
@@ -58,7 +52,8 @@ function draw() {
 
 }
 
-function cat() {
+function Cat() {
+
   //set translation point
   translate(-95, -30);
   //active area
@@ -72,13 +67,17 @@ function cat() {
   //==end of active area
 
   //==frontpaw
+
   image(frontL, 62, 54);
+
+
   //right front Leg
   image(frontR, 131, 63);
   //back Legs left
   image(backL, 62, 176);
   //back right
   image(backR, 134, 177);
+
 
   //Cat body gets fat
   fill(115, 99, 87);
