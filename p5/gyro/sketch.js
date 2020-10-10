@@ -17,12 +17,13 @@ var headTail;
 var marks;
 var stomachX = 64;
 var stomachY = 160;
+var woodFloor;
 
 
 //===============================================================Preload
 function preload() {
   catImg = loadImage("assets/1x/catPlace.png");
-  woodFloor = loadImage("assets/1x/floor.png");
+  woodFloor = loadImage("assets/1x/wood.jpg");
   limbs = loadImage("assets/1x/limbs.png");
   headTail = loadImage("assets/1x/headTail.png");
   marks = loadImage("assets/1x/marking.png")

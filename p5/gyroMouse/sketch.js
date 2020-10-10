@@ -3,6 +3,13 @@ Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
 var catImg;
+var xPosition = 0;
+var yPosition = 0;
+var x = 0; // acceleratiobn data
+var y = 0;
+var z = 0;
+var angle = 0.0;
+var timer = 0;
 var catHead;
 var legleftF;
 var legrightF;
@@ -10,16 +17,10 @@ var cattail;
 var catbody;
 var leftB;
 var rightB;
-
-
-var xPosition = 0;
-var yPosition = 0;
-var x = 0; // acceleratiobn data
-var y = 0;
-var z = 0;
 var cars = [];
 var catPos;
 var angle = 0.0;
+var woodFloor;
 
 //---------------------------------------------------------Set up
 function preload() {
