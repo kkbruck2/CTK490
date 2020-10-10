@@ -12,7 +12,7 @@ var stomachX = 64;
 var stomachY = 160;
 var angle = 0;
 var angleDirection = 1;
-var marks
+var marks;
 
 
 function preload() {
@@ -25,6 +25,7 @@ function preload() {
   backR = loadImage("assets/1x/backR.png");
   activeArea = loadImage("assets/1x/Asset106.png");
   catWhole = loadImage("assets/1x/catPlace.png");
+  woodFloor = ("assets/1x/wood.jpeg")
   marks = loadImage("assets/1x/marking.png");
 }
 
@@ -36,7 +37,7 @@ function setup() {
   angleMode(DEGREES);
   imageMode(CENTER);
 
-  cat = new Cat(mouseX, mouseY)
+//  cat(mouseX, mouseY);
 
 
 
@@ -51,18 +52,22 @@ function draw() {
   // rect(0, 0, 400, 400);
   //template END
 
-  translate(mouseX, mouseY);
-  rotate(angle);
+  cat(mouseX, mouseY, angle);
 
-  cat();
 
 }
 
-function cat() {
+function cat(x, y, a) {
   //set translation point
-  translate(-95, -30);
-  //active area
+  push();
+  translate(x, y);
+  rotate(a);
 
+//rotation point
+  translate(-95, -30);
+
+
+  //==active area location
   push();
   fill(0, 0, 0, 50);
   ellipse(95, 30, 60, 60);
@@ -72,9 +77,11 @@ function cat() {
   //==end of active area
 
   //==frontpaw
-  image(frontL, 62, 54);
+  //image(frontL, 62, 54);
+  image(frontL, 62 + -2/10 * (stomachX - 64), 54);
+  rotate(90);
   //right front Leg
-  image(frontR, 131, 63);
+  image(frontR, 131 + 2/10 * (stomachX - 64), 63);
   //back Legs left
   image(backL, 62, 176);
   //back right
@@ -92,6 +99,7 @@ function cat() {
   image(catHead, 100, 40);
   image(cattail, 120, 277);
 
+    pop();
 }
 
 function mouseReleased() {
