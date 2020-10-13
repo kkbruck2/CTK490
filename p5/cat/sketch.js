@@ -1,4 +1,4 @@
-var catWhole;
+
 var catHead;
 var frontL;
 var frontR;
@@ -25,7 +25,7 @@ function preload() {
   backR = loadImage("assets/1x/backR.png");
   activeArea = loadImage("assets/1x/Asset106.png");
   catWhole = loadImage("assets/1x/catPlace.png");
-  woodFloor = ("assets/1x/wood.jpeg")
+  woodFloor = ("assets/1x/woodFloor.jpeg")
   marks = loadImage("assets/1x/marking.png");
 }
 
@@ -33,7 +33,7 @@ function preload() {
 
 function setup() {
 
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(displayWidth, displayHeight);
   angleMode(DEGREES);
   imageMode(CENTER);
 
@@ -68,24 +68,25 @@ function cat(x, y, a) {
 
 
   //==active area location
-  push();
-  fill(0, 0, 0, 50);
-  ellipse(95, 30, 60, 60);
-  noFill();
-  translate(20, 30);
-  pop();
+  // push();
+  // fill(0, 0, 0, 50);
+  // ellipse(95, 30, 60, 60);
+  // noFill();
+  // translate(20, 30);
+  // pop();
   //==end of active area
 
   //==frontpaw
   //image(frontL, 62, 54);
+
   image(frontL, 62 + -2/10 * (stomachX - 64), 54);
-  rotate(90);
+
   //right front Leg
   image(frontR, 131 + 2/10 * (stomachX - 64), 63);
   //back Legs left
-  image(backL, 62, 176);
+  image(backL, 64 + -2/6 * (stomachX - 64), 176);
   //back right
-  image(backR, 134, 177);
+  image(backR, 135 + 2/6 * (stomachX - 64), 177);
 
   //Cat body gets fat
   fill(115, 99, 87);
@@ -102,6 +103,7 @@ function cat(x, y, a) {
     pop();
 }
 
-function mouseReleased() {
+function mouseReleased(x, y, a) {
   image(marks, 100, 150, stomachX += 5, stomachY);
+
 }

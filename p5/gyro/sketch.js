@@ -12,8 +12,14 @@ var cars = [];
 var catPos;
 var angle = 0.0;
 var timer = 0;
-var limbs;
-var headTail;
+var frontL;
+var frontR;
+var backL;
+var backR;
+var catHead;
+var cattail;
+var activeArea;
+var angle = 0;
 var marks;
 var stomachX = 64;
 var stomachY = 160;
@@ -22,11 +28,17 @@ var woodFloor;
 
 //===============================================================Preload
 function preload() {
-  catImg = loadImage("assets/1x/catPlace.png");
+  catHead = loadImage("assets/1x/head.png");
+  frontL = loadImage("assets/1x/frontL.png");
+  frontR = loadImage("assets/1x/frontR.png");
+  cattail = loadImage("assets/1x/tail.png");
+  catbody = loadImage("assets/1x/body.png");
+  backL = loadImage("assets/1x/backL.png");
+  backR = loadImage("assets/1x/backR.png");
+  activeArea = loadImage("assets/1x/Asset106.png");
+  catWhole = loadImage("assets/1x/catPlace.png");
   woodFloor = loadImage("assets/1x/wood.jpg");
-  limbs = loadImage("assets/1x/limbs.png");
-  headTail = loadImage("assets/1x/headTail.png");
-  marks = loadImage("assets/1x/marking.png")
+  marks = loadImage("assets/1x/marking.png");
 }
 
 
