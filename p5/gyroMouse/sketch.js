@@ -2,7 +2,7 @@
 Make sure you turn on orientation lock on your iPhone or Android device. */
 
 
-var alpha, beta, gamma; // orientation data
+// var alpha, beta, gamma; // orientation data
 var bunnyImage;
 var xPosition = 0;
 var yPosition = 0;
@@ -44,7 +44,7 @@ function preload() {
 
 function setup() {
 
-  createCanvas(displayWidth, displayHeight);
+  // createCanvas(displayWidth, displayHeight);
   angleMode(DEGREES);
 
 
@@ -64,10 +64,8 @@ function setup() {
     rectMode(CENTER);
 
   }
-  //============================================================End of set-up
-  //=============================================================Draw
-
-
+  //=====================================End of set-up
+  //==============================================Draw
 
 
 function draw() {
@@ -107,4 +105,19 @@ function draw() {
     }
   }
 
+}
+
+//======= end draw
+
+//----------Cat motion
+function drawArrow(base, vec, myColor) {
+  push();
+  noStroke();
+
+  translate(base.x, base.y);
+  line(0, 0, vec.x, vec.y);
+  rotate(vec.heading());
+  translate(vec.mag(), 0);
+  cat(0, 0);
+  pop();
 }

@@ -26,7 +26,7 @@ var stomachY = 160;
 var woodFloor;
 
 
-//===============================================================Preload
+//=====================================Preload
 function preload() {
   catHead = loadImage("assets/1x/head.png");
   frontL = loadImage("assets/1x/frontL.png");
@@ -37,18 +37,15 @@ function preload() {
   backR = loadImage("assets/1x/backR.png");
   activeArea = loadImage("assets/1x/Asset106.png");
   catWhole = loadImage("assets/1x/catPlace.png");
-  woodFloor = loadImage("assets/1x/wood.jpg");
+  woodFloor = loadImage("assets/1x/woodFloor.jpg");
   marks = loadImage("assets/1x/marking.png");
 }
 
 
-//===============================================================Set up
+//====================================Set up
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(displayWidth, displayHeight);
   angleMode(DEGREES);
-
-
-
 
 
   //------------------------------------- initialize accelerometer variables
@@ -146,7 +143,7 @@ function drawArrow(base, vec, myColor) {
   cat(0, 0);
   pop();
 }
-//-----------------------------------------------------------End of cat motion
+//-----------------------End of cat motion
 //------------------------------------------------- Read in accelerometer data
 window.addEventListener('deviceorientation', function(e) {
   alpha = e.alpha;
