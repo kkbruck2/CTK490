@@ -79,13 +79,13 @@ function cat(x, y, a) {
   //==frontpaw
   //image(frontL, 62, 54);
   image(frontL, 62 + -2/10 * (stomachX - 64), 54);
-  rotate(90);
+
   //right front Leg
   image(frontR, 131 + 2/10 * (stomachX - 64), 63);
   //back Legs left
-  image(backL, 62, 176);
+  image(backL, 62 + -2/8 * (stomachX - 64), 176);
   //back right
-  image(backR, 134, 177);
+  image(backR, 134 + -2/8 * (stomachX - 64), 177);
 
   //Cat body gets fat
   fill(115, 99, 87);
