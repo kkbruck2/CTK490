@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Gyro Mouse</title>
+	<title>Mouse Hunt</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
@@ -10,10 +10,8 @@
 
 
 	<!-- p5js -->
-	<script src="../libs/p5.min.js"></script>
-	<script src="../libs/p5.sound.min.js"></script>
-	<script src="sketch.js"></script>
 
+	<script src="../libs/p5.min.js"></script>
 
 	<button   id="request"  style="height: 50px; width: 150px; top: 20px; right: 20px; position: fixed; z-index: 5;">Request Permission</button>
 
@@ -50,17 +48,18 @@ document.getElementById('request').onclick = requestT;
 <style id="container">
 
 </style>
+
 <script>
 let sketch = function(p) {
 	p.setup = function(){
-		p.createCanvas(windowWidth, windowHeight);
+		p.createCanvas(windowWidth, windowHeight);;
 		p.background("#CE9B64");
+
 
 	}
 };
 new p5(sketch, 'container');
 </script>
-
 
 	<!-- sketch -->
 	<script language="javascript" src="sketch.js"></script>

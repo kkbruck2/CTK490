@@ -24,6 +24,8 @@ var marks;
 var stomachX = 64;
 var stomachY = 160;
 var woodFloor;
+var catbody;
+
 
 
 //=====================================Preload
@@ -69,6 +71,8 @@ function setup() {
 function draw() {
   background('#CE9B64'); // background fill
   image(woodFloor, windowWidth / 2, windowHeight / 2);
+//new info
+  cat(mouseX, mouseY, angle);
 
   //-----------------------------
   let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
@@ -159,25 +163,76 @@ window.addEventListener('devicemotion', function(e) {
   z = e.acceleration.z;
 });
 //----------------------------------------------------------element definitions
+//=== start of detail cat====
+function cat(x, y, a) {
+  //set translation point
+  push();
+  translate(x, y);
+  rotate(a);
 
-//========================================================== cat definition
-function cat() {
-  rotate(90);
-    image(limbs, -4, 50);
+//rotation point
+  translate(-95, -30);
 
+
+  //==active area location
+  // push();
+  // fill(0, 0, 0, 50);
+  // ellipse(95, 30, 60, 60);
+  // noFill();
+  // translate(20, 30);
+  // pop();
+  //==end of active area
+
+  //==frontpaw
+  //image(frontL, 62, 54);
+
+  image(frontL, 62 + -2/10 * (stomachX - 64), 54);
+
+  //right front Leg
+  image(frontR, 131 + 2/10 * (stomachX - 64), 63);
+  //back Legs left
+  image(backL, 64 + -2/6 * (stomachX - 64), 176);
+  //back right
+  image(backR, 135 + 2/6 * (stomachX - 64), 177);
+
+  //Cat body gets fat
   fill(115, 99, 87);
   stroke(0);
   strokeWeight(2);
-  ellipse(-3, 77, stomachX, stomach);
+  ellipse(100, 145, stomachX, 165);
   //body markings
   noStroke();
-  image(marks, -3, 77, stomachX, stomachY);
-  image(headTail, 0, 113)
+  image(marks, 100, 144, stomachX, stomachY);
+  //head and tail
+  image(catHead, 100, 40);
+  image(cattail, 120, 277);
 
-  // fill(150, 0, 150, 150);
-  // translate(-300, -300);
-  // ellipse(300, 300, 70, 70);
+  pop();
 }
+//==== end of detailed cat===
+
+
+
+
+
+
+//===cat from gyro ======================================================= cat definition
+// function cat() {
+//   rotate(90);
+//     image(limbs, -4, 50);
+//
+//   fill(115, 99, 87);
+//   stroke(0);
+//   strokeWeight(2);
+//   ellipse(-3, 77, stomachX, stomach);
+//   //body markings
+//   noStroke();
+//   image(marks, -3, 77, stomachX, stomachY);
+//   image(headTail, 0, 113)
+//
+// }
+// //=== end cat from gyro==================
+
 
 //============================================================ End of cat definition
 
