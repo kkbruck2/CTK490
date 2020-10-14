@@ -57,6 +57,7 @@ function draw() {
 
 }
 
+//=== end of detail cat====
 function cat(x, y, a) {
   //set translation point
   push();
@@ -100,8 +101,10 @@ function cat(x, y, a) {
   image(catHead, 100, 40);
   image(cattail, 120, 277);
 
-    pop();
+  pop();
 }
+//==== end of detailed cat===
+
 
 function mouseReleased(x, y, a) {
   image(marks, 100, 150, stomachX += 5, stomachY);
