@@ -156,10 +156,12 @@ function cat() {
   rotate(90);
     image(limbs, -4, 50);
 
-  fill(115, 99, 87);
-  stroke(0);
-  strokeWeight(2);
-  ellipse(-3, 77, stomachX, stomach);
+    fill(115, 99, 87);
+    stroke(0);
+    strokeWeight(2);
+    ellipse(-3, 77, stomachX, 165);
+    //body markings
+
   //body markings
   noStroke();
   image(marks, -3, 77, stomachX, stomachY);

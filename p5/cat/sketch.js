@@ -46,6 +46,7 @@ function setup() {
 
 function draw() {
   background(255);
+  //image(woodFloor, windowWidth / 2, windowHeight /2);
   //template
   // image(catWhole, 100,160);
   // fill(255, 255, 255, 80)
@@ -68,12 +69,12 @@ function cat(x, y, a) {
 
 
   //==active area location
-  push();
-  fill(0, 0, 0, 50);
-  ellipse(95, 30, 60, 60);
-  noFill();
-  translate(20, 30);
-  pop();
+  // push();
+  // fill(0, 0, 0, 50);
+  // ellipse(95, 30, 60, 60);
+  // noFill();
+  // translate(20, 30);
+  // pop();
   //==end of active area
 
   //==frontpaw
@@ -83,9 +84,9 @@ function cat(x, y, a) {
   //right front Leg
   image(frontR, 131 + 2/10 * (stomachX - 64), 63);
   //back Legs left
-  image(backL, 62 + -2/8 * (stomachX - 64), 176);
+  image(backL, 62 + -2/6 * (stomachX - 64), 172);
   //back right
-  image(backR, 134 + -2/8 * (stomachX - 64), 177);
+  image(backR, 134 + 2/6 * (stomachX - 64), 173);
 
   //Cat body gets fat
   fill(115, 99, 87);
