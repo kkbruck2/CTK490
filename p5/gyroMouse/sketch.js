@@ -44,14 +44,14 @@ function preload() {
 
 function setup() {
 
-  // createCanvas(displayWidth, displayHeight);
+  createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
 
 
     //------------------------------------- initialize accelerometer variables
-    alpha = 0;
-    beta = 0;
-    gamma = 0;
+    // alpha = 0;
+    // beta = 0;
+    // gamma = 0;
 
     for (var i = 0; i < 20; i++) {
       cars.push(new car())
