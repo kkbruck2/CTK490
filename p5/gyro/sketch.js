@@ -11,9 +11,9 @@ var z = 0;
 var cars = [];
 var catPos;
 var angle = 0.0;
-var value = 20;
+var timer = 0;
 
-var threshold = 30;
+
 
 //===============================================================Preload
 function preload() {
@@ -146,9 +146,9 @@ window.addEventListener('devicemotion', function(e) {
 function cat() {
   rotate(90);
   image(catImg, 0, 113);
-  // fill(150, 0, 150, 150);
+  fill(150, 0, 150, 150);
   translate(-300, -300);
-  // ellipse(300, 300, 70, 70);
+  ellipse(300, 300, 70, 70);
 }
 
 //============================================================ End of cat definition
@@ -182,7 +182,9 @@ function car() {
 // =========================================================== End of Car(mice)
 //
 function deviceShaken() {
+cars = [];
 
-  cars.reset();
-
+  for (var i = 0; i < 20; i++) {
+    cars.push(new car())
   }
+}
