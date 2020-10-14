@@ -2,7 +2,6 @@
 Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
-var bunnyImage;
 var xPosition = 0;
 var yPosition = 0;
 var x = 0; // acceleratiobn data
@@ -12,6 +11,7 @@ var cars = [];
 var catPos;
 var angle = 0.0;
 var timer = 0;
+
 var frontL;
 var frontR;
 var backL;
@@ -41,7 +41,8 @@ function preload() {
   catWhole = loadImage("assets/1x/catPlace.png");
   woodFloor = loadImage("assets/1x/woodFloor.jpg");
   marks = loadImage("assets/1x/marking.png");
-}
+=======
+
 
 
 //====================================Set up
@@ -166,22 +167,14 @@ window.addEventListener('devicemotion', function(e) {
 //=== start of detail cat====
 function cat(x, y, a) {
   //set translation point
+  
+    rotate(90);
   push();
   translate(x, y);
   rotate(a);
 
 //rotation point
   translate(-95, -30);
-
-
-  //==active area location
-  // push();
-  // fill(0, 0, 0, 50);
-  // ellipse(95, 30, 60, 60);
-  // noFill();
-  // translate(20, 30);
-  // pop();
-  //==end of active area
 
   //==frontpaw
   //image(frontL, 62, 54);
@@ -208,6 +201,9 @@ function cat(x, y, a) {
   image(cattail, 120, 277);
 
   pop();
+=======
+//========================================================== cat definition
+
 }
 //==== end of detailed cat===
 

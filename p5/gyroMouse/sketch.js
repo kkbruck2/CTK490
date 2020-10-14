@@ -1,14 +1,15 @@
 /* For mobile phones - accesses accelerometer.
 Make sure you turn on orientation lock on your iPhone or Android device. */
 
+=======
+var alpha, beta, gamma; // orientation data
 
-// var alpha, beta, gamma; // orientation data
-var bunnyImage;
 var xPosition = 0;
 var yPosition = 0;
 var x = 0; // acceleratiobn data
 var y = 0;
 var z = 0;
+
 var cars = [];
 var catPos;
 var angle = 0.0;

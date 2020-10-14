@@ -1,4 +1,4 @@
-
+var catWhole;
 var catHead;
 var frontL;
 var frontR;
@@ -12,7 +12,7 @@ var stomachX = 64;
 var stomachY = 160;
 var angle = 0;
 var angleDirection = 1;
-var marks;
+var marks
 
 
 function preload() {
@@ -25,8 +25,6 @@ function preload() {
   backR = loadImage("assets/1x/backR.png");
   activeArea = loadImage("assets/1x/Asset106.png");
   catWhole = loadImage("assets/1x/catPlace.png");
-  woodFloor = ("assets/1x/woodFloor.jpeg")
-
   marks = loadImage("assets/1x/marking.png");
 }
 
@@ -34,12 +32,11 @@ function preload() {
 
 function setup() {
 
-  createCanvas(displayWidth, displayHeight);
+  createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
   imageMode(CENTER);
 
-//  cat(mouseX, mouseY);
-
+  catPos = new Cat(mouseX, mouseY);
 
 
 
@@ -47,35 +44,39 @@ function setup() {
 
 function draw() {
   background(255);
-  //template
-  // image(catWhole, 100,160);
-  // fill(255, 255, 255, 80)
-  // rect(0, 0, 400, 400);
-  //template END
 
-  cat(mouseX, mouseY, angle);
+  translate(mouseX, mouseY);
+  rotate(angle);
 
+  cat();
 
 }
 
-function cat(x, y, a) {
+function Cat() {
+
   //set translation point
-  push();
-  translate(x, y);
-  rotate(a);
-
-//rotation point
   translate(-95, -30);
+  //active area
 
+  push();
+  fill(0, 0, 0, 50);
+  ellipse(95, 30, 60, 60);
+  noFill();
+  translate(20, 30);
+  pop();
+  //==end of active area
 
-  image(frontL, 62 + -2/10 * (stomachX - 64), 54);
+  //==frontpaw
+
+  image(frontL, 62, 54);
+
 
   //right front Leg
-  image(frontR, 131 + 2/10 * (stomachX - 64), 63);
+  image(frontR, 131, 63);
   //back Legs left
-  image(backL, 64 + -2/6 * (stomachX - 64), 176);
+  image(backL, 62, 176);
   //back right
-  image(backR, 135 + 2/6 * (stomachX - 64), 177);
+  image(backR, 134, 177);
 
 
   //Cat body gets fat
@@ -89,13 +90,9 @@ function cat(x, y, a) {
   //head and tail
   image(catHead, 100, 40);
   image(cattail, 120, 277);
-  pop();
 
 }
-//==== end of detailed cat===
 
-
-function mouseReleased(x, y, a) {
+function mouseReleased() {
   image(marks, 100, 150, stomachX += 5, stomachY);
-
 }
