@@ -150,7 +150,7 @@ function drawArrow(base, vec, myColor) {
   line(0, 0, vec.x, vec.y);
   rotate(vec.heading());
   translate(vec.mag(), 0);
-  cat(0, 0);
+  cat(vec.x, vec.y);
   pop();
 }
 //-----------------------------------------------------------End of cat motion
