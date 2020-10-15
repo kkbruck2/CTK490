@@ -170,8 +170,8 @@ window.addEventListener('devicemotion', function(e) {
 //----------------------------------------------------------element definitions
 
 //========================================================== cat definition
-function cat(x, y, a) {
-push();
+function cat() {
+
   angle = 90;
   //left front leg
   image(frontL, -36  + -2 / 10 * (stomachX -64), 15);
@@ -200,7 +200,7 @@ push();
   fill(150, 0, 150, 150);
   translate(-300, -300);
   ellipse(300, 300, 70, 70);
-  pop();
+
 }
 
 //============================================================ End of cat definition

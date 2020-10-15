@@ -12,8 +12,6 @@ var cars = [];
 var catPos;
 var angle = 0.0;
 var timer = 0;
-var limbs;
-var headTail;
 var marks;
 var stomachX = 64;
 var stomachY = 160;
