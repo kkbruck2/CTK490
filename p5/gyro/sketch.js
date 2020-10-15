@@ -17,16 +17,31 @@ var headTail;
 var marks;
 var stomachX = 64;
 var stomachY = 160;
-var woodFloor;
+var woodFloorX = 0;
+var woodFloorY = 0;
+var catHead;
+var frontL;
+var frontR;
+var cattail;
+var catbody;
+var backL;
+var backR;
 
 
 //===============================================================Preload
 function preload() {
   catImg = loadImage("assets/1x/catPlace.png");
-  woodFloor = loadImage("assets/1x/wood.jpg");
+  woodFloor = loadImage("assets/1x/myFloor.png")
   limbs = loadImage("assets/1x/limbs.png");
   headTail = loadImage("assets/1x/headTail.png");
   marks = loadImage("assets/1x/marking.png")
+  frontL = loadImage("assets/1x/frontL.png");
+  frontR = loadImage("assets/1x/frontR.png");
+  cattail = loadImage("assets/1x/tail.png");
+  catbody = loadImage("assets/1x/body.png");
+  backL = loadImage("assets/1x/backL.png");
+  backR = loadImage("assets/1x/backR.png");
+
 }
 
 
@@ -34,6 +49,9 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
+  imageMode(CENTER);
+  rectMode(CENTER);
+  ellipseMode(CENTER);
 
 
 
@@ -51,15 +69,15 @@ function setup() {
 
   //------------------------------------------------- piece splice
 
-  imageMode(CENTER);
-  rectMode(CENTER);
+
 
 }
 //============================================================End of set-up
 //=============================================================Draw
 function draw() {
   background('#CE9B64'); // background fill
-  image(woodFloor, windowWidth / 2, windowHeight / 2);
+  image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
+
 
   //-----------------------------
   let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
@@ -152,24 +170,37 @@ window.addEventListener('devicemotion', function(e) {
 //----------------------------------------------------------element definitions
 
 //========================================================== cat definition
-function cat() {
-  rotate(90);
-    image(limbs, -4, 50);
+function cat(x, y, a) {
 
-    fill(115, 99, 87);
-    stroke(0);
-    strokeWeight(2);
-    ellipse(-3, 64, stomachX, 182);
-    //body markings
+  angle = 90;
+  //left front leg
+  image(frontL, -36  + -2 / 10 * (stomachX -64), 15);
+
+  //right front Leg
+  image(frontR, 39 + 2 / 10 * (stomachX - 64), 20);
+
+  //back Legs left
+  image(backL, -36 + -2 / 6 * (stomachX - 64), 148);
+
+  //back right
+  image(backR, 35 + 2 / 6 * (stomachX - 64), 148);
+
+  //stomach
+  fill(115, 99, 87);
+  stroke(0);
+  strokeWeight(2);
+  ellipse(0, 120, stomachX, 180);
 
   //body markings
   noStroke();
-  image(marks, -3, 66, stomachX, stomachY);
-  image(headTail, 0, 113)
+  image(marks, 0, 120, stomachX, stomachY);
 
-  // fill(150, 0, 150, 150);
-  // translate(-300, -300);
-  // ellipse(300, 300, 70, 70);
+  image(catHead, 2, 2);
+  image(cattail, 20, 261);
+  fill(150, 0, 150, 150);
+  translate(-300, -300);
+  ellipse(300, 300, 70, 70);
+  //pop();
 }
 
 //============================================================ End of cat definition
