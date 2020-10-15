@@ -12,7 +12,6 @@ var cars = [];
 var catPos;
 var angle = 0.0;
 var timer = 0;
-var limbs;
 var headTail;
 var marks;
 var stomachX = 64;
@@ -32,8 +31,6 @@ var backR;
 function preload() {
   catImg = loadImage("assets/1x/catPlace.png");
   woodFloor = loadImage("assets/1x/myFloor.png")
-  limbs = loadImage("assets/1x/limbs.png");
-  headTail = loadImage("assets/1x/headTail.png");
   marks = loadImage("assets/1x/marking.png")
   frontL = loadImage("assets/1x/frontL.png");
   frontR = loadImage("assets/1x/frontR.png");
@@ -41,6 +38,8 @@ function preload() {
   catbody = loadImage("assets/1x/body.png");
   backL = loadImage("assets/1x/backL.png");
   backR = loadImage("assets/1x/backR.png");
+  catHead = loadImage("assets/1x/head.png");
+
 
 }
 
@@ -68,8 +67,6 @@ function setup() {
   catPos = createVector(width / 2, height - 80);
 
   //------------------------------------------------- piece splice
-
-
 
 }
 //============================================================End of set-up
@@ -171,7 +168,7 @@ window.addEventListener('devicemotion', function(e) {
 
 //========================================================== cat definition
 function cat(x, y, a) {
-
+push();
   angle = 90;
   //left front leg
   image(frontL, -36  + -2 / 10 * (stomachX -64), 15);
@@ -200,7 +197,7 @@ function cat(x, y, a) {
   fill(150, 0, 150, 150);
   translate(-300, -300);
   ellipse(300, 300, 70, 70);
-  //pop();
+  pop();
 }
 
 //============================================================ End of cat definition
