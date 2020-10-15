@@ -25,7 +25,7 @@ function preload() {
   backR = loadImage("assets/1x/backR.png");
   activeArea = loadImage("assets/1x/Asset106.png");
   catWhole = loadImage("assets/1x/catPlace.png");
-  woodFloor = ("assets/1x/wood.jpeg")
+  woodFloor = loadImage("assets/1x/myFloor.png");
   marks = loadImage("assets/1x/marking.png");
 }
 
@@ -45,8 +45,8 @@ function setup() {
 }
 
 function draw() {
-  background(255);
-  //image(woodFloor, windowWidth / 2, windowHeight /2);
+
+image(woodFloor, windowWidth / 2, windowHeight /2);
   //template
   // image(catWhole, 100,160);
   // fill(255, 255, 255, 80)
@@ -84,9 +84,11 @@ function cat(x, y, a) {
   //right front Leg
   image(frontR, 131 + 2/10 * (stomachX - 64), 63);
   //back Legs left
-  image(backL, 62 + -2/6 * (stomachX - 64), 172);
+
+  image(backL, 70 + -2/7 * (stomachX - 64), 172);
+
   //back right
-  image(backR, 134 + 2/6 * (stomachX - 64), 173);
+  image(backR, 128 + 2/7 * (stomachX - 64), 173);
 
   //Cat body gets fat
   fill(115, 99, 87);
