@@ -41,6 +41,7 @@ function preload() {
   catbody = loadImage("assets/1x/body.png");
   backL = loadImage("assets/1x/backL.png");
   backR = loadImage("assets/1x/backR.png");
+  catHead = loadImage("assets/1x/head.png")
 
 }
 
@@ -173,6 +174,7 @@ window.addEventListener('devicemotion', function(e) {
 function cat() {
 
   angle = 90;
+
   //left front leg
   image(frontL, -36  + -2 / 10 * (stomachX -64), 15);
 
