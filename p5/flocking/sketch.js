@@ -1,5 +1,5 @@
 let boids = [];
-//var mice = [];
+var mice = [];
 var woodFloor;
 
 function preload() {
