@@ -3,11 +3,14 @@ Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
 //==============cat movement variables
-var x = 150, y = 150, angle1 = 0.0, segLength = 100;
+let x = 150,
+y = 150,
+angle1 = 0.0,
+segLength = 100;
 // var xPosition = 0;
 // var yPosition = 0;
-// var x = 0; // acceleratiobn data
-// var y = 0;
+ //var mouseX = 0; // acceleratiobn data
+//var mouseY = 0;
 var z = 0;
 var cars = [];
 var catPos = 0;
@@ -31,14 +34,14 @@ var backR;
 
 //===============================================================Preload
 function preload() {
-  catImg = loadImage("assets/1x/catPlace.png");
+  //catImg = loadImage("assets/1x/catPlace.png");
   woodFloor = loadImage("assets/1x/myFloor.png")
   limbs = loadImage("assets/1x/limbs.png");
   marks = loadImage("assets/1x/marking0.png")
   frontL = loadImage("assets/1x/frontL.png");
   frontR = loadImage("assets/1x/frontR.png");
   cattail = loadImage("assets/1x/tail.png");
-  catbody = loadImage("assets/1x/body.png");
+  //catbody = loadImage("assets/1x/body.png");
   backL = loadImage("assets/1x/backL.png");
   backR = loadImage("assets/1x/backR.png");
   catHead = loadImage("assets/1x/head.png")
@@ -49,10 +52,11 @@ function preload() {
 //===============================================================Set up
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  angleMode(DEGREES);
+  //angleMode(DEGREES);
   imageMode(CENTER);
   rectMode(CENTER);
   ellipseMode(CENTER);
+  angleMode(DEGREES);
 
 
 
@@ -88,17 +92,18 @@ function draw() {
   x = mouseX - cos(angle1) * segLength;
   y = mouseY - sin(angle1) * segLength;
 
+  //Rotating point
+  segment(x, y, angle1);
 
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-  y = map(gamma, -60, 60, 0, width);
-  x = map(beta, -30, 30, 0, height);
+  x = map(gamma, -60, 60, 0, width);
+  y = map(beta, -30, 30, 0, height);
 
 
 
 
-  //Rotating point
-  segment(x, y, angle1);
+
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
@@ -173,7 +178,7 @@ function draw() {
 function segment(x, y, a) {
   push();
   translate(x, y);
-  rotate(a);
+  rotate(angle1);
   cat(0, 0);
   line(0, 0, segLength, 0);
   pop();
@@ -241,7 +246,8 @@ pop();
 //============================================================= Car(mice)
 function car() {
   //-----------------------attributes
-  this.pos = createVector(100, 100);
+this.pos = createVector(100, 100);
+
   this.vel = createVector(random(-5, 5), random(-5, 5));
   this.r = random(255);
   this.g = random(255);
