@@ -2,11 +2,14 @@
 Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
-var bunnyImage;
+let x = 150,
+  y = 150,
+  angle1 = 0.0,
+  segLength = 100;
 var xPosition = 0;
 var yPosition = 0;
-var x = 0; // acceleratiobn data
-var y = 0;
+// var x = 0; // acceleratiobn data
+// var y = 0;
 var z = 0;
 var cars = [];
 var catPos;
@@ -15,33 +18,46 @@ var timer = 0;
 var limbs;
 var headTail;
 var marks;
-var stomachX = 64;
-var stomachY = 160;
+var stomachX = 160;
+var stomachY = 64;
 var woodFloorX = 0;
 var woodFloorY = 0;
 var catHead;
 var frontL;
 var frontR;
 var cattail;
-var catbody;
 var backL;
 var backR;
 
 
+
+
 //===============================================================Preload
 function preload() {
-  catImg = loadImage("assets/1x/catPlace.png");
-  woodFloor = loadImage("assets/1x/myFloor.png")
-  limbs = loadImage("assets/1x/limbs.png");
-  headTail = loadImage("assets/1x/headTail.png");
-  marks = loadImage("assets/1x/marking.png")
+  catHead = loadImage("assets/1x/head.png");
   frontL = loadImage("assets/1x/frontL.png");
   frontR = loadImage("assets/1x/frontR.png");
   cattail = loadImage("assets/1x/tail.png");
-  catbody = loadImage("assets/1x/body.png");
   backL = loadImage("assets/1x/backL.png");
   backR = loadImage("assets/1x/backR.png");
-  catHead = loadImage("assets/1x/head.png")
+  activeArea = loadImage("assets/1x/Asset106.png");
+  catWhole = loadImage("assets/1x/catPlace.png");
+  woodFloor = loadImage("assets/1x/myFloor.png");
+  marks = loadImage("assets/1x/marking0.png");
+  //grid = loadImage("assets/grid.png");
+
+  // catImg = loadImage("assets/1x/catPlace.png");
+  // woodFloor = loadImage("assets/1x/myFloor.png")
+  // limbs = loadImage("assets/1x/limbs.png");
+  // headTail = loadImage("assets/1x/headTail.png");
+  // marks = loadImage("assets/1x/marking.png")
+  // frontL = loadImage("assets/1x/frontL.png");
+  // frontR = loadImage("assets/1x/frontR.png");
+  // cattail = loadImage("assets/1x/tail.png");
+  // catbody = loadImage("assets/1x/body.png");
+  // backL = loadImage("assets/1x/backL.png");
+  // backR = loadImage("assets/1x/backR.png");
+  // catHead = loadImage("assets/1x/head.png")
 
 }
 
@@ -66,7 +82,7 @@ function setup() {
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
-  catPos = createVector(width / 2, height - 80);
+  //catPos = createVector(width / 2, height - 80);
 
   //------------------------------------------------- piece splice
 
@@ -81,12 +97,12 @@ function draw() {
 
 
   //-----------------------------
-  let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
-  let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
-
-  drawArrow(catPos0, catPos, 'black');
-
-  let myHeading = catPos.heading();
+  // let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
+  // let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
+  //
+  // drawArrow(catPos0, catPos, 'black');
+  //
+  // let myHeading = catPos.heading();
   //---------------------------------------cat translate
 
 
@@ -104,6 +120,19 @@ function draw() {
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
+//=================updated cat motion
+dx = mouseX - x;
+dy = mouseY - y;
+angle1 = atan2(dy, dx);
+x = mouseX - cos(angle1) * segLength;
+y = mouseY - sin(angle1) * segLength;
+
+//Rotating point
+segment(x, y, angle1);
+
+
+  //=====================mapping
+
   xPosition = map(gamma, -60, 60, 0, width);
   yPosition = map(beta, -30, 30, 0, height);
 
@@ -142,17 +171,17 @@ function draw() {
 //================================================================ end of draw
 
 // ----------------------------------------------------------- Cat motion
-function drawArrow(base, vec, myColor) {
-  push();
-  noStroke();
-
-  translate(base.x, base.y);
-  line(0, 0, vec.x, vec.y);
-  rotate(vec.heading());
-  translate(vec.mag(), 0);
-  cat(vec.x, vec.y);
-  pop();
-}
+// function drawArrow(base, vec, myColor) {
+//   push();
+//   noStroke();
+//
+//   translate(base.x, base.y);
+//   line(0, 0, vec.x, vec.y);
+//   rotate(vec.heading());
+//   translate(vec.mag(), 0);
+//   cat(vec.x, vec.y);
+//   pop();
+// }
 //-----------------------------------------------------------End of cat motion
 //------------------------------------------------- Read in accelerometer data
 window.addEventListener('deviceorientation', function(e) {
@@ -169,39 +198,40 @@ window.addEventListener('devicemotion', function(e) {
   z = e.acceleration.z;
 });
 //----------------------------------------------------------element definitions
-
+//================segment added
+function segment(x, y, a) {
+  push();
+  translate(x, y);
+  rotate(a);
+  cat(0, 0);
+  line(0, 0, segLength, 0);
+  pop();
+}
 //========================================================== cat definition
 function cat() {
 push();
-  //angle = 90;
+image(frontL, 63, -30 + -2 / 10 * (stomachY - 30))
 
-  //left front leg
-  image(frontL, -36  + -2 / 10 * (stomachX -64), 15);
+image(frontR, 63, 35 + 2 / 10 * (stomachY - 35));
 
-  //right front Leg
-  image(frontR, 39 + 2 / 10 * (stomachX - 64), 20);
+//back Legs left
+image(backL, -63, -20 + -2 / 7 * (stomachY - 30));
+//back right
+image(backR, -63, 18 + 2 / 7 * (stomachY - 25));
 
-  //back Legs left
-  image(backL, -36 + -2 / 6 * (stomachX - 64), 148);
+//Cat body gets fat
+fill(115, 99, 87);
+stroke(0);
+strokeWeight(2);
+ellipse(-30, 0, 165, stomachY);
+//body markings
+noStroke();
+image(marks, -30, 0, 160, stomachY);
+//head and tail
+image(catHead, 80, 0);
+image(cattail, -160, 20);
 
-  //back right
-  image(backR, 35 + 2 / 6 * (stomachX - 64), 148);
 
-  //stomach
-  fill(115, 99, 87);
-  stroke(0);
-  strokeWeight(2);
-  ellipse(0, 120, stomachX, 180);
-
-  //body markings
-  noStroke();
-  image(marks, 0, 120, stomachX, stomachY);
-
-  image(catHead, 2, 2);
-  image(cattail, 20, 261);
-  //fill(150, 0, 150, 150);
-  translate(-300, -300);
-  //ellipse(300, 300, 70, 70);
 pop();
 }
 
