@@ -2,21 +2,21 @@
 Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
-//==============cat movement variables
-let x = 150, y = 150, angle1 = 0.0, segLength = 100;
+var bunnyImage;
 var xPosition = 0;
 var yPosition = 0;
-// var x = 0; // acceleratiobn data
-// var y = 0;
+var x = 0; // acceleratiobn data
+var y = 0;
 var z = 0;
 var cars = [];
 var catPos;
-//var angle = 0.0;
+var angle = 0.0;
 var timer = 0;
 var limbs;
+var headTail;
 var marks;
-var stomachY = 64;
-var stomachX = 160;
+var stomachX = 64;
+var stomachY = 160;
 var woodFloorX = 0;
 var woodFloorY = 0;
 var catHead;
@@ -33,7 +33,8 @@ function preload() {
   catImg = loadImage("assets/1x/catPlace.png");
   woodFloor = loadImage("assets/1x/myFloor.png")
   limbs = loadImage("assets/1x/limbs.png");
-  marks = loadImage("assets/1x/marking0.png")
+  headTail = loadImage("assets/1x/headTail.png");
+  marks = loadImage("assets/1x/marking.png")
   frontL = loadImage("assets/1x/frontL.png");
   frontR = loadImage("assets/1x/frontR.png");
   cattail = loadImage("assets/1x/tail.png");
@@ -172,28 +173,35 @@ window.addEventListener('devicemotion', function(e) {
 //========================================================== cat definition
 function cat() {
 push();
-//==frontpaws
-image(frontL, 63, -30 + -2 / 10 * (stomachY - 30))
+  //angle = 90;
 
-image(frontR, 63, 35 + 2 / 10 * (stomachY - 35));
+  //left front leg
+  image(frontL, -36  + -2 / 10 * (stomachX -64), 15);
 
-//back Legs left
-image(backL, -63, -20 + -2 / 7 * (stomachY - 30));
-//back right
-image(backR, -63, 18 + 2 / 7 * (stomachY - 25));
+  //right front Leg
+  image(frontR, 39 + 2 / 10 * (stomachX - 64), 20);
 
-//Cat body gets fat
-fill(115, 99, 87);
-stroke(0);
-strokeWeight(2);
-ellipse(-30, 0, 165, stomachY);
-//body markings
-noStroke();
-image(marks, -30, 0, 160, stomachY);
-//head and tail
-image(catHead, 80, 0);
-image(cattail, -160, 20);
+  //back Legs left
+  image(backL, -36 + -2 / 6 * (stomachX - 64), 148);
 
+  //back right
+  image(backR, 35 + 2 / 6 * (stomachX - 64), 148);
+
+  //stomach
+  fill(115, 99, 87);
+  stroke(0);
+  strokeWeight(2);
+  ellipse(0, 120, stomachX, 180);
+
+  //body markings
+  noStroke();
+  image(marks, 0, 120, stomachX, stomachY);
+
+  image(catHead, 2, 2);
+  image(cattail, 20, 261);
+  //fill(150, 0, 150, 150);
+  translate(-300, -300);
+  //ellipse(300, 300, 70, 70);
 pop();
 }
 
