@@ -14,14 +14,10 @@ var stomachX = 160;
 var catDirection = 1;
 var marks;
 var grid;
-
 let x = 50,
-    y = 50,
-    angle1 = 0.0,
-    segLength = 100;
-let catImg;
-let myFloor;
-
+  y = 50,
+  angle1 = 0.0,
+  segLength = 100;
 
 
 function preload() {
@@ -39,8 +35,6 @@ function preload() {
   grid = loadImage("assets/grid.png");
 }
 
-
-
 function setup() {
 
   createCanvas(windowWidth, windowHeight);
@@ -50,77 +44,47 @@ function setup() {
   strokeWeight(20.0);
   stroke(255, 100);
 
-
-
-
 }
 
+
 function draw() {
-image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
-image(grid, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
+  image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
+  image(grid, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
 
-//================insert direction code here
-
+  //================insert direction code here
   dx = mouseX - x;
   dy = mouseY - y;
   angle1 = atan2(dy, dx);
   x = mouseX - cos(angle1) * segLength;
   y = mouseY - sin(angle1) * segLength;
 
-  segment(x, y, angle1);
+//Rotating point
+  //segment(x, y, angle1);
 
-  ellipse(x, y, 20, 20);
-//=================================
-
+  //ellipse(x, y, 20, 20);
+  //=================================
 }
-
+// cat axis
 function segment(x, y, a) {
-
   push();
   translate(x, y);
   rotate(a);
-    //image(catImg, -40, segLength - 95);
-cat(0, 0);
+  cat(0, 0);
   line(0, 0, segLength, 0);
   pop();
 }
 
-
 function cat() {
-  //set translation point
-
   push();
+  //==frontpaws
+  image(frontL, 63, -30 + -2 / 10 * (stomachY - 30))
 
-
-
-//rotation point
-//translate(-95, -30);
-
-
-  //==active area location
-  // push();
-  // fill(0, 0, 0, 50);
-  // ellipse(95, 30, 60, 60);
-  // noFill();
-  // translate(20, 30);
-  // pop();
-  //==end of active area
-
-  //==frontpaw
-  //image(frontL, 62, 54);
-  //image(frontL, 62 + -2/10 * (stomachX - 64), 54);
-image(frontL, 63, -30 + -2/10 * (stomachY - 30) )
-  //right front Leg
-//  image(frontR, 131 + 2/10 * (stomachX - 64), 63);
-
-image(frontR, 63, 35 + 2/10 * (stomachY - 35));
+  image(frontR, 63, 35 + 2 / 10 * (stomachY - 35));
 
   //back Legs left
-
-  image(backL, -63, -20 + -2/7 * (stomachY - 30));
-
+  image(backL, -63, -20 + -2 / 7 * (stomachY - 30));
   //back right
-  image(backR, -63, 18 + 2/7 * (stomachY - 25));
+  image(backR, -63, 18 + 2 / 7 * (stomachY - 25));
 
   //Cat body gets fat
   fill(115, 99, 87);
@@ -136,6 +100,7 @@ image(frontR, 63, 35 + 2/10 * (stomachY - 35));
 
   pop();
 }
+
 
 function mouseReleased() {
   image(marks, 100, 150, stomachX, stomachY += 5);
