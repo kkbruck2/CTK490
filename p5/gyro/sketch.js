@@ -40,8 +40,6 @@ function preload() {
   cattail = loadImage("assets/1x/tail.png");
   backL = loadImage("assets/1x/backL.png");
   backR = loadImage("assets/1x/backR.png");
-  activeArea = loadImage("assets/1x/Asset106.png");
-  catWhole = loadImage("assets/1x/catPlace.png");
   woodFloor = loadImage("assets/1x/myFloor.png");
   marks = loadImage("assets/1x/marking0.png");
   //grid = loadImage("assets/grid.png");
@@ -133,18 +131,17 @@ segment(x, y, angle1);
 
   //=====================mapping
 
-  xPosition = map(gamma, -60, 60, 0, width);
-  yPosition = map(beta, -30, 30, 0, height);
+  x = map(gamma, -60, 60, 0, width);
+  y = map(beta, -30, 30, 0, height);
 
 
 
-  catPos.x = xPosition
-  catPos.y = yPosition
+
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
     cars[i].drive();
-    if (cars[i].pos.dist(catPos) < 50) {
+    if (cars[i].pos.dist(mouseX, mouseY) < 50) {
       cars.splice(i, 1);
       stomachX += 3;
 
