@@ -242,8 +242,8 @@ pop();
 //============================================================= Car(mice)
 function car() {
   //-----------------------attributes
-  // this.pos = createVector(100, 100);
-    this.pos = createVector(0, 0);
+this.pos = createVector(100, 100);
+
   this.vel = createVector(random(-5, 5), random(-5, 5));
   this.r = random(255);
   this.g = random(255);
