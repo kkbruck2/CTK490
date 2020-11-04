@@ -6,8 +6,8 @@ let x = 150,
   y = 150,
   angle1 = 0.0,
   segLength = 100;
-var xPosition = 0;
-var yPosition = 0;
+var mouseX = 0;
+var mouseY = 0;
 // var x = 0; // acceleratiobn data
 // var y = 0;
 var z = 0;
@@ -73,15 +73,11 @@ function setup() {
   alpha = 0;
   beta = 0;
   gamma = 0;
-
+  //------------------------------------------------- piece splice
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
   //catPos = createVector(width / 2, height - 80);
-
-  //------------------------------------------------- piece splice
-
-
 
 }
 //============================================================End of set-up
@@ -163,41 +159,13 @@ segment(x, y, angle1);
   text("z = " + z.toFixed(4), 25, 190);
 }
 //================================================================ end of draw
-
-// ----------------------------------------------------------- Cat motion
-// function drawArrow(base, vec, myColor) {
-//   push();
-//   noStroke();
-//
-//   translate(base.x, base.y);
-//   line(0, 0, vec.x, vec.y);
-//   rotate(vec.heading());
-//   translate(vec.mag(), 0);
-//   cat(vec.x, vec.y);
-//   pop();
-// }
-//-----------------------------------------------------------End of cat motion
-//------------------------------------------------- Read in accelerometer data
-window.addEventListener('deviceorientation', function(e) {
-  alpha = e.alpha;
-  beta = e.beta;
-  gamma = e.gamma;
-});
-
-// ------------------------------------------------------accelerometer Data
-window.addEventListener('devicemotion', function(e) {
-  // get accelerometer values
-  x = e.acceleration.x;
-  y = e.acceleration.y;
-  z = e.acceleration.z;
-});
-//----------------------------------------------------------element definitions
-//================segment added
 function segment(x, y, a) {
+
   push();
   translate(x, y);
   rotate(a);
-  cat(0, 0);
+  cat(-40, segLength - 95);
+
   line(0, 0, segLength, 0);
   pop();
 }
@@ -224,10 +192,7 @@ image(marks, -30, 0, 160, stomachY);
 //head and tail
 image(catHead, 80, 0);
 image(cattail, -160, 20);
-
-
 pop();
-}
 
 //============================================================ End of cat definition
 
@@ -258,12 +223,3 @@ function car() {
   }
 }
 // =========================================================== End of Car(mice)
-//
-function deviceShaken() {
-  reset();
-cars = [];
-
-  for (var i = 0; i < 20; i++) {
-    cars.push(new car())
-  }
-}
