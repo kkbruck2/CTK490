@@ -78,16 +78,32 @@ function draw() {
   background('#CE9B64'); // background fill
   image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
 
+  //---------------------------------------segment added
+  dx = mouseX - x;
+  dy = mouseY - y;
+  angle1 = atan2(dy, dx);
+  x = mouseX - cos(angle1) * segLength;
+  y = mouseY - sin(angle1) * segLength;
 
-  //-----------------------------
-  let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
-  let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
+  x = map(gamma, -60, 60, 0, width);
+  y = map(beta, -30, 30, 0, height);
 
-  drawArrow(catPos0, catPos, 'black');
+  catPos.x = x
+  catPos.y = y
 
-  let myHeading = catPos.heading();
-  //---------------------------------------cat translate
+  //Rotating point
+  segment(x, y, angle1);
 
+
+
+
+  //-----------------------------previous code
+  // let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
+  // let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
+  //
+  // drawArrow(catPos0, catPos, 'black');
+  //
+  // let myHeading = catPos.heading();
 
   //-------------------------------code for test mouse moving cat
   // push();
@@ -103,13 +119,10 @@ function draw() {
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-  xPosition = map(gamma, -60, 60, 0, width);
-  yPosition = map(beta, -30, 30, 0, height);
-
-
-
-  catPos.x = xPosition
-  catPos.y = yPosition
+  // xPosition = map(gamma, -60, 60, 0, width);
+  // yPosition = map(beta, -30, 30, 0, height);
+  // catPos.x = xPosition
+  // catPos.y = yPosition
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
@@ -140,18 +153,28 @@ function draw() {
 }
 //================================================================ end of draw
 
-// ----------------------------------------------------------- Cat motion
-function drawArrow(base, vec, myColor) {
+// ----------------------------------------------------------- Cat motion old
+function segment(x, y, a) {
   push();
-  noStroke();
-
-  translate(base.x, base.y);
-  line(0, 0, vec.x, vec.y);
-  rotate(vec.heading());
-  translate(vec.mag(), 0);
-  cat(vec.x, vec.y);
+  translate(x, y);
+  rotate(a);
+  cat(0, 0);
+  line(0, 0, segLength, 0);
   pop();
 }
+
+
+// function drawArrow(base, vec, myColor) {
+//   push();
+//   noStroke();
+//
+//   translate(base.x, base.y);
+//   line(0, 0, vec.x, vec.y);
+//   rotate(vec.heading());
+//   translate(vec.mag(), 0);
+//   cat(vec.x, vec.y);
+//   pop();
+// }
 //-----------------------------------------------------------End of cat motion
 //------------------------------------------------- Read in accelerometer data
 window.addEventListener('deviceorientation', function(e) {
