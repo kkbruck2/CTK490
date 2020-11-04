@@ -14,20 +14,15 @@ var stomachX = 160;
 var catDirection = 1;
 var marks;
 var grid;
-let x = 50,
-  y = 50,
+let x = 150,
+  y = 150,
   angle1 = 0.0,
   segLength = 100;
 
 var catDirection = 1;
 var marks;
 var grid;
-let x = 50,
-  y = 50,
-  angle1 = 0.0,
-  segLength = 100;
 let catImg;
-let myFloor;
 
 function preload() {
   catHead = loadImage("assets/1x/head.png");
@@ -39,7 +34,7 @@ function preload() {
   backR = loadImage("assets/1x/backR.png");
   activeArea = loadImage("assets/1x/Asset106.png");
   catWhole = loadImage("assets/1x/catPlace.png");
-  myFloor = loadImage("assets/1x/myFloor.png");
+  woodFloor = loadImage("assets/1x/myFloor.png");
   marks = loadImage("assets/1x/marking.png");
   grid = loadImage("assets/grid.png");
 }
@@ -58,7 +53,7 @@ function setup() {
 
 function draw() {
   image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
-  image(grid, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
+  //image(grid, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
 
   //================insert direction code here
   dx = mouseX - x;
@@ -68,10 +63,10 @@ function draw() {
   y = mouseY - sin(angle1) * segLength;
 
 //Rotating point
-  //segment(x, y, angle1);
+segment(x, y, angle1);
 
-  //ellipse(x, y, 20, 20);
-  //=================================
+//ellipse(x, y, 20, 20);
+  //================================= draw render
 }
 // cat axis
 function segment(x, y, a) {
