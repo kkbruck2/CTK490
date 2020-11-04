@@ -18,6 +18,14 @@ let x = 50,
   y = 50,
   angle1 = 0.0,
   segLength = 100;
+
+var catDirection = 1;
+var marks;
+var grid;
+let x = 50,
+  y = 50,
+  angle1 = 0.0,
+  segLength = 100;
 let catImg;
 let myFloor;
 
@@ -49,8 +57,8 @@ function setup() {
 
 
 function draw() {
-  image(myFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
-  //image(grid, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
+  image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
+  image(grid, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
 
   //================insert direction code here
   dx = mouseX - x;
