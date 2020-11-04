@@ -6,8 +6,8 @@ var alpha, beta, gamma; // orientation data
 let x = 150, y = 150, angle1 = 0.0, segLength = 100;
 // var xPosition = 0;
 // var yPosition = 0;
-let mouseX = 0; // acceleratiobn data
-let mouseY = 0;
+ //var mouseX = 0; // acceleratiobn data
+//var mouseY = 0;
 var z = 0;
 var cars = [];
 var catPos = 0;
