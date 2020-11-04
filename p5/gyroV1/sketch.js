@@ -2,21 +2,25 @@
 Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
-var bunnyImage;
-var xPosition = 0;
-var yPosition = 0;
-var x = 0; // acceleratiobn data
-var y = 0;
+//==============cat movement variables
+let x = 150,
+y = 150,
+angle1 = 0.0,
+segLength = 100;
+// var xPosition = 0;
+// var yPosition = 0;
+ //var mouseX = 0; // acceleratiobn data
+//var mouseY = 0;
 var z = 0;
 var cars = [];
-var catPos;
-var angle = 0.0;
+var catPos = 0;
+
+
 var timer = 0;
 var limbs;
-var headTail;
 var marks;
-var stomachX = 64;
-var stomachY = 160;
+var stomachY = 64;
+var stomachX = 160;
 var woodFloorX = 0;
 var woodFloorY = 0;
 var catHead;
@@ -30,15 +34,14 @@ var backR;
 
 //===============================================================Preload
 function preload() {
-  catImg = loadImage("assets/1x/catPlace.png");
+  //catImg = loadImage("assets/1x/catPlace.png");
   woodFloor = loadImage("assets/1x/myFloor.png")
   limbs = loadImage("assets/1x/limbs.png");
-  headTail = loadImage("assets/1x/headTail.png");
-  marks = loadImage("assets/1x/marking.png")
+  marks = loadImage("assets/1x/marking0.png")
   frontL = loadImage("assets/1x/frontL.png");
   frontR = loadImage("assets/1x/frontR.png");
   cattail = loadImage("assets/1x/tail.png");
-  catbody = loadImage("assets/1x/body.png");
+  //catbody = loadImage("assets/1x/body.png");
   backL = loadImage("assets/1x/backL.png");
   backR = loadImage("assets/1x/backR.png");
   catHead = loadImage("assets/1x/head.png")
@@ -49,10 +52,11 @@ function preload() {
 //===============================================================Set up
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  angleMode(DEGREES);
+  //angleMode(DEGREES);
   imageMode(CENTER);
   rectMode(CENTER);
   ellipseMode(CENTER);
+  angleMode(DEGREES);
 
 
 
@@ -66,7 +70,7 @@ function setup() {
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
-  catPos = createVector(width / 2, height - 80);
+  //catPos = createVector(width / 2, height - 80);
 
   //------------------------------------------------- piece splice
 
@@ -79,16 +83,48 @@ function draw() {
   background('#CE9B64'); // background fill
   image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
 
+  //---------------------------------------segment added
 
-  //-----------------------------
-  let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
-  let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
 
-  drawArrow(catPos0, catPos, 'black');
+  dx = mouseX - x;
+  dy = mouseY - y;
+  angle1 = atan2(dy, dx);
+  x = mouseX - cos(angle1) * segLength;
+  y = mouseY - sin(angle1) * segLength;
 
-  let myHeading = catPos.heading();
-  //---------------------------------------cat translate
+  //Rotating point
+  segment(x, y, angle1);
 
+  // takes your variable and maps it from range 1 to range 2
+  // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
+  x = map(gamma, -60, 60, 0, width);
+  y = map(beta, -30, 30, 0, height);
+
+
+
+
+
+
+  for (var i = 0; i < cars.length; i++) {
+    cars[i].display();
+    cars[i].drive();
+    if (cars[i].pos.dist(mouseX, mouseY) < 20) {
+      cars.splice(i, 1);
+      stomachX += 3;
+
+    }
+  }
+
+
+
+
+  //-----------------------------previous code
+  // let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
+  // let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
+  //
+  // drawArrow(catPos0, catPos, 'black');
+  //
+  // let myHeading = catPos.heading();
 
   //-------------------------------code for test mouse moving cat
   // push();
@@ -104,23 +140,20 @@ function draw() {
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-  xPosition = map(gamma, -60, 60, 0, width);
-  yPosition = map(beta, -30, 30, 0, height);
+  // xPosition = map(gamma, -60, 60, 0, width);
+  // yPosition = map(beta, -30, 30, 0, height);
+  // catPos.x = xPosition
+  // catPos.y = yPosition
 
-
-
-  catPos.x = xPosition
-  catPos.y = yPosition
-
-  for (var i = 0; i < cars.length; i++) {
-    cars[i].display();
-    cars[i].drive();
-    if (cars[i].pos.dist(catPos) < 50) {
-      cars.splice(i, 1);
-      stomachX += 3;
-
-    }
-  }
+  // for (var i = 0; i < cars.length; i++) {
+  //   cars[i].display();
+  //   cars[i].drive();
+  //   if (cars[i].pos.dist(catPos) < 20) {
+  //     cars.splice(i, 1);
+  //     stomachX += 3;
+  //
+  //   }
+  // }
 
   // DECORATIONS
   // Just a bunch of text commands to display data coming in from addEventListeners
@@ -141,18 +174,28 @@ function draw() {
 }
 //================================================================ end of draw
 
-// ----------------------------------------------------------- Cat motion
-function drawArrow(base, vec, myColor) {
+// ----------------------------------------------------------- Cat motion old
+function segment(x, y, a) {
   push();
-  noStroke();
-
-  translate(base.x, base.y);
-  line(0, 0, vec.x, vec.y);
-  rotate(vec.heading());
-  translate(vec.mag(), 0);
-  cat(vec.x, vec.y);
+  translate(x, y);
+  rotate(angle1);
+  cat(0, 0);
+  line(0, 0, segLength, 0);
   pop();
 }
+
+
+// function drawArrow(base, vec, myColor) {
+//   push();
+//   noStroke();
+//
+//   translate(base.x, base.y);
+//   line(0, 0, vec.x, vec.y);
+//   rotate(vec.heading());
+//   translate(vec.mag(), 0);
+//   cat(vec.x, vec.y);
+//   pop();
+// }
 //-----------------------------------------------------------End of cat motion
 //------------------------------------------------- Read in accelerometer data
 window.addEventListener('deviceorientation', function(e) {
@@ -173,35 +216,28 @@ window.addEventListener('devicemotion', function(e) {
 //========================================================== cat definition
 function cat() {
 push();
-  //angle = 90;
+//==frontpaws
+image(frontL, 63, -30 + -2 / 10 * (stomachY - 30))
 
-  //left front leg
-  image(frontL, -36  + -2 / 10 * (stomachX -64), 15);
+image(frontR, 63, 35 + 2 / 10 * (stomachY - 35));
 
-  //right front Leg
-  image(frontR, 39 + 2 / 10 * (stomachX - 64), 20);
+//back Legs left
+image(backL, -63, -20 + -2 / 7 * (stomachY - 30));
+//back right
+image(backR, -63, 18 + 2 / 7 * (stomachY - 25));
 
-  //back Legs left
-  image(backL, -36 + -2 / 6 * (stomachX - 64), 148);
+//Cat body gets fat
+fill(115, 99, 87);
+stroke(0);
+strokeWeight(2);
+ellipse(-30, 0, 165, stomachY);
+//body markings
+noStroke();
+image(marks, -30, 0, 160, stomachY);
+//head and tail
+image(catHead, 80, 0);
+image(cattail, -160, 20);
 
-  //back right
-  image(backR, 35 + 2 / 6 * (stomachX - 64), 148);
-
-  //stomach
-  fill(115, 99, 87);
-  stroke(0);
-  strokeWeight(2);
-  ellipse(0, 120, stomachX, 180);
-
-  //body markings
-  noStroke();
-  image(marks, 0, 120, stomachX, stomachY);
-
-  image(catHead, 2, 2);
-  image(cattail, 20, 261);
-  //fill(150, 0, 150, 150);
-  translate(-300, -300);
-  //ellipse(300, 300, 70, 70);
 pop();
 }
 
@@ -210,7 +246,8 @@ pop();
 //============================================================= Car(mice)
 function car() {
   //-----------------------attributes
-  this.pos = createVector(100, 100);
+this.pos = createVector(100, 100);
+
   this.vel = createVector(random(-5, 5), random(-5, 5));
   this.r = random(255);
   this.g = random(255);
