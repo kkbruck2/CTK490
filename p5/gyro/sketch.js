@@ -3,7 +3,10 @@ Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
 //==============cat movement variables
-let x = 150, y = 150, angle1 = 0.0, segLength = 100;
+let x = 150,
+y = 150,
+angle1 = 0.0,
+segLength = 100;
 // var xPosition = 0;
 // var yPosition = 0;
  //var mouseX = 0; // acceleratiobn data
@@ -53,6 +56,7 @@ function setup() {
   imageMode(CENTER);
   rectMode(CENTER);
   ellipseMode(CENTER);
+  angleMode(DEGREES);
 
 
 
@@ -174,7 +178,7 @@ function draw() {
 function segment(x, y, a) {
   push();
   translate(x, y);
-  rotate(a);
+  rotate(angle1);
   cat(0, 0);
   line(0, 0, segLength, 0);
   pop();
