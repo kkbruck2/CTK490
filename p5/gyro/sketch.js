@@ -3,11 +3,11 @@ Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
 //==============cat movement variables
-var x = 150, y = 150, angle1 = 0.0, segLength = 100;
+let x = 150, y = 150, angle1 = 0.0, segLength = 100;
 // var xPosition = 0;
 // var yPosition = 0;
-// var x = 0; // acceleratiobn data
-// var y = 0;
+let mouseX = 0; // acceleratiobn data
+let mouseY = 0;
 var z = 0;
 var cars = [];
 var catPos = 0;
@@ -31,14 +31,14 @@ var backR;
 
 //===============================================================Preload
 function preload() {
-  catImg = loadImage("assets/1x/catPlace.png");
+  //catImg = loadImage("assets/1x/catPlace.png");
   woodFloor = loadImage("assets/1x/myFloor.png")
   limbs = loadImage("assets/1x/limbs.png");
   marks = loadImage("assets/1x/marking0.png")
   frontL = loadImage("assets/1x/frontL.png");
   frontR = loadImage("assets/1x/frontR.png");
   cattail = loadImage("assets/1x/tail.png");
-  catbody = loadImage("assets/1x/body.png");
+  //catbody = loadImage("assets/1x/body.png");
   backL = loadImage("assets/1x/backL.png");
   backR = loadImage("assets/1x/backR.png");
   catHead = loadImage("assets/1x/head.png")
@@ -49,7 +49,7 @@ function preload() {
 //===============================================================Set up
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  angleMode(DEGREES);
+  //angleMode(DEGREES);
   imageMode(CENTER);
   rectMode(CENTER);
   ellipseMode(CENTER);
@@ -88,6 +88,8 @@ function draw() {
   x = mouseX - cos(angle1) * segLength;
   y = mouseY - sin(angle1) * segLength;
 
+  //Rotating point
+  segment(x, y, angle1);
 
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
@@ -97,8 +99,7 @@ function draw() {
 
 
 
-  //Rotating point
-  segment(x, y, angle1);
+
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
