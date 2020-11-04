@@ -80,8 +80,7 @@ function draw() {
   image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
 
   //---------------------------------------segment added
-  catPos.x = mouseX
-  catPos.y = mouseY
+
 
   dx = mouseX - x;
   dy = mouseY - y;
@@ -104,7 +103,7 @@ function draw() {
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
     cars[i].drive();
-    if (cars[i].pos.dist(catPos.x, catPos.y) < 20) {
+    if (cars[i].pos.dist(mouseX, mouseY) < 20) {
       cars.splice(i, 1);
       stomachX += 3;
 
