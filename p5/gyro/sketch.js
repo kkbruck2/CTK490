@@ -91,8 +91,8 @@ function draw() {
 
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-  y = map(gamma, -60, 60, 0, width);
-  x = map(beta, -30, 30, 0, height);
+  x = map(gamma, -60, 60, 0, width);
+  y = map(beta, -30, 30, 0, height);
 
 
 
