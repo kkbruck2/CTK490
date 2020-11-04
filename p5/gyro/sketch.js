@@ -12,11 +12,9 @@ var yPosition = 0;
 // var y = 0;
 var z = 0;
 var cars = [];
-var catPos;
-var angle = 0.0;
+//var catPos;
+// angle = 0.0;
 var timer = 0;
-var limbs;
-var headTail;
 var marks;
 var stomachX = 160;
 var stomachY = 64;
@@ -25,7 +23,6 @@ var woodFloorY = 0;
 var catHead;
 var frontL;
 var frontR;
-var cattail;
 var backL;
 var backR;
 
@@ -131,8 +128,8 @@ segment(x, y, angle1);
 
   //=====================mapping
 
-  x = map(gamma, -60, 60, 0, width);
-  y = map(beta, -30, 30, 0, height);
+  dx = map(gamma, -60, 60, 0, width);
+  dy = map(beta, -30, 30, 0, height);
 
 
 
