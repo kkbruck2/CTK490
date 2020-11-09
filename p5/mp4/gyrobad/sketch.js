@@ -24,6 +24,7 @@ function setup() {
   for (var i = 0; i < 10; i++) {
     cars.push(new car())
   }
+
   catPos = createVector(width / 2, height - 80);
 
   bunnyImage = loadImage("assets/bunny.jpg");

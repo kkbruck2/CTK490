@@ -49,7 +49,7 @@ function preload() {
 //===============================================================Set up
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  angleMode(DEGREES);
+  //angleMode(DEGREES);
   imageMode(CENTER);
   rectMode(CENTER);
   ellipseMode(CENTER);

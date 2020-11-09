@@ -11,8 +11,6 @@ var marks;
 var stomachY = 64;
 var stomachX = 160;
 var catDirection = 1;
-
-var myLegs, myBody, head;
 var mice = [];
 var pieces = [];
 var direction = [];
@@ -20,7 +18,11 @@ var timer = 0;
 var myFloor;
 var x = 150, y = 150, angle1 = 0.0, segLength = 100;
 
+let flock;
+let mice;
+
 //------------------------------------------------------var end
+
 //------------------------------------------------------preload
 function preload() {
   catHead = loadImage("assets/1x/head.png");
@@ -48,13 +50,10 @@ function setup() {
 
   createCanvas(windowWidth, windowHeight);
 
-  angleMode(DEGREES);
+
   imageMode(CENTER);
   rectMode(CENTER);
   ellipseMode(CENTER);
-
-
-
 
   //--------------------------Spawn mice
   for (var i = 0; i < 50; i++) {
@@ -69,26 +68,23 @@ function setup() {
 function draw() {
 image(myFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
 
-  game();
+//game();
   //================insert direction code here
+
   // push();
   dx = mouseX - x;
   dy = mouseY - y;
   angle1 = atan2(dy, dx);
-  x = mouseX - cos(angle1) * segLength;
-  y = mouseY - sin(angle1) * segLength;
+  x = mouseX - sin(angle1) * segLength;
+  y = mouseY - cos(angle1) * segLength;
+
 
   //Rotating point
 
-
-
-
   // pop();
-
-
-
 }
 //----------------------------------------------------end draw
+
 // ------------------------cat axis
 function segment(x, y, a) {
   push();
@@ -129,78 +125,72 @@ function cat() {
 
 
 //-------------------------------start pieces class!!
-function Piece() {
-  //----attributes
-  this.pos = createVector(windowWidth, windowHeight);
-  this.vel = createVector(random(-6, 6), random(-6, 6));
-  this.miceNum = 0;
-  this.timer = 0;
-  this.maxTimer = (1, 10);
-
-  //----- methods
-  // display
-
-  this.display = function() {
-    //  translate(p5.Vector.fromAngle(millis() / 1000, 40));
-
-    push();
-    // animating the mices
-    if (this.vel > 0) map(this.maxTimer * -1 === this.vel.mag());
-    if (this.vel < 0) map(this.maxTimer === this.vel.mag());
-    translate(this.pos.x, this.pos.y);
-    rotate(this.vel.heading());
-    image(mice[this.miceNum], 0, 0);
-    this.timer++;
-
-
-    if (this.timer > this.maxTimer) {
-      this.miceNum = this.miceNum + 1;
-      this.timer = 0;
-
-    }
-
-
-    //mice reset
-    if (this.miceNum > mice.length - 1) {
-      this.miceNum = 0;
-    }
-
-
-    pop();
-
-  }
-  //drive
-  this.drive = function() {
-    this.pos.add(this.vel);
-
-    if (this.pos.x > windowWidth) this.pos.x = 0;
-    if (this.pos.x < 0) this.pos.x = windowWidth;
-    if (this.pos.y > windowHeight) this.pos.y = 0;
-    if (this.pos.y < 0) this.pos.y = windowHeight;
-
-  }
-
-}
-
+// function Piece() {
+//   //----attributes
+//   this.pos = createVector(windowWidth, windowHeight);
+//   this.vel = createVector(random(-6, 6), random(-6, 6));
+//   this.miceNum = 0;
+//   this.timer = 0;
+//   this.maxTimer = (1, 10);
+//
+//   //----- methods
+//   // display
+//
+//   this.display = function() {
+//     //  translate(p5.Vector.fromAngle(millis() / 1000, 40));
+//
+//     push();
+//     // animating the mices
+//     if (this.vel > 0) map(this.maxTimer * -1 === this.vel.mag());
+//     if (this.vel < 0) map(this.maxTimer === this.vel.mag());
+//     translate(this.pos.x, this.pos.y);
+//     rotate(this.vel.heading());
+//     image(mice[this.miceNum], 0, 0);
+//     this.timer++;
+//
+//
+//     if (this.timer > this.maxTimer) {
+//       this.miceNum = this.miceNum + 1;
+//       this.timer = 0;
+//
+//     }
+//
+//
+//     //mice reset
+//     if (this.miceNum > mice.length - 1) {
+//       this.miceNum = 0;
+//     }
+//
+//
+//     pop();
+//
+//   }
+//   //drive
+//   this.drive = function() {
+//     this.pos.add(this.vel);
+//
+//     if (this.pos.x > windowWidth) this.pos.x = 0;
+//     if (this.pos.x < 0) this.pos.x = windowWidth;
+//     if (this.pos.y > windowHeight) this.pos.y = 0;
+//     if (this.pos.y < 0) this.pos.y = windowHeight;
+//
+//   }
+//
+// }
 //--------------------------------------------------------end pieces class
 
-
 //------------------------------------------------------------ game
-function game() {
-
-  for (var i = 0; i < pieces.length; i++) {
-    pieces[i].display();
-    pieces[i].drive();
-    if (pieces[i].pos.dist(mouseX, mouseY) < 10) {
-      pieces.splice(i, 1);
-      stomachX += 3;
-    }
-  }
-
-  if (pieces.length == 0) {
-    myState = 3;
-    timer = 0;
-  }
-segment();
-
-}
+// function game() {
+//
+//   for (var i = 0; i < pieces.length; i++) {
+//     pieces[i].display();
+//     pieces[i].drive();
+//     if (pieces[i].pos.dist(mouseX, mouseY) < 10) {
+//       pieces.splice(i, 1);
+//       stomachX += 3;
+//     }
+//   }
+//
+// //segment();
+//
+// }
