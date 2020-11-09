@@ -10,7 +10,7 @@ var woodFloor;
 var activeArea;
 var stomachY = 64;
 var stomachX = 160;
-
+var cars = [];
 var catDirection = 1;
 var marks;
 var grid;
@@ -48,6 +48,9 @@ function setup() {
   strokeWeight(20.0);
   stroke(255, 100);
 
+
+
+
 }
 
 
@@ -64,6 +67,8 @@ function draw() {
 
 //Rotating point
 segment(x, y, angle1);
+
+
 
 //ellipse(x, y, 20, 20);
   //================================= draw render
@@ -104,8 +109,32 @@ function cat() {
 
   pop();
 }
+function car() {
+  //-----------------------attributes
+  this.pos = createVector(100, 100);
+  this.vel = createVector(random(-5, 5), random(-5, 5));
+  this.r = random(255);
+  this.g = random(255);
+  this.b = random(255);
 
+  //----------------------vector
 
-function mouseReleased() {
-  image(marks, 100, 150, stomachX, stomachY += 5);
+  this.display = function() {
+    fill(this.r, this.g, this.b);
+    rect(this.pos.x, this.pos.y, 100, 50);
+  }
+
+  //----------------------methods
+  this.drive = function() {
+    this.pos.add(this.vel);
+
+    if (this.pos.x > width) this.pos.x = 0;
+    if (this.pos.x < 0) this.pos.x = width;
+    if (this.pos.y > height) this.pos.y = 0;
+    if (this.pos.y < 0) this.pos.y = height;
+  }
 }
+
+// function mouseReleased() {
+//   image(marks, 100, 150, stomachX, stomachY += 5);
+// }

@@ -2,57 +2,46 @@
 Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
-let x = 150,
-  y = 150,
-  angle1 = 0.0,
-  segLength = 100;
-var mouseX = 0;
-var mouseY = 0;
-// var x = 0; // acceleratiobn data
-// var y = 0;
+var bunnyImage;
+var xPosition = 0;
+var yPosition = 0;
+var x = 0; // acceleratiobn data
+var y = 0;
 var z = 0;
 var cars = [];
-//var catPos;
-// angle = 0.0;
+var catPos;
+var angle = 0.0;
 var timer = 0;
+var limbs;
+var headTail;
 var marks;
-var stomachX = 160;
-var stomachY = 64;
+var stomachX = 64;
+var stomachY = 160;
 var woodFloorX = 0;
 var woodFloorY = 0;
 var catHead;
 var frontL;
 var frontR;
+var cattail;
+var catbody;
 var backL;
 var backR;
 
 
-
-
 //===============================================================Preload
 function preload() {
-  catHead = loadImage("assets/1x/head.png");
+  catImg = loadImage("assets/1x/catPlace.png");
+  woodFloor = loadImage("assets/1x/myFloor.png")
+  limbs = loadImage("assets/1x/limbs.png");
+  headTail = loadImage("assets/1x/headTail.png");
+  marks = loadImage("assets/1x/marking.png")
   frontL = loadImage("assets/1x/frontL.png");
   frontR = loadImage("assets/1x/frontR.png");
   cattail = loadImage("assets/1x/tail.png");
+  catbody = loadImage("assets/1x/body.png");
   backL = loadImage("assets/1x/backL.png");
   backR = loadImage("assets/1x/backR.png");
-  woodFloor = loadImage("assets/1x/myFloor.png");
-  marks = loadImage("assets/1x/marking0.png");
-  //grid = loadImage("assets/grid.png");
-
-  // catImg = loadImage("assets/1x/catPlace.png");
-  // woodFloor = loadImage("assets/1x/myFloor.png")
-  // limbs = loadImage("assets/1x/limbs.png");
-  // headTail = loadImage("assets/1x/headTail.png");
-  // marks = loadImage("assets/1x/marking.png")
-  // frontL = loadImage("assets/1x/frontL.png");
-  // frontR = loadImage("assets/1x/frontR.png");
-  // cattail = loadImage("assets/1x/tail.png");
-  // catbody = loadImage("assets/1x/body.png");
-  // backL = loadImage("assets/1x/backL.png");
-  // backR = loadImage("assets/1x/backR.png");
-  // catHead = loadImage("assets/1x/head.png")
+  catHead = loadImage("assets/1x/head.png")
 
 }
 
@@ -73,11 +62,15 @@ function setup() {
   alpha = 0;
   beta = 0;
   gamma = 0;
-  //------------------------------------------------- piece splice
+
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
-  //catPos = createVector(width / 2, height - 80);
+  catPos = createVector(width / 2, height - 80);
+
+  //------------------------------------------------- piece splice
+
+
 
 }
 //============================================================End of set-up
@@ -88,12 +81,12 @@ function draw() {
 
 
   //-----------------------------
-  // let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
-  // let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
-  //
-  // drawArrow(catPos0, catPos, 'black');
-  //
-  // let myHeading = catPos.heading();
+  let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
+  let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
+
+  drawArrow(catPos0, catPos, 'black');
+
+  let myHeading = catPos.heading();
   //---------------------------------------cat translate
 
 
@@ -111,30 +104,18 @@ function draw() {
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-//=================updated cat motion
-dx = mouseX - x;
-dy = mouseY - y;
-angle1 = atan2(dy, dx);
-x = mouseX - cos(angle1) * segLength;
-y = mouseY - sin(angle1) * segLength;
-
-//Rotating point
-segment(x, y, angle1);
-
-
-  //=====================mapping
-
-  dx = map(gamma, -60, 60, 0, width);
-  dy = map(beta, -30, 30, 0, height);
+  xPosition = map(gamma, -60, 60, 0, width);
+  yPosition = map(beta, -30, 30, 0, height);
 
 
 
-
+  catPos.x = xPosition
+  catPos.y = yPosition
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
     cars[i].drive();
-    if (cars[i].pos.dist(mouseX, mouseY) < 50) {
+    if (cars[i].pos.dist(catPos) < 50) {
       cars.splice(i, 1);
       stomachX += 3;
 
@@ -159,40 +140,70 @@ segment(x, y, angle1);
   text("z = " + z.toFixed(4), 25, 190);
 }
 //================================================================ end of draw
-function segment(x, y, a) {
 
+// ----------------------------------------------------------- Cat motion
+function drawArrow(base, vec, myColor) {
   push();
-  translate(x, y);
-  rotate(a);
-  cat(-40, segLength - 95);
+  noStroke();
 
-  line(0, 0, segLength, 0);
+  translate(base.x, base.y);
+  line(0, 0, vec.x, vec.y);
+  rotate(vec.heading());
+  translate(vec.mag(), 0);
+  cat(vec.x, vec.y);
   pop();
 }
+//-----------------------------------------------------------End of cat motion
+//------------------------------------------------- Read in accelerometer data
+window.addEventListener('deviceorientation', function(e) {
+  alpha = e.alpha;
+  beta = e.beta;
+  gamma = e.gamma;
+});
+
+// ------------------------------------------------------accelerometer Data
+window.addEventListener('devicemotion', function(e) {
+  // get accelerometer values
+  x = e.acceleration.x;
+  y = e.acceleration.y;
+  z = e.acceleration.z;
+});
+//----------------------------------------------------------element definitions
+
 //========================================================== cat definition
 function cat() {
 push();
-image(frontL, 63, -30 + -2 / 10 * (stomachY - 30))
+  //angle = 90;
 
-image(frontR, 63, 35 + 2 / 10 * (stomachY - 35));
+  //left front leg
+  image(frontL, -36  + -2 / 10 * (stomachX -64), 15);
 
-//back Legs left
-image(backL, -63, -20 + -2 / 7 * (stomachY - 30));
-//back right
-image(backR, -63, 18 + 2 / 7 * (stomachY - 25));
+  //right front Leg
+  image(frontR, 39 + 2 / 10 * (stomachX - 64), 20);
 
-//Cat body gets fat
-fill(115, 99, 87);
-stroke(0);
-strokeWeight(2);
-ellipse(-30, 0, 165, stomachY);
-//body markings
-noStroke();
-image(marks, -30, 0, 160, stomachY);
-//head and tail
-image(catHead, 80, 0);
-image(cattail, -160, 20);
+  //back Legs left
+  image(backL, -36 + -2 / 6 * (stomachX - 64), 148);
+
+  //back right
+  image(backR, 35 + 2 / 6 * (stomachX - 64), 148);
+
+  //stomach
+  fill(115, 99, 87);
+  stroke(0);
+  strokeWeight(2);
+  ellipse(0, 120, stomachX, 180);
+
+  //body markings
+  noStroke();
+  image(marks, 0, 120, stomachX, stomachY);
+
+  image(catHead, 2, 2);
+  image(cattail, 20, 261);
+  //fill(150, 0, 150, 150);
+  translate(-300, -300);
+  //ellipse(300, 300, 70, 70);
 pop();
+}
 
 //============================================================ End of cat definition
 
@@ -223,3 +234,12 @@ function car() {
   }
 }
 // =========================================================== End of Car(mice)
+//
+function deviceShaken() {
+  reset();
+cars = [];
+
+  for (var i = 0; i < 20; i++) {
+    cars.push(new car())
+  }
+}
