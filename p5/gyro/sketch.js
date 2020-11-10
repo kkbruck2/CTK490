@@ -2,9 +2,9 @@
 Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
-var bunnyImage;
-var xPosition = 0;
-var yPosition = 0;
+
+var px = 0;
+var py = 0;
 var dx; // acceleratiobn data
 var dy;
 var z = 0;
@@ -34,10 +34,7 @@ let x = 150,
 
 //===============================================================Preload
 function preload() {
-  catImg = loadImage("assets/1x/catPlace.png");
   woodFloor = loadImage("assets/1x/myFloor.png")
-  limbs = loadImage("assets/1x/limbs.png");
-  headTail = loadImage("assets/1x/headTail.png");
   marks = loadImage("assets/1x/marking.png")
   frontL = loadImage("assets/1x/frontL.png");
   frontR = loadImage("assets/1x/frontR.png");
@@ -79,45 +76,30 @@ function setup() {
 function draw() {
   background('#CE9B64'); // background fill
   image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
-  ellipse(mouseX, mouseY, 40, 40);
 
   //=================code from cat
-  dx = mouseX - x;
-  dy = mouseY - y;
+
+  dx = px - x;
+  dy = py - y;
   angle1 = atan2(dy, dx);
-  x = mouseX - cos(angle1) * segLength;
-  y = mouseY - sin(angle1) * segLength;
+  x = px - cos(angle1) * segLength;
+  y = py - sin(angle1) * segLength;
 
   //Rotating point
   segment(x, y, angle1);
 
   //=============================
-  //-----------------------------
 
-  //---------------------------------------cat translate
-
-
-  //-------------------------------code for test mouse moving cat
-  // push();
-  // translate(mouseX, mouseY);
-  //
-  // rotate(angle);
-  // cat(-300, -300);
-  // angle += 2;
-  // pop();
-  //-------------------------------code for test mouse moving cat END
-
-  // noStroke();
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-  xPosition = map(gamma, 5.7, 0.5, 0, width);
-  yPosition = map(beta, 5.2, 1, 0, height);
+  x = map(gamma, 5.7, 0.5, 0, width);
+  y = map(beta, 5.2, 1, 0, height);
 
 
 
-  catPos.x = mouseX
-  catPos.y = mouseY
+  catPos.x = px
+  catPos.y = py
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
