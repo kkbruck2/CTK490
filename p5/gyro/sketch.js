@@ -151,7 +151,7 @@ function draw() {
 function segment(x, y, a) {
   push();
   translate(x, y);
-  rotate(a);
+  rotate(1.57);
   cat(0, 0);
   line(0, 0, segLength, 0);
   pop();
