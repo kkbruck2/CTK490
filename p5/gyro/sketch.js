@@ -116,8 +116,8 @@ function draw() {
 
 
 
-  catPos.x = mouseX
-  catPos.y = mouseY
+  catPos.x = dx
+  catPos.y = dy
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
