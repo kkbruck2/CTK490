@@ -160,7 +160,6 @@ segment(x, y, angle1);
 
 //===============================segment function
 function segment(x, y, a) {
-  strokeWeight(20);
   push();
   translate(x, y);
   rotate(a);
