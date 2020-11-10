@@ -8,9 +8,11 @@ var dx; // acceleratiobn data
 var dy;
 var z = 0;
 var cars = [];
-var catPos;
+var catPos = 0;
 var angle = 0.0;
 var timer = 0;
+var limbs;
+var headTail;
 var marks;
 var stomachY = 64;
 var stomachX = 160;
@@ -20,6 +22,7 @@ var catHead;
 var frontL;
 var frontR;
 var cattail;
+var catbody;
 var backL;
 var backR;
 let x = 150,
