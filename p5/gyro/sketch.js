@@ -51,10 +51,6 @@ function setup() {
   rectMode(CENTER);
   ellipseMode(CENTER);
 
-  strokeWeight(20.0);
-  stroke(255, 100);
-
-
 
 
 
@@ -122,8 +118,8 @@ segment(x, y, angle1);
   //----------------------degree mapping
   // xPosition = map(gamma, -60, 60, 0, width);
   // yPosition = map(beta, -30, 30, 0, height);
-  x = map(gamma, 5.7, 0.5, 0, width);
-  y = map(beta, 5.2, 1, 0, height);
+  x = map(beta, 5.7, 0.5, 0, width);
+  y = map(gamma, 5.2, 1, 0, height);
 
   catPos.x = mouseX
   catPos.y = mouseY
@@ -160,7 +156,6 @@ segment(x, y, angle1);
 
 //===============================segment function
 function segment(x, y, a) {
-  strokeWeight(20);
   push();
   translate(x, y);
   rotate(a);
