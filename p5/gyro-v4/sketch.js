@@ -93,34 +93,6 @@ segment(x, y, angle1);
 
 //=============================
 
-  //----------------------------- heading code
-  // let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
-  // let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
-  //
-  // drawArrow(catPos0, catPos, 'black');
-  //
-  // let myHeading = catPos.heading();
-  //---------------------------------------cat translate
-
-
-  //-------------------------------code for test mouse moving cat
-  // push();
-  // translate(mouseX, mouseY);
-  //
-  // rotate(angle);
-  // cat(-300, -300);
-  // angle += 2;
-  // pop();
-  //-------------------------------code for test mouse moving cat END
-
-  // noStroke();
-  // the map command !!!!
-  // takes your variable and maps it from range 1 to range 2
-  // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-
-  //----------------------degree mapping
-  // xPosition = map(gamma, -60, 60, 0, width);
-  // yPosition = map(beta, -30, 30, 0, height);
   x = map(beta, 5.7, 0.5, 0, width);
   y = map(gamma, 5.2, 1, 0, height);
 
