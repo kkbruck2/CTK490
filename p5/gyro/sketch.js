@@ -125,8 +125,8 @@ segment(x, y, angle1);
   //----------------------degree mapping
   // xPosition = map(gamma, -60, 60, 0, width);
   // yPosition = map(beta, -30, 30, 0, height);
-  xPosition = map(beta, 5.7, 0.5, 0, width);
-  yPosition = map(gamma, 5.2, 1, 0, height);
+  x = map(beta, 5.7, 0.5, 0, width);
+  y = map(gamma, 5.2, 1, 0, height);
 
   catPos.x = mouseX
   catPos.y = mouseY
