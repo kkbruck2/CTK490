@@ -2,14 +2,13 @@
 Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
-var bunnyImage;
 var xPosition = 0;
 var yPosition = 0;
 var dx; // acceleratiobn data
 var dy;
 var z = 0;
 var cars = [];
-var catPos;
+var catPos = 0;
 var angle = 0.0;
 var timer = 0;
 var limbs;
@@ -34,15 +33,12 @@ let x = 150,
 
 //===============================================================Preload
 function preload() {
-  catImg = loadImage("assets/1x/catPlace.png");
+  catHead = loadImage("assets/1x/head.png");
   woodFloor = loadImage("assets/1x/myFloor.png")
-  limbs = loadImage("assets/1x/limbs.png");
-  headTail = loadImage("assets/1x/headTail.png");
   marks = loadImage("assets/1x/marking.png")
   frontL = loadImage("assets/1x/frontL.png");
   frontR = loadImage("assets/1x/frontR.png");
   cattail = loadImage("assets/1x/tail.png");
-  catbody = loadImage("assets/1x/body.png");
   backL = loadImage("assets/1x/backL.png");
   backR = loadImage("assets/1x/backR.png");
   catHead = loadImage("assets/1x/head.png")
@@ -58,8 +54,6 @@ function setup() {
   rectMode(CENTER);
   ellipseMode(CENTER);
 
-  strokeWeight(20.0);
-  stroke(255, 100);
 
 
 
@@ -72,28 +66,40 @@ function setup() {
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
+  //------------------------------------------------- piece splice
+
+  //catPos = createVector(dx, dy);
+
 
 }
 //============================================================End of set-up
+
 //=============================================================Draw
 function draw() {
   background('#CE9B64'); // background fill
   image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
-  ellipse(mouseX, mouseY, 40, 40);
 
-  //=================code from cat
-  dx = mouseX - x;
-  dy = mouseY - y;
-  angle1 = atan2(dy, dx);
-  x = mouseX - cos(angle1) * segLength;
-  y = mouseY - sin(angle1) * segLength;
+//=================code from cat
+dx = mouseX - x;
+dy = mouseY - y;
+angle1 = atan2(dy, dx);
+x = mouseX - cos(angle1) * segLength;
+y = mouseY - sin(angle1) * segLength;
 
-  //Rotating point
-  segment(x, y, angle1);
+//ellipse(x, y, 20, 20);
 
-  //=============================
-  //-----------------------------
+//Rotating point
+segment(x, y, angle1);
 
+//=============================
+
+  //----------------------------- heading code
+  // let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
+  // let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
+  //
+  // drawArrow(catPos0, catPos, 'black');
+  //
+  // let myHeading = catPos.heading();
   //---------------------------------------cat translate
 
 
@@ -111,13 +117,16 @@ function draw() {
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-  xPosition = map(gamma, 5.7, 0.5, 0, width);
-  yPosition = map(beta, 5.2, 1, 0, height);
 
-
+  //----------------------degree mapping
+  // xPosition = map(gamma, -60, 60, 0, width);
+  // yPosition = map(beta, -30, 30, 0, height);
+  x = map(beta, 5.7, 0.5, 0, width);
+  y = map(gamma, 5.2, 1, 0, height);
 
   catPos.x = mouseX
   catPos.y = mouseY
+
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
@@ -147,17 +156,30 @@ function draw() {
   text("z = " + z.toFixed(4), 25, 190);
 }
 //================================================================ end of draw
+
 //===============================segment function
 function segment(x, y, a) {
   push();
   translate(x, y);
   rotate(a);
   cat(0, 0);
+
   line(0, 0, segLength, 0);
   pop();
 }
-// ----------------------------------------------------------- Cat motion
 
+// ----------------------------------------------------------- Cat motion Heading
+// function drawArrow(base, vec, myColor) {
+//   push();
+//   noStroke();
+//
+//   translate(base.x, base.y);
+//   line(0, 0, vec.x, vec.y);
+//   rotate(vec.heading());
+//   translate(vec.mag(), 0);
+//   cat(vec.x, vec.y);
+//   pop();
+// }
 //-----------------------------------------------------------End of cat motion
 //------------------------------------------------- Read in accelerometer data
 window.addEventListener('deviceorientation', function(e) {
@@ -208,7 +230,9 @@ function cat() {
 //============================================================= Car(mice)
 function car() {
   //-----------------------attributes
-  this.pos = createVector(100, 100);
+  this.pos = createVector(x, y);
+
+  //this.pos = createVector(100, 100);
   this.vel = createVector(random(-5, 5), random(-5, 5));
   this.r = random(255);
   this.g = random(255);
