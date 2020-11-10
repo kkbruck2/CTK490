@@ -167,6 +167,7 @@ function segment(x, y, a) {
   translate(x, y);
   rotate(a);
   cat(0, 0);
+
   line(0, 0, segLength, 0);
   pop();
 }
@@ -202,37 +203,30 @@ window.addEventListener('devicemotion', function(e) {
 
 //========================================================== cat definition
 function cat() {
-push();
-  //angle = 90;
+  push();
+  //==frontpaws
+  image(frontL, 63, -30 + -2 / 10 * (stomachY - 30))
 
-  //left front leg
-  image(frontL, -36  + -2 / 10 * (stomachX -64), 15);
-
-  //right front Leg
-  image(frontR, 39 + 2 / 10 * (stomachX - 64), 20);
+  image(frontR, 63, 35 + 2 / 10 * (stomachY - 35));
 
   //back Legs left
-  image(backL, -36 + -2 / 6 * (stomachX - 64), 148);
-
+  image(backL, -63, -20 + -2 / 7 * (stomachY - 30));
   //back right
-  image(backR, 35 + 2 / 6 * (stomachX - 64), 148);
+  image(backR, -63, 18 + 2 / 7 * (stomachY - 25));
 
-  //stomach
+  //Cat body gets fat
   fill(115, 99, 87);
   stroke(0);
   strokeWeight(2);
-  ellipse(0, 120, stomachX, 180);
-
+  ellipse(-30, 0, 165, stomachY);
   //body markings
   noStroke();
-  image(marks, 0, 120, stomachX, stomachY);
+  image(marks, -30, 0, 160, stomachY);
+  //head and tail
+  image(catHead, 80, 0);
+  image(cattail, -160, 20);
 
-  image(catHead, 2, 2);
-  image(cattail, 20, 261);
-  //fill(150, 0, 150, 150);
-  translate(-300, -300);
-  //ellipse(300, 300, 70, 70);
-pop();
+  pop();
 }
 
 //============================================================ End of cat definition
