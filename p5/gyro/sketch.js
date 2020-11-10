@@ -3,8 +3,8 @@ Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
 var bunnyImage;
-var xPosition = 0;
-var yPosition = 0;
+var px = 0;
+var py = 0;
 var dx; // acceleratiobn data
 var dy;
 var z = 0;
@@ -58,8 +58,8 @@ function setup() {
   rectMode(CENTER);
   ellipseMode(CENTER);
 
-  strokeWeight(20.0);
-  stroke(255, 100);
+  // strokeWeight(20.0);
+  // stroke(255, 100);
 
 
 
@@ -111,18 +111,18 @@ function draw() {
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-  xPosition = map(gamma, 5.7, 0.5, 0, width);
-  yPosition = map(beta, 5.2, 1, 0, height);
+  x = map(gamma, 5.7, 0.5, 0, width);
+  y = map(beta, 5.2, 1, 0, height);
 
 
 
-  catPos.x = dx
-  catPos.y = dy
+  //catPos.x = dx
+  //catPos.y = dy
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
     cars[i].drive();
-    if (cars[i].pos.dist(catPos) < 50) {
+    if (cars[i].pos.dist(px, py) < 50) {
       cars.splice(i, 1);
       stomachX += 3;
 
