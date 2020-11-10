@@ -68,7 +68,7 @@ function setup() {
   }
   //------------------------------------------------- piece splice
 
-  //catPos = createVector(dx, dy);
+// catPos = createVector(dx, dy);
 
 
 }
@@ -229,11 +229,3 @@ function car() {
 }
 // =========================================================== End of Car(mice)
 //
-function deviceShaken() {
-  reset();
-cars = [];
-
-  for (var i = 0; i < 20; i++) {
-    cars.push(new car())
-  }
-}
