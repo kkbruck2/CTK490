@@ -98,8 +98,8 @@ function draw() {
 
 
 
-  catPos.x = px
-  catPos.y = py
+  catPos.x = dx - x
+  catPos.y = dy - y
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
