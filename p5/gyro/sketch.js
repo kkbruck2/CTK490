@@ -5,11 +5,11 @@ var alpha, beta, gamma; // orientation data
 var bunnyImage;
 var xPosition = 0;
 var yPosition = 0;
-var x = 0; // acceleratiobn data
-var y = 0;
+// var x = dx; // acceleratiobn data
+// var y = dy;
 var z = 0;
 var cars = [];
-var catPos;
+var catPos = 0;
 var angle = 0.0;
 var timer = 0;
 var limbs;
@@ -26,6 +26,10 @@ var cattail;
 var catbody;
 var backL;
 var backR;
+let x = 150,
+  y = 150,
+  angle1 = 0.0,
+  segLength = 100;
 
 
 //===============================================================Preload
@@ -66,27 +70,40 @@ function setup() {
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
-  catPos = createVector(width / 2, height - 80);
-
   //------------------------------------------------- piece splice
 
+  //catPos = createVector(dx, dy);
 
 
 }
 //============================================================End of set-up
+
 //=============================================================Draw
 function draw() {
   background('#CE9B64'); // background fill
   image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
 
+//=================code from cat
+dx = mouseX - x;
+dy = mouseY - y;
+angle1 = atan2(dy, dx);
+x = mouseX - cos(angle1) * segLength;
+y = mouseY - sin(angle1) * segLength;
 
-  //-----------------------------
-  let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
-  let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
+//ellipse(x, y, 20, 20);
 
-  drawArrow(catPos0, catPos, 'black');
+//Rotating point
+segment(x, y, angle1);
 
-  let myHeading = catPos.heading();
+//=============================
+
+  //----------------------------- heading code
+  // let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
+  // let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
+  //
+  // drawArrow(catPos0, catPos, 'black');
+  //
+  // let myHeading = catPos.heading();
   //---------------------------------------cat translate
 
 
@@ -104,13 +121,16 @@ function draw() {
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-  xPosition = map(gamma, -60, 60, 0, width);
-  yPosition = map(beta, -30, 30, 0, height);
 
+  //----------------------degree mapping
+  // xPosition = map(gamma, -60, 60, 0, width);
+  // yPosition = map(beta, -30, 30, 0, height);
+  xPosition = map(gamma, 5.7, 0.5, 0, width);
+  yPosition = map(beta, 5.2, 1, 0, height);
 
+  catPos.x = mouseX
+  catPos.y = mouseY
 
-  catPos.x = xPosition
-  catPos.y = yPosition
 
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
@@ -141,18 +161,28 @@ function draw() {
 }
 //================================================================ end of draw
 
-// ----------------------------------------------------------- Cat motion
-function drawArrow(base, vec, myColor) {
+//===============================segment function
+function segment(x, y, a) {
   push();
-  noStroke();
-
-  translate(base.x, base.y);
-  line(0, 0, vec.x, vec.y);
-  rotate(vec.heading());
-  translate(vec.mag(), 0);
-  cat(vec.x, vec.y);
+  translate(x, y);
+  rotate(a);
+  cat(0, 0);
+  line(0, 0, segLength, 0);
   pop();
 }
+
+// ----------------------------------------------------------- Cat motion Heading
+// function drawArrow(base, vec, myColor) {
+//   push();
+//   noStroke();
+//
+//   translate(base.x, base.y);
+//   line(0, 0, vec.x, vec.y);
+//   rotate(vec.heading());
+//   translate(vec.mag(), 0);
+//   cat(vec.x, vec.y);
+//   pop();
+// }
 //-----------------------------------------------------------End of cat motion
 //------------------------------------------------- Read in accelerometer data
 window.addEventListener('deviceorientation', function(e) {
@@ -210,7 +240,9 @@ pop();
 //============================================================= Car(mice)
 function car() {
   //-----------------------attributes
-  this.pos = createVector(100, 100);
+  this.pos = createVector(x, y);
+
+  //this.pos = createVector(100, 100);
   this.vel = createVector(random(-5, 5), random(-5, 5));
   this.r = random(255);
   this.g = random(255);
