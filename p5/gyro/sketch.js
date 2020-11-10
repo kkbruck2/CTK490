@@ -2,7 +2,6 @@
 Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
-var bunnyImage;
 var xPosition = 0;
 var yPosition = 0;
 var dx; // acceleratiobn data
@@ -15,8 +14,8 @@ var timer = 0;
 var limbs;
 var headTail;
 var marks;
-var stomachX = 64;
-var stomachY = 160;
+var stomachY = 64;
+var stomachX = 160;
 var woodFloorX = 0;
 var woodFloorY = 0;
 var catHead;
@@ -34,15 +33,12 @@ let x = 150,
 
 //===============================================================Preload
 function preload() {
-  catImg = loadImage("assets/1x/catPlace.png");
+  catHead = loadImage("assets/1x/head.png");
   woodFloor = loadImage("assets/1x/myFloor.png")
-  limbs = loadImage("assets/1x/limbs.png");
-  headTail = loadImage("assets/1x/headTail.png");
   marks = loadImage("assets/1x/marking.png")
   frontL = loadImage("assets/1x/frontL.png");
   frontR = loadImage("assets/1x/frontR.png");
   cattail = loadImage("assets/1x/tail.png");
-  catbody = loadImage("assets/1x/body.png");
   backL = loadImage("assets/1x/backL.png");
   backR = loadImage("assets/1x/backR.png");
   catHead = loadImage("assets/1x/head.png")
