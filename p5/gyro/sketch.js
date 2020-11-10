@@ -2,13 +2,13 @@
 Make sure you turn on orientation lock on your iPhone or Android device. */
 
 var alpha, beta, gamma; // orientation data
-var xPosition = 0;
-var yPosition = 0;
+// var xPosition = 0;
+// var yPosition = 0;
 var dx; // acceleratiobn data
 var dy;
 var z = 0;
 var cars = [];
-var catPos;
+var catPos = 0;
 var angle = 0.0;
 var timer = 0;
 var marks;
