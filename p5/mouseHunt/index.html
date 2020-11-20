@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Mouse Hunt Gyro</title>
+	<title>Mouse Hunt</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
@@ -15,7 +15,7 @@
 	<script src="../libs/p5.js"></script>
 	<script src="../libs/p5.sound.min.js"></script>
 
-	<button   id="request"  style="height: 50px; width: 150px; top: 20px; right: 20px; position: fixed; z-index: 5;">Request Permission</button>
+	<!-- <button   id="request"  style="height: 50px; width: 150px; top: 20px; right: 20px; position: fixed; z-index: 5;">Request Permission</button> -->
 
 <style> body {padding: 0; margin: 0;} body::-webkit-scrollbar { display: none; }</style>
 
@@ -24,28 +24,28 @@
 //  location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
 // }
 
-function requestT () {
-
-	 if (typeof(DeviceMotionEvent) !== 'undefined' && typeof(DeviceMotionEvent.requestPermission) === 'function') {
-			 alert('enter');
-			 DeviceMotionEvent.requestPermission()
-			 .then(response => {
-			 	 alert('resp'+ response);
-				 if (response == 'granted') {
-					 window.addEventListener('devicemotion', (e) => {
-						 // do something with e
-						 // hide the button here
-						 document.getElementById('request').style.display = 'none';
-					 })
-				 }
-			 })
-
-	 .catch(console.error)
-	 }else {
-			 alert('DeviceMotionEvent is not defined');
-	 }
-}
-document.getElementById('request').onclick = requestT;
+// function requestT () {
+//
+// 	 if (typeof(DeviceMotionEvent) !== 'undefined' && typeof(DeviceMotionEvent.requestPermission) === 'function') {
+// 			 alert('enter');
+// 			 DeviceMotionEvent.requestPermission()
+// 			 .then(response => {
+// 			 	 alert('resp'+ response);
+// 				 if (response == 'granted') {
+// 					 window.addEventListener('devicemotion', (e) => {
+// 						 // do something with e
+// 						 // hide the button here
+// 						 document.getElementById('request').style.display = 'none';
+// 					 })
+// 				 }
+// 			 })
+//
+// 	 .catch(console.error)
+// 	 }else {
+// 			 alert('DeviceMotionEvent is not defined');
+// 	 }
+// }
+// document.getElementById('request').onclick = requestT;
 </script>
 <style id="container">
 
@@ -79,7 +79,7 @@ new p5(sketch, 'container');
 </head>
 
 <body>
-	<div id='container' style="top: 0; right: 0; position: fixed; z-index: 1;"></div>
+	<!-- <div id='container' style="top: 0; right: 0; position: fixed; z-index: 1;"></div> -->
 
 
 
