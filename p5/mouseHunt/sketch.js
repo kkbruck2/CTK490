@@ -28,6 +28,7 @@ var loseSound;
 var bkgMusic;
 
 var myState = 0;
+var promise = document.querySelector('audio').play();
 //=======================================var end
 //=======================================preload
 function preload() {
@@ -53,6 +54,7 @@ function preload() {
   winSound = loadSound('assets/396174__funwithsound__success-triumph-resolution-sound-effect_01.mp3');
   loseSound = loadSound('assets/174427__badly99__domino-sound-effect_01.mp3');
 
+
   bkgMusic.loop();
   bkgMusic.stop();
   winSound.play();
@@ -74,6 +76,8 @@ function setup() {
   chalk = loadFont('assets/Chalkboard.ttc');
   montMed = loadFont('assets/Montserrat-Medium.ttf');
   grid = loadImage('assets/grid.png');
+
+
   bkgMusic.play();
 
 
@@ -94,8 +98,10 @@ function setup() {
 
 //-------------------------------------------------------------draw
 function draw() {
+background(206, 150, 100);
 
   image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
+
 
   textFont(fontDiner);
 
