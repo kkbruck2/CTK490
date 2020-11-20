@@ -28,7 +28,7 @@ var loseSound;
 var bkgMusic;
 
 var myState = 0;
-var promise = document.querySelector('audio').play();
+
 //=======================================var end
 //=======================================preload
 function preload() {
