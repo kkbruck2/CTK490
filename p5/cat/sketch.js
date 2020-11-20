@@ -22,6 +22,8 @@ var catDirection = 1;
 var marks;
 var grid;
 let catImg;
+var windowWidth = 0;
+var windowHeight = 0;
 
 function preload() {
   catHead = loadImage("assets/1x/head.png");

@@ -26,7 +26,7 @@ var lose;
 var winSound;
 var loseSound;
 var myState = 0;
-var bkgMusic
+var bkgMusic;
 //=======================================var end
 //=======================================preload
 function preload() {
@@ -49,8 +49,8 @@ function preload() {
   mice[6] = loadImage('assets/1x/mice3.png');
   mice[7] = loadImage('assets/1x/mice2.png');
   bkgMusic = loadSound('assets/456797__anechoix__jazz-music-loop.mp3');
-  winSound = loadSound('assets/396174__funwithsound__success-triumph-resolution-sound-effect_01.mp3')
-  loseSound = loadSound('assets/174427__badly99__domino-sound-effect_01.mp3')
+  winSound = loadSound('assets/396174__funwithsound__success-triumph-resolution-sound-effect_01.mp3');
+  loseSound = loadSound('assets/174427__badly99__domino-sound-effect_01.mp3');
 
   bkgMusic.loop();
   bkgMusic.stop();
