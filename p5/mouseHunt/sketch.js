@@ -25,8 +25,9 @@ var win;
 var lose;
 var winSound;
 var loseSound;
-var myState = 0;
 var bkgMusic;
+
+var myState = 0;
 //=======================================var end
 //=======================================preload
 function preload() {
