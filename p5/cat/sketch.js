@@ -10,7 +10,6 @@ var woodFloor;
 var activeArea;
 var stomachY = 64;
 var stomachX = 160;
-var cars = [];
 var catDirection = 1;
 var marks;
 var grid;
