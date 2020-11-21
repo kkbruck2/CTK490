@@ -70,16 +70,16 @@ function preload() {
   loseSound = loadSound('assets/174427__badly99__domino-sound-effect_01.mp3');
 
   //-------------------audio play option
-  var promise = document.querySelector('video').play();
-
-  if (promise !== undefined) {
-    promise.then(_ => {
-      // Autoplay started!
-    }).catch(error => {
-      // Autoplay was prevented.
-      // Show a "Play" button so that user can start playback.
-    });
-  }
+  // var promise = document.querySelector('video').play();
+  //
+  // if (promise !== undefined) {
+  //   promise.then(_ => {
+  //     // Autoplay started!
+  //   }).catch(error => {
+  //     // Autoplay was prevented.
+  //     // Show a "Play" button so that user can start playback.
+  //   });
+  // }
   //----------------------------------------------------------
 
   //sound action
@@ -126,6 +126,14 @@ function setup() {
 function draw() {
   background(206, 150, 100);
   image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
+  dx = mouseX - x;
+  dy = mouseY - y;
+  angle1 = atan2(dy, dx);
+  x = mouseX - cos(angle1) * segLength;
+  y = mouseY - sin(angle1) * segLength;
+  //Rotating point
+  segment(x, y, angle1);
+
   //----------------Text heading
   textFont(fontDiner);
   //----------------States
@@ -229,18 +237,35 @@ function mouseReleased() {
 
 
 //----------------------------------------------------mice class!!
-function Boid() {
+function Boid(x, y) {
   //----attributes
-  this.pos = createVector(width - 50, height - 50);
+  this.acc = createCanvas(0, 0);
   this.vel = createVector(random(-6, 6), random(-6, 6));
+  this.pos = createVector(windowWidth - 160, windowHeight - 160);
   this.miceNum = 0;
   this.timer = 0;
   this.maxTimer = (1, 10);
 
   //----- methods
+
+  this.update = function() {
+    this.vel.add(this.acc);
+    this.vel.limit(this.maxspeed);
+    this.pos.add(this.vel);
+    this.acc.mult(1);
+  }
+
+  this.seek = function(target) {
+    let desired = createVector.sub(target, this.position);
+    desired.normalize();
+    desired.mult(this.maxspeed);
+    let steer = createVector.sub(target, this.vel);
+    steer.limit(this.maxforce);
+    return steer;
+  }
   // display
 
-  this.display = function() {
+  this.display = function(boids) {
     //  translate(p5.Vector.fromAngle(millis() / 1000, 40));
 
     push();
@@ -256,29 +281,43 @@ function Boid() {
     if (this.timer > this.maxTimer) {
       this.miceNum = this.miceNum + 1;
       this.timer = 0;
-
     }
-
 
     //mice reset
     if (this.miceNum > mice.length - 1) {
       this.miceNum = 0;
     }
 
-
     pop();
 
   }
   //drive
+
   this.drive = function() {
     this.pos.add(this.vel);
+    this.flock(boids);
+    this.update();
+    this.borders();
+    this.render();
 
-    if (this.pos.x > width) this.pos.x = 0;
-    if (this.pos.x < 0) this.pos.x = width;
-    if (this.pos.y > height) this.pos.y = 0;
-    if (this.pos.y < 0) this.pos.y = height;
-
+    if (this.pos.x > windowWidth) this.pos.x = 0;
+    if (this.pos.x < 0) this.pos.x = windowWidth;
+    if (this.pos.y > windowHeight) this.pos.y = 0;
+    if (this.pos.y < 0) this.pos.y = windowHeight;
   }
+this.flock = function() {
+  let sep = this.separate(boids);
+  let ali = this.align(boids);
+  let coh = this.cohesion(boids);
+
+  sep.mult(5.0);
+  ali.mult(0.05);
+  coh.mult(0);
+
+  this.applyForce(sep);
+  this.applyForce(ali);
+  this.applyForce(coh);
+}
 
 }
 
@@ -324,14 +363,6 @@ function game() {
   }
 
   //================cat movement table-condensed
-  dx = mouseX - x;
-  dy = mouseY - y;
-  angle1 = atan2(dy, dx);
-  x = mouseX - cos(angle1) * segLength;
-  y = mouseY - sin(angle1) * segLength;
-
-  //Rotating point
-  segment(x, y, angle1);
 
   // push();
   //
