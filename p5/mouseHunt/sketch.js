@@ -26,6 +26,8 @@ var lose;
 var winSound;
 var loseSound;
 var bkgMusic;
+var windowWidth = 0;
+var windowHeight = 0;
 
 var myState = 0;
 
