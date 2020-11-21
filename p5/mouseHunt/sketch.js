@@ -83,7 +83,7 @@ function preload() {
   //----------------------------------------------------------
 
   //sound action
-
+  bkgMusic.play();
   bkgMusic.loop();
   bkgMusic.stop();
   winSound.play();
