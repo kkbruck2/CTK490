@@ -5,22 +5,45 @@
 	<title>Mouse Hunt</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
 	<meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
-
 
 	<!-- p5js -->
 
 	<script src="../libs/p5.min.js"></script>
-	<!-- <script src="../libs/p5.js"></script> -->
 	<script src="../libs/p5.sound.min.js"></script>
+	<script src="../libs/p5.dom.min.js"></script>
+	<script src="../libs/tabletop.min.min.js"></script>
+
 	<script language="javascript" src="sketch.js"></script>
 
 	<!-- <button   id="request"  style="height: 50px; width: 150px; top: 20px; right: 20px; position: fixed; z-index: 5;">Request Permission</button> -->
 
-<style> body {padding: 0; margin: 0;} body::-webkit-scrollbar { display: none; }</style>
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+		}
 
-<!-- <script>
+		body::-webkit-scrollbar {
+			display: none;
+		}
+	</style>
+
+<!--
+	<script type="text/javascript">
+		window.onload = function() {
+			var context = new AudioContext();
+			// Setup all nodes
+		}
+
+		document.querySelector('button').addEventListener('click', function() {
+			context.resume().then(() => {
+				console.log('Playback resumed successfully');
+			});
+		});
+	</script> -->
+	
+	<!-- <script>
 if (location.protocol != 'https:') {
  location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
 }
@@ -47,41 +70,29 @@ function requestT () {
 	 }
 }
 document.getElementById('request').onclick = requestT;
-</script>
-<style id="container">
+</script>-->
+	<style id="container">
 
-</style>
-
-<script>
-let sketch = function(p) {
-	p.setup = function(){
-		p.createCanvas(windowWidth, windowHeight);;
-		p.background("#CE9B64");
-
-
-	}
-};
-new p5(sketch, 'container');
-</script> -->
-
-	<!-- sketch -->
-	<style>
-		body {
-			padding: 0;
-			margin: 0;
-		}
 	</style>
 
+	<script>
+		let sketch = function(p) {
+			p.setup = function() {
+				p.createCanvas(windowWidth, windowHeight);;
+				p.background("#CE9B64");
 
 
+			}
+		};
+		new p5(sketch, 'container');
+	</script>
 
+	<!-- sketch -->
 
 </head>
 
 <body>
 	<!-- <div id='container' style="top: 0; right: 0; position: fixed; z-index: 1;"></div> -->
-
-
 
 </body>
 
