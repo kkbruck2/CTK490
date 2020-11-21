@@ -1,0 +1,24 @@
+<a href="#" class="myButton">SOUND</a>
+
+.myButton {
+	background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+	background-color:#44c767;
+	border-radius:12px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:16px 31px;
+	text-decoration:none;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+	background-color:#5cbf2a;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
