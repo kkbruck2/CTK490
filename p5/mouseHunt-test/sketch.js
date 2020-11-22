@@ -1,20 +1,23 @@
-//cat images
-var catWhole;
+//cat variables
 var catHead;
-var frontL, frontR, backL, backR;
+
+var frontL;
+var frontR;
+var backL;
+var backR;
 var cattail;
-var catbody;
 var stomachY = 64;
 var stomachX = 160;
 var marks;
-let catImg;
+// let catImg;
 //cat location
-var catDirection = 1;
-let x = 150,
-  y = 150,
-  angle1 = 0.0,
-  segLength = 100;
+//var catDirection = 1;
+let x = 150
+let y = 150;
+let angle1 = 0.0;
+let segLength = 100;
 //mice
+var mice;
 var mice = [];
 var boids = [];
 var direction = [];
@@ -24,9 +27,9 @@ var start;
 var win;
 var lose;
 //winSound
-var winSound;
-var loseSound;
-var bkgMusic;
+// var winSound;
+// var loseSound;
+// var bkgMusic;
 //environment
 var windowWidth = 0;
 var windowHeight = 0;
@@ -41,15 +44,15 @@ function preload() {
   frontL = loadImage('assets/1x/frontL.png');
   frontR = loadImage('assets/1x/frontR.png');
   cattail = loadImage('assets/1x/tail.png');
-  catbody = loadImage('assets/1x/body.png');
   backL = loadImage('assets/1x/backL.png');
   backR = loadImage('assets/1x/backR.png');
-  catWhole = loadImage('assets/1x/catPlace.png')
   marks = loadImage('assets/1x/marking.png');
   //environment
   woodFloor = loadImage('assets/1x/myFloor.png');
-  grid = loadImage('assets/grid.png');
+  //grid = loadImage('assets/grid.png');
   //mice
+  //mice = loadImage('assets/1x/mice3.png');
+
   mice[0] = loadImage('assets/1x/mice1.png');
   mice[1] = loadImage('assets/1x/mice2.png');
   mice[2] = loadImage('assets/1x/mice3.png');
@@ -63,11 +66,11 @@ function preload() {
   lose = loadImage('assets/loss.png');
   win = loadImage('assets/winCat.png')
 
-  //sound load
+  //sounds
 
-  bkgMusic = loadSound('assets/456797__anechoix__jazz-music-loop.mp3');
-  winSound = loadSound('assets/396174__funwithsound__success-triumph-resolution-sound-effect_01.mp3');
-  loseSound = loadSound('assets/174427__badly99__domino-sound-effect_01.mp3');
+  // bkgMusic = loadSound('assets/456797__anechoix__jazz-music-loop.mp3');
+  // winSound = loadSound('assets/396174__funwithsound__success-triumph-resolution-sound-effect_01.mp3');
+  // loseSound = loadSound('assets/174427__badly99__domino-sound-effect_01.mp3');
 
   //-------------------audio play option
   // var promise = document.querySelector('video').play();
@@ -83,22 +86,24 @@ function preload() {
   //----------------------------------------------------------
 
   //sound action
-  bkgMusic.play();
-  bkgMusic.loop();
-  bkgMusic.stop();
-  winSound.play();
-  winSound.stop();
-  loseSound.play();
-  loseSound.stop();
+  // bkgMusic.play();
+  // bkgMusic.loop();
+  // bkgMusic.stop();
+  // winSound.play();
+  // winSound.stop();
+  // loseSound.play();
+  // loseSound.stop();
 }
 //=======================preload end
 
 //=======================setup
+
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   //Fonts
   fontDiner = loadFont('assets/FontdinerSwanky-Regular.ttf');
-  chalk = loadFont('assets/Chalkboard.ttc');
+  // chalk = loadFont('assets/Chalkboard.ttf');
   montMed = loadFont('assets/Montserrat-Medium.ttf');
   grid = loadImage('assets/grid.png');
 
@@ -107,7 +112,7 @@ function setup() {
 
   //-----------------------------
 
-  bkgMusic.play();
+  // bkgMusic.play();
 
   //--------------------------Spawn mice
   for (var i = 0; i < 30; i++) {
@@ -150,7 +155,7 @@ function draw() {
       break;
 
     case 1:
-      bkgMusic.play();
+      // bkgMusic.play();
       myState = 2;
       break;
 
@@ -160,8 +165,8 @@ function draw() {
       textAlign(CENTER);
       text("Let's Hunt Mice!", windowWidth / 2, 120);
       image(start, windowWidth / 2, windowHeight / 2 + 30);
-      winSound.stop();
-      loseSound.stop();
+      // winSound.stop();
+      // loseSound.stop();
       textSize(30);
       textFont(montMed);
       text('Click to Start Game', windowWidth / 2, windowHeight - 35);
@@ -177,8 +182,8 @@ function draw() {
       break;
 
     case 4:
-      winSound.play();
-      bkgMusic.stop();
+      // winSound.play();
+      // bkgMusic.stop();
       myState = 5;
       break;
 
@@ -195,8 +200,8 @@ function draw() {
       break;
 
     case 6:
-      bkgMusic.stop();
-      loseSound.play();
+      // bkgMusic.stop();
+      // loseSound.play();
       myState = 7;
       break;
 
@@ -213,6 +218,7 @@ function draw() {
       break;
   }
 }
+
 //----------------------------------------------------end draw
 //----------------------------------------------------mouseReleased
 function mouseReleased() {
@@ -234,6 +240,7 @@ function mouseReleased() {
   }
 }
 //---------------------------------------------------end mouseReleased
+
 
 
 //----------------------------------------------------mice class!!
@@ -275,6 +282,8 @@ function Boid(x, y) {
     translate(this.pos.x, this.pos.y);
     rotate(this.vel.heading());
     image(mice[this.miceNum], 0, 0);
+    // image(mice[this.miceNum], 0, 0);
+
     this.timer++;
 
 
