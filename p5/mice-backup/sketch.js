@@ -4,7 +4,7 @@
 //From <a href='http://natureofcode.com'>natureofcode.com</a>
 //===============variables
 //var mice = [];
-var mices = [];
+//var mices = [];
 let boids = [];
 var flock;
 var woodFloor;
@@ -13,6 +13,8 @@ var mice;
 
 function preload() {
   mice = loadImage('assets/1x/mice5.png');
+  woodFloor = loadImage('assets/1x/woodbkg.jpg');
+
 
   // mice[0] = loadImage('assets/1x/mice1.png');
   // mice[1] = loadImage('assets/1x/mice2.png');
@@ -22,17 +24,10 @@ function preload() {
   // mice[5] = loadImage('assets/1x/mice4.png');
   // mice[6] = loadImage('assets/1x/mice3.png');
   // mice[7] = loadImage('assets/1x/mice2.png');
-
-  woodFloor = loadImage('assets/1x/woodbkg.jpg');
-
-
 }
 //===============setup
-
-
 function setup() {
   createCanvas(1080, 720);
-
 
   flock = new Flock();
   // Add an initial set of boids into the system
@@ -46,6 +41,7 @@ function setup() {
 function draw() {
   background(150, 100, 50);
   image(woodFloor, width/2, height/ 2, width, height);
+    flock.run();
 
 }
 
@@ -104,17 +100,17 @@ Path.prototype.run = function(boids) {
 }
 
 
-  // distance = p5.dist(predictLocation, normalPoint);
-  // if (distance < path.radius) {
-  //   seek(normalPoint);
-  // }
-  // distance = p5.dist(predictLocation, normalPoint);
-  // if (distance > path.radius) {
-  //   b.normalize();
-  //   b.mult(50);
-  // }
-  // target = p5.Vector.add(normalPoint, b);
-  // seek(target);
+// distance = p5.dist(predictLocation, normalPoint);
+// if (distance < path.radius) {
+//   seek(normalPoint);
+// }
+// distance = p5.dist(predictLocation, normalPoint);
+// if (distance > path.radius) {
+//   b.normalize();
+//   b.mult(50);
+// }
+// target = p5.Vector.add(normalPoint, b);
+// seek(target);
 
 
 
@@ -196,8 +192,6 @@ Boid.prototype.seek = function(target) {
 
 Boid.prototype.render = function() {
   // Draw a triangle rotated in the direction of velocity
-
-
   let theta = this.velocity.heading(0, 0);
   fill(127);
   stroke(200);
@@ -205,6 +199,11 @@ Boid.prototype.render = function() {
   translate(this.position.x, this.position.y);
   rotate(theta);
   image(mice, this.r * 3, this.r * 3);
+  // beginShape();
+  // vertex(0, -this.r * 2);
+  // vertex(-this.r, this.r * 2);
+  // vertex(this.r, this.r * 2);
+  // endShape(CLOSE);
   pop();
 }
 
