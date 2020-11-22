@@ -379,13 +379,12 @@ function Cat() {
  //    cat(catPos.x, catPos.y);
  // }
 
-  this.drive = function(cat) {
+  this.drive = function(x, y, a, cat) {
 
     push();
     translate(x, y);
     rotate(a);
-    this.Cat(windowWidth / 2, windowHeight / 2);
-    //line(0, 0, segLength, 0);
+    segment(0, 0, segLength, 0);
     pop();
 
   }
