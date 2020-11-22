@@ -88,7 +88,7 @@ function draw() {
   background(200, 150, 100);
   image(woodFloor, width/2, height/ 2, width, height);
     flock.run();
-    this.Cat();
+
 
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
