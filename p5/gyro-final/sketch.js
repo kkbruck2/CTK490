@@ -84,11 +84,9 @@ function setup() {
 //==================draw
 function draw() {
 
-
   background(200, 150, 100);
-  image(woodFloor, width/2, height/ 2, width, height);
-    flock.run();
-
+  image(woodFloor, width / 2, height / 2, width, height);
+  flock.run();
 
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
@@ -107,12 +105,11 @@ function draw() {
       boids.splice(i, 1);
       stomachY += 3;
 
-
     }
   }
 
-
 }
+//================end draw
 //------------------------------------------------- Read in accelerometer data
 window.addEventListener('deviceorientation', function(e) {
   alpha = e.alpha;
@@ -128,14 +125,6 @@ window.addEventListener('devicemotion', function(e) {
   z = e.acceleration.z;
 });
 //----------------------------------------------------------element definitions
-
-
-
-
-// The Nature of Code
-// Daniel Shiffman
-// http://natureofcode.com
-
 // Flock object
 // Does very little, simply manages the array of all the boids
 
@@ -190,7 +179,7 @@ Path.prototype.run = function(boids) {
 
 // Boid class
 // Methods for Separation, Cohesion, Alignment added
-
+//===================== Boid start
 function Boid(x, y) {
   this.acceleration = createVector(0, 0);
   this.velocity = createVector(random(-10, 10), random(-10, 10));
@@ -200,20 +189,21 @@ function Boid(x, y) {
   this.maxforce = 0.5 // Maximum steering force
   //   this.maxforce = 0.05; // Maximum steering force
 }
-
+//---------------------end boid variables
 Boid.prototype.run = function(boids) {
+  //==================these are the prototypes for boid
   this.flock(boids);
   this.update();
   this.borders(100, 100);
   this.render();
 
 }
-
+//---------------------- end run
 Boid.prototype.applyForce = function(force) {
   // We could add mass here if we want A = F / M
   this.acceleration.add(force);
 }
-
+//--------------------- end force
 // We accumulate a new acceleration each time based on three rules
 Boid.prototype.flock = function(boids) {
   let sep = this.separate(boids); // Separation
@@ -227,7 +217,7 @@ Boid.prototype.flock = function(boids) {
   // this.applyForce(ali);
   this.applyForce(coh);
 }
-
+//-------------------- end flock
 // Method to update location
 Boid.prototype.update = function() {
   // Update velocity
@@ -238,7 +228,7 @@ Boid.prototype.update = function() {
   // Reset accelertion to 0 each cycle
   this.acceleration.mult(0);
 }
-
+//----------------end update location
 // A method that calculates and applies a steering force towards a target
 // STEER = DESIRED MINUS VELOCITY
 Boid.prototype.seek = function(target) {
@@ -253,11 +243,7 @@ Boid.prototype.seek = function(target) {
   steer.limit(this.maxforce); // Limit to maximum steering force
   return steer;
 }
-//============follow
-
-//Boid.prototype.follow = function(paths p) {}
-
-
+//------------------ end seek
 
 Boid.prototype.render = function() {
   // Draw a triangle rotated in the direction of velocity
@@ -275,7 +261,7 @@ Boid.prototype.render = function() {
   // endShape(CLOSE);
   pop();
 }
-
+// --------------------- end render
 // Wraparound
 Boid.prototype.borders = function() {
   if (this.position.x < this.r) this.position.x = width + this.r;
@@ -283,7 +269,7 @@ Boid.prototype.borders = function() {
   if (this.position.x > width + this.r) this.position.x = this.r;
   if (this.position.y > height + this.r) this.position.y = this.r;
 }
-
+//--------------------- end borders
 // Separation
 // Method checks for nearby boids and steers away
 Boid.prototype.separate = function(boids) {
@@ -310,7 +296,6 @@ Boid.prototype.separate = function(boids) {
   if (count > 0) {
     steer.div(count);
   }
-
   // As long as the vector is greater than 0
   if (steer.mag() > 0) {
     // Implement Reynolds: Steering = Desired - Velocity
@@ -321,7 +306,7 @@ Boid.prototype.separate = function(boids) {
   }
   return steer;
 }
-
+//--------------------end Separation
 // Alignment
 // For every nearby boid in the system, calculate the average velocity
 Boid.prototype.align = function(boids) {
@@ -346,7 +331,7 @@ Boid.prototype.align = function(boids) {
     return createVector(0, 0);
   }
 }
-
+//---------------------end align
 // Cohesion
 // For the average location (i.e. center) of all nearby boids, calculate steering vector towards that location
 Boid.prototype.cohesion = function(boids) {
@@ -367,52 +352,71 @@ Boid.prototype.cohesion = function(boids) {
     return createVector(0, 0);
   }
 }
+//-------------------- end cohesion
+//============================================end boid class
 
+//===================================start Cat class
 function Cat() {
-  dx = catPos.x - x;
-  dy = catPos.y - y;
-  angle1 = atan2(dy, dx);
-  x = catPos.x - cos(angle1) * segLength;
-  y = catPos.y - sin(angle1) * segLength;
+  start = new PVector(catPos.x, catPos.y);
+  end = new PVector(x, y);
+  this.dx = catPos.x - x;
+  this.dy = catPos.y - y;
+  this.angle1 = atan2(dy, dx);
+  this.x = catPos.x - cos(angle1) * segLength;
+  this.y = catPos.y - sin(angle1) * segLength;
+}
 
- // this.cat = function(cat) {
- //    cat(catPos.x, catPos.y);
- // }
+Cat.prototype.run = function() {
+  this.update();
+  this.render(cat);
+}
 
-  this.drive = function(x, y, a, cat) {
 
-    push();
-    translate(x, y);
-    rotate(a);
-    segment(0, 0, segLength, 0);
-    pop();
+Cat.prototype.update = function(cat) {
+  push();
+  this.translate(x, y);
+  this.rotate(a);
+  this.segment(0, 0, segLength, 0);
+  pop();
+}
 
-  }
 
-  this.display = function(cat) {
-    push();
-    //==frontpaws
-    image(frontL, 63, -30 + -2 / 10 * (stomachY - 30))
+  //segment(x, y, angle1);
+  //ellipse(x, y, 20, 20);
 
-    image(frontR, 63, 35 + 2 / 10 * (stomachY - 35));
 
-    //back Legs left
-    image(backL, -63, -20 + -2 / 7 * (stomachY - 30));
-    //back right
-    image(backR, -63, 18 + 2 / 7 * (stomachY - 25));
+// Cat.prototype.segment(x, y, a) {
+//   translate(x, y);
+//
+//   rotate(a);
+//   line(0, 0, segLength, 0);
+//   pop();
+// }
 
-    //Cat body gets fat
-    fill(115, 99, 87);
-    stroke(0);
-    strokeWeight(2);
-    ellipse(-30, 0, 165, stomachY);
-    //body markings
-    noStroke();
-    image(marks, -30, 0, 160, stomachY);
-    //head and tail
-    image(catHead, 80, 0);
-    image(cattail, -160, 20);
 
-    pop();
-  }
+Cat.prototype.render = function(cat) {
+  push();
+  //==frontpaws
+  image(frontL, 63, -30 + -2 / 10 * (stomachY - 30))
+
+  image(frontR, 63, 35 + 2 / 10 * (stomachY - 35));
+
+  //back Legs left
+  image(backL, -63, -20 + -2 / 7 * (stomachY - 30));
+  //back right
+  image(backR, -63, 18 + 2 / 7 * (stomachY - 25));
+
+  //Cat body gets fat
+  fill(115, 99, 87);
+  stroke(0);
+  strokeWeight(2);
+  ellipse(-30, 0, 165, stomachY);
+  //body markings
+  noStroke();
+  image(marks, -30, 0, 160, stomachY);
+  //head and tail
+  image(catHead, 80, 0);
+  image(cattail, -160, 20);
+
+  pop();
 }
