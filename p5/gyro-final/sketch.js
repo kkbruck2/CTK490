@@ -21,6 +21,7 @@ var marks;
 var stomachY = 64;
 var stomachX = 160;
 var catDirection = 1;
+var catPos;
 //==============environment
 var woodFloor;
 var windowWidth = 0;
@@ -64,7 +65,8 @@ function setup() {
   //createCanvas(1080, 720);
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
-
+  imageMode(CENTER);
+  render = new Cat();
 
   flock = new Flock();
   // Add an initial set of boids into the system
@@ -72,7 +74,7 @@ function setup() {
     let b = new Boid(random(width), random(height));
     flock.addBoid(b);
   }
-  imageMode(CENTER);
+
 
   catPos = createVector(windowWidth / 2, windowHeight / 2);
 
@@ -87,6 +89,7 @@ function draw() {
   background(200, 150, 100);
   image(woodFloor, width / 2, height / 2, width, height);
   flock.run();
+
 
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
@@ -357,13 +360,13 @@ Boid.prototype.cohesion = function(boids) {
 
 //===================================start Cat class
 function Cat() {
-  start = new PVector(catPos.x, catPos.y);
-  end = new PVector(x, y);
-  this.dx = catPos.x - x;
-  this.dy = catPos.y - y;
-  this.angle1 = atan2(dy, dx);
-  this.x = catPos.x - cos(angle1) * segLength;
-  this.y = catPos.y - sin(angle1) * segLength;
+  // start = new PVector(catPos.x, catPos.y);
+  // end = new PVector(x, y);
+  dx = catPos.x - x;
+  dy = catPos.y - y;
+  angle1 = atan2(dy, dx);
+  x = catPos.x - cos(angle1) * segLength;
+  y = catPos.y - sin(angle1) * segLength;
 }
 
 Cat.prototype.run = function() {
@@ -394,7 +397,7 @@ Cat.prototype.update = function(cat) {
 // }
 
 
-Cat.prototype.render = function(cat) {
+Cat.prototype.render = function() {
   push();
   //==frontpaws
   image(frontL, 63, -30 + -2 / 10 * (stomachY - 30))
