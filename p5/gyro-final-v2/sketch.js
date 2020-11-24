@@ -18,7 +18,7 @@ var catbody;
 var backL;
 var backR;
 var marks;
-var stomachY = 159;
+var stomachY = 160;
 var stomachX = 64;
 var catDirection = 1;
 var catPos;
@@ -75,12 +75,12 @@ function setup() {
 
   flock = new Flock();
   // Add an initial set of boids into the system
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 20; i++) {
     let b = new Boid(random(width), random(height));
     flock.addBoid(b);
   }
 
-  catPos = createVector(windowWidth, windowHeight);
+  catPos = createVector(windowWidth / 2, windowHeight / 2 - 80);
 
   alpha = 0;
   beta = 0;
@@ -103,7 +103,6 @@ function draw() {
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-  //================switched x and y maps
   yPosition = map(gamma, 60, -60, 0, width);
   xPosition = map(beta, 30, -30, 0, height);
 
@@ -115,7 +114,7 @@ function draw() {
     flock.boids[i].run();
     if (flock.boids[i].position.dist(catPos) < 40) {
       flock.boids.splice(i, 1);
-      stomachX += 3;
+      stomachY += 3;
 
     }
 
@@ -224,7 +223,6 @@ Boid.prototype.run = function(boids) {
   this.borders(100, 100);
   this.render();
 
-
 }
 //---------------------- end run
 Boid.prototype.applyForce = function(force) {
@@ -293,10 +291,10 @@ Boid.prototype.render = function() {
 // --------------------- end render
 // Wraparound
 Boid.prototype.borders = function() {
-  if (this.position.x < -50) this.position.x = windowWidth + 50;
-  if (this.position.y < -50) this.position.y = windowHeight + 50;
-  if (this.position.x > windowWidth + 50) this.position.x = -50;
-  if (this.position.y > windowHeight + 50) this.position.y = -50;
+  if (this.position.x < this.r) this.position.x = width + this.r;
+  if (this.position.y < this.r) this.position.y = height + this.r;
+  if (this.position.x > width + this.r) this.position.x = this.r;
+  if (this.position.y > height + this.r) this.position.y = this.r;
 }
 //--------------------- end borders
 // Separation
@@ -456,14 +454,14 @@ pop();
 // }
 // =========================================================== End of Car(mice)
 //
-// function deviceShaken() {
-//   reset();
-// cars = [];
-//
-//   for (var i = 0; i < 20; i++) {
-//     cars.push(new car())
-//   }
-// }
+function deviceShaken() {
+  reset();
+cars = [];
+
+  for (var i = 0; i < 20; i++) {
+    cars.push(new car())
+  }
+}
 
 //======================horizontal cat
 // function cat() {
