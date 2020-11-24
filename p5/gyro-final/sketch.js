@@ -28,8 +28,7 @@ var windowWidth = 0;
 var windowHeight = 0;
 
 //===============axis
-let rx = 150,
-  ry = 150,
+let base = 150,
   angle1 = 0.0,
   segLength = 100;
 
@@ -69,13 +68,12 @@ function setup() {
 
   flock = new Flock();
   // Add an initial set of boids into the system
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 30; i++) {
     let b = new Boid(random(width), random(height));
     flock.addBoid(b);
   }
 
-
-  catPos = createVector(windowWidth / 2, windowHeight / 2);
+  catPos = createVector(windowWidth / 2, windowHeight / 2 - 80);
 
   alpha = 0;
   beta = 0;
@@ -84,19 +82,16 @@ function setup() {
 }
 //==================draw
 function draw() {
-
   background(200, 150, 100);
-  image(woodFloor, width / 2, height / 2, width, height);
+  image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
+
   flock.run();
-
-
 
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
   xPosition = map(gamma, -60, 60, 0, width);
   yPosition = map(beta, -30, 30, 0, height);
-
 
   catPos.x = xPosition
   catPos.y = yPosition
@@ -109,6 +104,8 @@ function draw() {
       stomachY += 3;
 
     }
+
+    this.Cat.draw();
   }
 
 }
@@ -131,6 +128,7 @@ window.addEventListener('devicemotion', function(e) {
 // Flock object
 // Does very little, simply manages the array of all the boids
 
+
 function Flock() {
   // An array for all the boids
   this.boids = [];
@@ -150,8 +148,10 @@ Flock.prototype.addBoid = function(b) {
 // Path class
 function Path(p) {
   let radius = 25;
-  start = new PVector(sx, sy);
-  end = new PVector(px, py);
+  // start = new PVector(sx, sy);
+  // end = new PVector(px, py);
+  start = createVector(sx, sy);
+  end = createVector(px, py);
 }
 
 Path.prototype.run = function(boids) {
@@ -187,7 +187,7 @@ function Boid(x, y) {
   this.acceleration = createVector(0, 0);
   this.velocity = createVector(random(-10, 10), random(-10, 10));
   this.position = createVector(x, y);
-  this.r = 10.0;
+  this.r = 3.0;
   this.maxspeed = 5.0; // Maximum speed
   this.maxforce = 0.5 // Maximum steering force
   //   this.maxforce = 0.05; // Maximum steering force
@@ -359,36 +359,14 @@ Boid.prototype.cohesion = function(boids) {
 //============================================end boid class
 
 //===================================start Cat class
-function Cat(catPos, r) {
-  //let start = createVector(catPos.x, catPos.y);
-  //let end = createVector(rx, ry);
-  dx = catPos.x - rx;
-  dy = catPos.y - ry;
-  angle1 = atan2(dy, dx);
-  rx = catPos.x - cos(angle1) * segLength;
-  ry = catPos.y - sin(angle1) * segLength;
+
+function Cat() {
+  this.draw();
+  this.render();
+  this.update();
 }
 
-Cat.prototype.run = function(cat) {
-this.render();
-
-this.update();
-
-}
-
-Cat.prototype.render = function(x, y, a) {
-  push();
-  translate(x, y);
-  rotate(a);
-  cat(0, 0, segLength, 0);
-  pop();
-}
-
-
-
-
-
-Cat.prototype.display = function(cat) {
+Cat.draw = function(cat) {
   push();
   //==frontpaws
   image(frontL, 63, -30 + -2 / 10 * (stomachY - 30))
@@ -414,3 +392,26 @@ Cat.prototype.display = function(cat) {
 
   pop();
 }
+
+// Cat.prototype.run = function(cat) {
+//   this.render();
+//   this.update();
+//   this.draw(cat);
+// }
+Cat.render = function(d, base, catPos, angle1) {
+dx = catPos.x - base.x;
+dy = catPos.y - base.y;
+angle1 = atan2(dy, dx);
+base.x = catPos.x - cos(angle1) * segLength;
+base.y = catPos.y - sin(angle1) * segLength;
+}
+//=====================
+Cat.update = function(base, vec, a) {
+  push();
+  translate(base.x, base.y);
+  rotate(a);
+  Cat(vec.x, vec.y)
+  line(base.x, base.y, segLength, segLength);
+  pop();
+}
+//====================
