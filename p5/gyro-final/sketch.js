@@ -18,7 +18,7 @@ var catbody;
 var backL;
 var backR;
 var marks;
-var stomachY = 160;
+var stomachY = 159;
 var stomachX = 64;
 var catDirection = 1;
 var catPos;
@@ -75,7 +75,7 @@ function setup() {
 
   flock = new Flock();
   // Add an initial set of boids into the system
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 50; i++) {
     let b = new Boid(random(width), random(height));
     flock.addBoid(b);
   }
@@ -105,7 +105,7 @@ function draw() {
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
   //================switched x and y maps
   yPosition = map(gamma, 60, -60, 0, width);
-  xPosition = map(beta, 30, -30, 0, height);
+  xPosition = map(beta, 60, -60, 0, height);
 
   catPos.x = xPosition
   catPos.y = yPosition
@@ -115,7 +115,7 @@ function draw() {
     flock.boids[i].run();
     if (flock.boids[i].position.dist(catPos) < 40) {
       flock.boids.splice(i, 1);
-      stomachY += 3;
+      stomachX += 3;
 
     }
 
