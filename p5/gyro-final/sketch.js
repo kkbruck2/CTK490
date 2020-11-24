@@ -28,8 +28,8 @@ var windowWidth = 0;
 var windowHeight = 0;
 
 //===============axis
-let x = 150,
-  y = 150,
+let rx = 150,
+  ry = 150,
   angle1 = 0.0,
   segLength = 100;
 
@@ -66,7 +66,6 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
   imageMode(CENTER);
-  render = new Cat();
 
   flock = new Flock();
   // Add an initial set of boids into the system
@@ -91,6 +90,7 @@ function draw() {
   flock.run();
 
 
+
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
@@ -102,8 +102,8 @@ function draw() {
   catPos.y = yPosition
 
   for (var i = 0; i < boids.length; i++) {
-    boids[i].display();
-    boids[i].drive();
+    boids[i].render();
+    boids[i].run();
     if (boids[i].pos.dist(catPos) < 50) {
       boids.splice(i, 1);
       stomachY += 3;
@@ -187,7 +187,7 @@ function Boid(x, y) {
   this.acceleration = createVector(0, 0);
   this.velocity = createVector(random(-10, 10), random(-10, 10));
   this.position = createVector(x, y);
-  this.r = 3.0;
+  this.r = 10.0;
   this.maxspeed = 5.0; // Maximum speed
   this.maxforce = 0.5 // Maximum steering force
   //   this.maxforce = 0.05; // Maximum steering force
@@ -359,45 +359,36 @@ Boid.prototype.cohesion = function(boids) {
 //============================================end boid class
 
 //===================================start Cat class
-function Cat() {
-  // start = new PVector(catPos.x, catPos.y);
-  // end = new PVector(x, y);
-  dx = catPos.x - x;
-  dy = catPos.y - y;
+function Cat(catPos, r) {
+  //let start = createVector(catPos.x, catPos.y);
+  //let end = createVector(rx, ry);
+  dx = catPos.x - rx;
+  dy = catPos.y - ry;
   angle1 = atan2(dy, dx);
-  x = catPos.x - cos(angle1) * segLength;
-  y = catPos.y - sin(angle1) * segLength;
+  rx = catPos.x - cos(angle1) * segLength;
+  ry = catPos.y - sin(angle1) * segLength;
 }
 
-Cat.prototype.run = function() {
-  this.update();
-  this.render(cat);
+Cat.prototype.run = function(cat) {
+this.render();
+
+this.update();
+
 }
 
-
-Cat.prototype.update = function(cat) {
+Cat.prototype.render = function(x, y, a) {
   push();
-  this.translate(x, y);
-  this.rotate(a);
-  this.segment(0, 0, segLength, 0);
+  translate(x, y);
+  rotate(a);
+  cat(0, 0, segLength, 0);
   pop();
 }
 
 
-  //segment(x, y, angle1);
-  //ellipse(x, y, 20, 20);
 
 
-// Cat.prototype.segment(x, y, a) {
-//   translate(x, y);
-//
-//   rotate(a);
-//   line(0, 0, segLength, 0);
-//   pop();
-// }
 
-
-Cat.prototype.render = function() {
+Cat.prototype.display = function(cat) {
   push();
   //==frontpaws
   image(frontL, 63, -30 + -2 / 10 * (stomachY - 30))
