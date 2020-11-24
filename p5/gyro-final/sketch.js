@@ -109,11 +109,11 @@ function draw() {
   catPos.x = xPosition
   catPos.y = yPosition
 
-  for (var i = 0; i < boids.length; i++) {
-    boids[i].render();
-    boids[i].run();
-    if (boids[i].pos.dist(catPos) < 50) {
-      boids.splice(i, 1);
+  for (var i = 0; i < flock.boids.length; i++) {
+    //flock.boids[i].render();
+    flock.boids[i].run();
+    if (flock.boids[i].position.dist(catPos) < 40) {
+      flock.boids.splice(i, 1);
       stomachY += 3;
 
     }
@@ -159,13 +159,13 @@ function Flock() {
 }
 
 Flock.prototype.run = function() {
-  for (let i = 0; i < this.boids.length; i++) {
-    this.boids[i].run(this.boids); // Passing the entire list of boids to each boid individually
+  for (let i = 0; i < flock.boids.length; i++) {
+    flock.boids[i].run(flock.boids); // Passing the entire list of boids to each boid individually
   }
 }
 
 Flock.prototype.addBoid = function(b) {
-  this.boids.push(b);
+  flock.boids.push(b);
 }
 
 // Path class
@@ -306,13 +306,13 @@ Boid.prototype.separate = function(boids) {
   let steer = createVector(0, 0);
   let count = 0;
   // For every boid in the system, check if it's too close
-  for (let i = 0; i < boids.length; i++) {
+  for (let i = 0; i < flock.boids.length; i++) {
 
-    let d = p5.Vector.dist(this.position, boids[i].position);
+    let d = p5.Vector.dist(this.position, flock.boids[i].position);
     // If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
     if ((d > 0) && (d < desiredseparation)) {
       // Calculate vector pointing away from neighbor
-      let diff = p5.Vector.sub(this.position, boids[i].position);
+      let diff = p5.Vector.sub(this.position, flock.boids[i].position);
       diff.normalize();
       diff.div(d); // Weight by distance
       steer.add(diff);
@@ -365,10 +365,10 @@ Boid.prototype.cohesion = function(boids) {
   let neighbordist = 50;
   let sum = createVector(0, 0); // Start with empty vector to accumulate all locations
   let count = 0;
-  for (let i = 0; i < boids.length; i++) {
-    let d = p5.Vector.dist(this.position, boids[i].position);
+  for (let i = 0; i < flock.boids.length; i++) {
+    let d = p5.Vector.dist(this.position, flock.boids[i].position);
     if ((d > 0) && (d < neighbordist)) {
-      sum.add(boids[i].position); // Add location
+      sum.add(flock.boids[i].position); // Add location
       count++;
     }
   }
@@ -427,31 +427,31 @@ pop();
 //============================================================ End of cat definition
 
 //============================================================= Car(mice)
-function car() {
-  //-----------------------attributes
-  this.pos = createVector(100, 100);
-  this.vel = createVector(random(-5, 5), random(-5, 5));
-  this.r = random(255);
-  this.g = random(255);
-  this.b = random(255);
-
-  //----------------------vector
-
-  this.display = function() {
-    fill(this.r, this.g, this.b);
-    rect(this.pos.x, this.pos.y, 100, 50);
-  }
-
-  //----------------------methods
-  this.drive = function() {
-    this.pos.add(this.vel);
-
-    if (this.pos.x > width) this.pos.x = 0;
-    if (this.pos.x < 0) this.pos.x = width;
-    if (this.pos.y > height) this.pos.y = 0;
-    if (this.pos.y < 0) this.pos.y = height;
-  }
-}
+// function car() {
+//   //-----------------------attributes
+//   this.pos = createVector(100, 100);
+//   this.vel = createVector(random(-5, 5), random(-5, 5));
+//   this.r = random(255);
+//   this.g = random(255);
+//   this.b = random(255);
+//
+//   //----------------------vector
+//
+//   this.display = function() {
+//     fill(this.r, this.g, this.b);
+//     rect(this.pos.x, this.pos.y, 100, 50);
+//   }
+//
+//   //----------------------methods
+//   this.drive = function() {
+//     this.pos.add(this.vel);
+//
+//     if (this.pos.x > width) this.pos.x = 0;
+//     if (this.pos.x < 0) this.pos.x = width;
+//     if (this.pos.y > height) this.pos.y = 0;
+//     if (this.pos.y < 0) this.pos.y = height;
+//   }
+// }
 // =========================================================== End of Car(mice)
 //
 function deviceShaken() {
