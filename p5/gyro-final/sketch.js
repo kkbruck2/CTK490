@@ -8,7 +8,7 @@
 let boids = [];
 var flock;
 var woodFloor;
-var mice;
+var mice = [];
 
 var catHead;
 var frontL;
@@ -129,7 +129,7 @@ function drawAxis(base, vec) {
   translate(base.x, base.y);
   line(0, 0, vec.x, vec.y);
   rotate(vec.heading());
-  translate(vec.mag(), base);
+  translate(vec.mag(), 0);
   cat(vec.x, vec.y);
   pop();
 }
