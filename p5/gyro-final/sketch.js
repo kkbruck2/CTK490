@@ -18,8 +18,8 @@ var catbody;
 var backL;
 var backR;
 var marks;
-var stomachY = 64;
-var stomachX = 160;
+var stomachY = 160;
+var stomachX = 64;
 var catDirection = 1;
 var catPos;
 //==============environment
@@ -32,6 +32,13 @@ let base = 150,
   angle1 = 0.0,
   segLength = 100;
 
+//===============gryo
+var alpha, beta, gamma; // orientation data
+var xPosition = 0;
+var yPosition = 0;
+var x = 0; // acceleratiobn data
+var y = 0;
+var z = 0;
 
 
 function preload() {
@@ -68,7 +75,7 @@ function setup() {
 
   flock = new Flock();
   // Add an initial set of boids into the system
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 20; i++) {
     let b = new Boid(random(width), random(height));
     flock.addBoid(b);
   }
@@ -84,6 +91,12 @@ function setup() {
 function draw() {
   background(200, 150, 100);
   image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
+
+  let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
+  let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
+  drawAxis(catPos0, catPos);
+
+  let myHeading = catPos.heading();
 
   flock.run();
 
@@ -105,11 +118,21 @@ function draw() {
 
     }
 
-    this.Cat.draw();
   }
 
 }
 //================end draw
+
+function drawAxis(base, vec) {
+  push();
+  noStroke();
+  translate(base.x, base.y);
+  line(0, 0, vec.x, vec.y);
+  rotate(vec.heading());
+  translate(vec.mag(), base);
+  cat(vec.x, vec.y);
+  pop();
+}
 //------------------------------------------------- Read in accelerometer data
 window.addEventListener('deviceorientation', function(e) {
   alpha = e.alpha;
@@ -230,6 +253,7 @@ Boid.prototype.update = function() {
   this.position.add(this.velocity);
   // Reset accelertion to 0 each cycle
   this.acceleration.mult(0);
+
 }
 //----------------end update location
 // A method that calculates and applies a steering force towards a target
@@ -360,58 +384,133 @@ Boid.prototype.cohesion = function(boids) {
 
 //===================================start Cat class
 
-function Cat() {
-  this.draw();
-  this.render();
-  this.update();
-}
+// function Cat() {
+//   this.draw();
+//   this.render();
+//   this.update();
+// }
 
-Cat.draw = function(cat) {
-  push();
-  //==frontpaws
-  image(frontL, 63, -30 + -2 / 10 * (stomachY - 30))
+function cat() {
+push();
+  //angle = 90;
 
-  image(frontR, 63, 35 + 2 / 10 * (stomachY - 35));
+  //left front leg
+  image(frontL, -36  + -2 / 10 * (stomachX -64), 15);
+
+  //right front Leg
+  image(frontR, 39 + 2 / 10 * (stomachX - 64), 20);
 
   //back Legs left
-  image(backL, -63, -20 + -2 / 7 * (stomachY - 30));
-  //back right
-  image(backR, -63, 18 + 2 / 7 * (stomachY - 25));
+  image(backL, -36 + -2 / 6 * (stomachX - 64), 148);
 
-  //Cat body gets fat
+  //back right
+  image(backR, 35 + 2 / 6 * (stomachX - 64), 148);
+
+  //stomach
   fill(115, 99, 87);
   stroke(0);
   strokeWeight(2);
-  ellipse(-30, 0, 165, stomachY);
+  ellipse(0, 120, stomachX, 180);
+
   //body markings
   noStroke();
-  image(marks, -30, 0, 160, stomachY);
-  //head and tail
-  image(catHead, 80, 0);
-  image(cattail, -160, 20);
+  image(marks, 0, 120, stomachX, stomachY);
 
-  pop();
+  image(catHead, 2, 2);
+  image(cattail, 20, 261);
+  //fill(150, 0, 150, 150);
+  translate(-300, -300);
+  //ellipse(300, 300, 70, 70);
+pop();
 }
+
+//============================================================ End of cat definition
+
+//============================================================= Car(mice)
+function car() {
+  //-----------------------attributes
+  this.pos = createVector(100, 100);
+  this.vel = createVector(random(-5, 5), random(-5, 5));
+  this.r = random(255);
+  this.g = random(255);
+  this.b = random(255);
+
+  //----------------------vector
+
+  this.display = function() {
+    fill(this.r, this.g, this.b);
+    rect(this.pos.x, this.pos.y, 100, 50);
+  }
+
+  //----------------------methods
+  this.drive = function() {
+    this.pos.add(this.vel);
+
+    if (this.pos.x > width) this.pos.x = 0;
+    if (this.pos.x < 0) this.pos.x = width;
+    if (this.pos.y > height) this.pos.y = 0;
+    if (this.pos.y < 0) this.pos.y = height;
+  }
+}
+// =========================================================== End of Car(mice)
+//
+function deviceShaken() {
+  reset();
+cars = [];
+
+  for (var i = 0; i < 20; i++) {
+    cars.push(new car())
+  }
+}
+
+//======================horizontal cat
+// function cat() {
+//   push();
+//   angle = 90;
+//   //==frontpaws
+//   image(frontL, 63, -30 + -2 / 10 * (stomachY - 30))
+//
+//   image(frontR, 63, 35 + 2 / 10 * (stomachY - 35));
+//
+//   //back Legs left
+//   image(backL, -63, -20 + -2 / 7 * (stomachY - 30));
+//   //back right
+//   image(backR, -63, 18 + 2 / 7 * (stomachY - 25));
+//
+//   //Cat body gets fat
+//   fill(115, 99, 87);
+//   stroke(0);
+//   strokeWeight(2);
+//   ellipse(-30, 0, 165, stomachY);
+//   //body markings
+//   noStroke();
+//   image(marks, -30, 0, 160, stomachY);
+//   //head and tail
+//   image(catHead, 80, 0);
+//   image(cattail, -160, 20);
+//
+//   pop();
+// }
 
 // Cat.prototype.run = function(cat) {
 //   this.render();
 //   this.update();
 //   this.draw(cat);
 // }
-Cat.render = function(d, base, catPos, angle1) {
-dx = catPos.x - base.x;
-dy = catPos.y - base.y;
-angle1 = atan2(dy, dx);
-base.x = catPos.x - cos(angle1) * segLength;
-base.y = catPos.y - sin(angle1) * segLength;
-}
-//=====================
-Cat.update = function(base, vec, a) {
-  push();
-  translate(base.x, base.y);
-  rotate(a);
-  Cat(vec.x, vec.y)
-  line(base.x, base.y, segLength, segLength);
-  pop();
-}
+// Cat.render = function(d, base, catPos, angle1) {
+//   dx = catPos.x - base.x;
+//   dy = catPos.y - base.y;
+//   angle1 = atan2(dy, dx);
+//   base.x = catPos.x - cos(angle1) * segLength;
+//   base.y = catPos.y - sin(angle1) * segLength;
+// }
+// //=====================
+// Cat.update = function(base, vec, a) {
+//   push();
+//   translate(base.x, base.y);
+//   rotate(a);
+//   cat(vec.x, vec.y)
+//   line(base.x, base.y, segLength, segLength);
+//   pop();
+// }
 //====================
