@@ -103,8 +103,9 @@ function draw() {
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-  xPosition = map(gamma, -60, 60, 0, width);
-  yPosition = map(beta, -30, 30, 0, height);
+  //================switched x and y maps
+  yPosition = map(gamma, -60, 60, 0, width);
+  xPosition = map(beta, -30, 30, 0, height);
 
   catPos.x = xPosition
   catPos.y = yPosition
