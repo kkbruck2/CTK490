@@ -80,7 +80,7 @@ function setup() {
     flock.addBoid(b);
   }
 
-  catPos = createVector(windowWidth / 2, windowHeight / 2 - 80);
+  catPos = createVector(windowWidth, windowHeight);
 
   alpha = 0;
   beta = 0;
@@ -293,10 +293,10 @@ Boid.prototype.render = function() {
 // --------------------- end render
 // Wraparound
 Boid.prototype.borders = function() {
-  if (this.position.x < this.r) this.position.x = width + this.r;
-  if (this.position.y < this.r) this.position.y = height + this.r;
-  if (this.position.x > width + this.r) this.position.x = this.r;
-  if (this.position.y > height + this.r) this.position.y = this.r;
+  if (this.position.x < -150) this.position.x = windowWidth + 150;
+  if (this.position.y < -150) this.position.y = windowHeight + 150;
+  if (this.position.x > windowWidth + 150) this.position.x = -150;
+  if (this.position.y > windowHeight + 150) this.position.y = -150;
 }
 //--------------------- end borders
 // Separation
