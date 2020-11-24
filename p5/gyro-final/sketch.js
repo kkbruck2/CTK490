@@ -75,7 +75,7 @@ function setup() {
 
   flock = new Flock();
   // Add an initial set of boids into the system
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 30; i++) {
     let b = new Boid(random(width), random(height));
     flock.addBoid(b);
   }
@@ -223,6 +223,7 @@ Boid.prototype.run = function(boids) {
   this.update();
   this.borders(100, 100);
   this.render();
+
 
 }
 //---------------------- end run
