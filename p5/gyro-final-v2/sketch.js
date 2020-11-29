@@ -18,15 +18,14 @@ var catbody;
 var backL;
 var backR;
 var marks;
-var stomachY = 160;
+var stomachY = 159;
 var stomachX = 64;
 var catDirection = 1;
 var catPos;
 //==============environment
 var woodFloor;
-var displayWidth = 0;
-var displayHeight = 0;
-
+var windowWidth = 0;
+var windowHeight = 0;
 
 //===============axis
 let base = 150,
@@ -44,8 +43,7 @@ var z = 0;
 
 function preload() {
   //================mice
-  //mice = loadImage('assets/1x/mice5.png');
-  mice[0] = loadImage('assets/1x/mice1.png');
+//  mice[0] = loadImage('assets/1x/mice1.png');
   mice[1] = loadImage('assets/1x/mice2.png');
   mice[2] = loadImage('assets/1x/mice3.png');
   mice[3] = loadImage('assets/1x/mice4.png');
@@ -70,19 +68,18 @@ function preload() {
 //===============setup
 function setup() {
   //createCanvas(1080, 720);
-  createCanvas(displayWidth, displayHeight);
+  createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
   imageMode(CENTER);
 
-
   flock = new Flock();
   // Add an initial set of boids into the system
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 30; i++) {
     let b = new Boid(random(width), random(height));
     flock.addBoid(b);
   }
 
-  catPos = createVector(displayWidth / 2, displayHeight / 2 - 80);
+  catPos = createVector( windowWidth /2, windowHeight /2);
 
   alpha = 0;
   beta = 0;
@@ -92,10 +89,10 @@ function setup() {
 //==================draw
 function draw() {
   background(200, 150, 100);
-  image(woodFloor, displayWidth / 2, displayHeight / 2, displayWidth, displayHeight);
+  image(woodFloor, width / 2, height / 2, width, height);
 
-  let catPos0 = createVector(displayWidth / 2, displayHeight / 2);
-  let catPos = createVector(xPosition - displayWidth / 2, yPosition - displayHeight / 2);
+  let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
+  let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
   drawAxis(catPos0, catPos);
 
   let myHeading = catPos.heading();
@@ -105,6 +102,7 @@ function draw() {
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
+  //================switched x and y maps
   yPosition = map(gamma, 60, -60, 0, width);
   xPosition = map(beta, 30, -30, 0, height);
 
@@ -114,14 +112,11 @@ function draw() {
   for (var i = 0; i < flock.boids.length; i++) {
     //flock.boids[i].render();
     flock.boids[i].run();
-    if (flock.boids[i].position.dist(catPos) < 40) {
+    if (flock.boids[i].position.dist(catPos) < 50) {
       flock.boids.splice(i, 1);
-      stomachY += 3;
-
+      stomachX += 3;
     }
-
   }
-
 }
 //================end draw
 
@@ -135,34 +130,34 @@ function drawAxis(base, vec) {
   cat(vec.x, vec.y);
   pop();
 }
-//------------------------------------------------- Read in accelerometer data
+//-----------------------Read in accelerometer data
 window.addEventListener('deviceorientation', function(e) {
   alpha = e.alpha;
   beta = e.beta;
   gamma = e.gamma;
 });
 
-// ------------------------------------------------------accelerometer Data
+// -----------------------accelerometer Data
 window.addEventListener('devicemotion', function(e) {
   // get accelerometer values
   x = e.acceleration.x;
   y = e.acceleration.y;
   z = e.acceleration.z;
 });
-//----------------------------------------------------------element definitions
-// Flock object
-// Does very little, simply manages the array of all the boids
-
+//-----------element definitions
+// ----------Flock object
+// ----------Does very little, simply manages the array of all the boids
 
 function Flock() {
-  // An array for all the boids
+  //---------An array for all the boids
   this.boids = [];
-  // Initialize the array
+  //----------Initialize the array
 }
 
 Flock.prototype.run = function() {
   for (let i = 0; i < flock.boids.length; i++) {
-    flock.boids[i].run(flock.boids); // Passing the entire list of boids to each boid individually
+        flock.boids[i].run(flock.boids);
+    //---------Passing the entire list of boids to each boid individually
   }
 }
 
@@ -170,15 +165,14 @@ Flock.prototype.addBoid = function(b) {
   flock.boids.push(b);
 }
 
-// Path class
+//====================================Path class
 function Path(p) {
   let radius = 25;
-  // start = new PVector(sx, sy);
-  // end = new PVector(px, py);
+
   start = createVector(sx, sy);
   end = createVector(px, py);
 }
-
+//----------------------------------path run
 Path.prototype.run = function(boids) {
   // Following path = constant vel with a predicted location
   let predict = vel.get();
@@ -201,30 +195,27 @@ Path.prototype.run = function(boids) {
   }
 }
 
-// The Nature of Code
-// Daniel Shiffman
-// http://natureofcode.com
-
-// Boid class
-// Methods for Separation, Cohesion, Alignment added
-//===================== Boid start
+//============================ Boid start
 function Boid(x, y) {
   this.acceleration = createVector(0, 0);
   this.velocity = createVector(random(-10, 10), random(-10, 10));
   this.position = createVector(x, y);
-  //this.r = 3.0;
+  this.r = 3.0;
   this.maxspeed = 5.0; // Maximum speed
   this.maxforce = 0.5 // Maximum steering force
   //   this.maxforce = 0.05; // Maximum steering force
+  this.miceNum = 0;
+  this.timer = 0;
+  this.maxTimer = (1, 10);
 }
 //---------------------end boid variables
-Boid.prototype.run = function(boids) {
+
+Boid.prototype.run = function() {
   //==================these are the prototypes for boid
   this.flock(boids);
   this.update();
   this.borders(100, 100);
-  this.render();
-
+  this.render(mice);
 }
 //---------------------- end run
 Boid.prototype.applyForce = function(force) {
@@ -232,6 +223,7 @@ Boid.prototype.applyForce = function(force) {
   this.acceleration.add(force);
 }
 //--------------------- end force
+
 // We accumulate a new acceleration each time based on three rules
 Boid.prototype.flock = function(boids) {
   let sep = this.separate(boids); // Separation
@@ -245,8 +237,8 @@ Boid.prototype.flock = function(boids) {
   // this.applyForce(ali);
   this.applyForce(coh);
 }
-//-------------------- end flock
-// Method to update location
+//-------------------- end boid flock
+//--------------------Method to update location
 Boid.prototype.update = function() {
   // Update velocity
   this.velocity.add(this.acceleration);
@@ -255,19 +247,17 @@ Boid.prototype.update = function() {
   this.position.add(this.velocity);
   // Reset accelertion to 0 each cycle
   this.acceleration.mult(0);
-
 }
 //----------------end update location
-// A method that calculates and applies a steering force towards a target
-// STEER = DESIRED MINUS VELOCITY
-Boid.prototype.seek = function(target) {
+// -------A method that calculates and applies a steering force towards a target
+// -------STEER = DESIRED MINUS VELOCITY
 
-  //let d = desired.mag();
+Boid.prototype.seek = function(target) {
   let desired = p5.Vector.sub(target, this.position); // A vector pointing from the location to the target
-  // Normalize desired and scale to maximum speed
+  // -------------------Normalize desired and scale to maximum speed
   desired.normalize();
   desired.mult(this.maxspeed);
-  // Steering = Desired minus Velocity
+  //------------------- Steering = Desired minus Velocity
   let steer = p5.Vector.sub(desired, this.velocity);
   steer.limit(this.maxforce); // Limit to maximum steering force
   return steer;
@@ -277,31 +267,35 @@ Boid.prototype.seek = function(target) {
 Boid.prototype.render = function() {
   // Draw a triangle rotated in the direction of velocity
   let theta = this.velocity.heading(0, 0);
-  this.boid
-  // for(let j = 0; j <  boids.mice.length; j++) {
-  //   mice[j].run(boids.mice);
-  // }
-  fill(127);
-  stroke(200);
+  for (let j = 0; j < this.mice.length; j++) {
+    image(mice[j], 0, 0);
+ }
   push();
+  if (this.velocity > 0) map(this.maxTimer * -1 === this.velocity.mag());
+  if (this.velocity < 0) map(this.maxTimer === this.velocity.mag());
   translate(this.position.x, this.position.y);
   rotate(theta);
+  image(mice[j], 0, 0);
 
-  //image(mice, this.r * 3, this.r * 3);
-  // beginShape();
-  // vertex(0, -this.r * 2);
-  // vertex(-this.r, this.r * 2);
-  // vertex(this.r, this.r * 2);
-  // endShape(CLOSE);
+  if (this.timer > this.maxTimer) {
+    this.miceNum = this.miceNum + 1;
+    this.timer = 0;
+  }
+    this.timer ++;
+  //mice reset
+  if (this.miceNum > mice.length - 1) {
+    this.miceNum = 0;
+  }
+
   pop();
 }
 // --------------------- end render
 // Wraparound
 Boid.prototype.borders = function() {
-  if (this.position.x < -100) this.position.x = width + 100;
-  if (this.position.y < -100) this.position.y = height + 100;
-  if (this.position.x > width + 100) this.position.x = -100;
-  if (this.position.y > height + 100) this.position.y = -100;
+  if (this.position.x < -50) this.position.x = windowWidth + 50;
+  if (this.position.y < -50) this.position.y = windowHeight + 50;
+  if (this.position.x > windowWidth + 50) this.position.x = -50;
+  if (this.position.y > windowHeight + 50) this.position.y = -50;
 }
 //--------------------- end borders
 // Separation
@@ -312,11 +306,10 @@ Boid.prototype.separate = function(boids) {
   let desiredseparation = 160;
   let steer = createVector(0, 0);
   let count = 0;
-  // For every boid in the system, check if it's too close
+  //--------------- For every boid in the system, check if it's too close
   for (let i = 0; i < flock.boids.length; i++) {
-
     let d = p5.Vector.dist(this.position, flock.boids[i].position);
-    // If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
+    //-------------If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
     if ((d > 0) && (d < desiredseparation)) {
       // Calculate vector pointing away from neighbor
       let diff = p5.Vector.sub(this.position, flock.boids[i].position);
@@ -366,7 +359,8 @@ Boid.prototype.align = function(boids) {
   }
 }
 //---------------------end align
-// Cohesion
+
+//======================Cohesion
 // For the average location (i.e. center) of all nearby boids, calculate steering vector towards that location
 Boid.prototype.cohesion = function(boids) {
   let neighbordist = 50;
@@ -387,9 +381,9 @@ Boid.prototype.cohesion = function(boids) {
   }
 }
 //-------------------- end cohesion
-//============================================end boid class
+//======================end boid class
 
-//===================================start Cat class
+//========================start Cat class
 
 // function Cat() {
 //   this.draw();
@@ -398,11 +392,11 @@ Boid.prototype.cohesion = function(boids) {
 // }
 
 function cat() {
-push();
+  push();
   //angle = 90;
 
   //left front leg
-  image(frontL, -36  + -2 / 10 * (stomachX -64), 15);
+  image(frontL, -36 + -2 / 10 * (stomachX - 64), 15);
 
   //right front Leg
   image(frontR, 39 + 2 / 10 * (stomachX - 64), 20);
@@ -428,47 +422,13 @@ push();
   //fill(150, 0, 150, 150);
   translate(-300, -300);
   //ellipse(300, 300, 70, 70);
-pop();
+  pop();
 }
 
-//============================================================ End of cat definition
+//==================End of cat definition
 
-//============================================================= Car(mice)
-// function car() {
-//   //-----------------------attributes
-//   this.pos = createVector(100, 100);
-//   this.vel = createVector(random(-5, 5), random(-5, 5));
-//   this.r = random(255);
-//   this.g = random(255);
-//   this.b = random(255);
-//
-//   //----------------------vector
-//
-//   this.display = function() {
-//     fill(this.r, this.g, this.b);
-//     rect(this.pos.x, this.pos.y, 100, 50);
-//   }
-//
-//   //----------------------methods
-//   this.drive = function() {
-//     this.pos.add(this.vel);
-//
-//     if (this.pos.x > width) this.pos.x = 0;
-//     if (this.pos.x < 0) this.pos.x = width;
-//     if (this.pos.y > height) this.pos.y = 0;
-//     if (this.pos.y < 0) this.pos.y = height;
-//   }
-// }
-// =========================================================== End of Car(mice)
-//
-function deviceShaken() {
-  reset();
-cars = [];
+//================== Car(mice)
 
-  for (var i = 0; i < 20; i++) {
-    cars.push(new car())
-  }
-}
 
 //======================horizontal cat
 // function cat() {
