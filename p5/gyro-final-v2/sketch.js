@@ -267,8 +267,8 @@ Boid.prototype.seek = function(target) {
 Boid.prototype.render = function() {
   // Draw a triangle rotated in the direction of velocity
   let theta = this.velocity.heading(0, 0);
-  for (let j = 0; j < this.mice.length; j++) {
-    image(mice[j], 0, 0);
+  for (let i = 0; i < this.mice.length; i++) {
+    image(mice[i], 0, 0);
  }
   push();
   if (this.velocity > 0) map(this.maxTimer * -1 === this.velocity.mag());
