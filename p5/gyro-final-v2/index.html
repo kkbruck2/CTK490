@@ -25,7 +25,7 @@
 
 function requestT () {
 
-	 if (typeof(DeviceMotionEvent) !== 'undefined' && typeof(DeviceMotionEvent.requestPermission) === 'function') {
+	 if (typeof(DeviceMotionEvent) !== 'landscape' && typeof(DeviceMotionEvent.requestPermission) === 'function') {
 			 alert('enter');
 			 DeviceMotionEvent.requestPermission()
 			 .then(response => {

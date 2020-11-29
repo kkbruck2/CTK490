@@ -24,8 +24,9 @@ var catDirection = 1;
 var catPos;
 //==============environment
 var woodFloor;
-var windowWidth = 0;
-var windowHeight = 0;
+var displayWidth = 0;
+var displayHeight = 0;
+
 
 //===============axis
 let base = 150,
@@ -43,15 +44,15 @@ var z = 0;
 
 function preload() {
   //================mice
-  mice = loadImage('assets/1x/mice5.png');
-  // mice[0] = loadImage('assets/1x/mice1.png');
-  // mice[1] = loadImage('assets/1x/mice2.png');
-  // mice[2] = loadImage('assets/1x/mice3.png');
-  // mice[3] = loadImage('assets/1x/mice4.png');
-  // mice[4] = loadImage('assets/1x/mice5.png');
-  // mice[5] = loadImage('assets/1x/mice4.png');
-  // mice[6] = loadImage('assets/1x/mice3.png');
-  // mice[7] = loadImage('assets/1x/mice2.png');
+  //mice = loadImage('assets/1x/mice5.png');
+  mice[0] = loadImage('assets/1x/mice1.png');
+  mice[1] = loadImage('assets/1x/mice2.png');
+  mice[2] = loadImage('assets/1x/mice3.png');
+  mice[3] = loadImage('assets/1x/mice4.png');
+  mice[4] = loadImage('assets/1x/mice5.png');
+  mice[5] = loadImage('assets/1x/mice4.png');
+  mice[6] = loadImage('assets/1x/mice3.png');
+  mice[7] = loadImage('assets/1x/mice2.png');
 
 
   //===============cat
@@ -69,9 +70,10 @@ function preload() {
 //===============setup
 function setup() {
   //createCanvas(1080, 720);
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(displayWidth, displayHeight);
   angleMode(DEGREES);
   imageMode(CENTER);
+
 
   flock = new Flock();
   // Add an initial set of boids into the system
@@ -80,7 +82,7 @@ function setup() {
     flock.addBoid(b);
   }
 
-  catPos = createVector(windowWidth / 2, windowHeight / 2 - 80);
+  catPos = createVector(displayWidth / 2, displayHeight / 2 - 80);
 
   alpha = 0;
   beta = 0;
@@ -90,10 +92,10 @@ function setup() {
 //==================draw
 function draw() {
   background(200, 150, 100);
-  image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
+  image(woodFloor, displayWidth / 2, displayHeight / 2, displayWidth, displayHeight);
 
-  let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
-  let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
+  let catPos0 = createVector(displayWidth / 2, displayHeight / 2);
+  let catPos = createVector(xPosition - displayWidth / 2, yPosition - displayHeight / 2);
   drawAxis(catPos0, catPos);
 
   let myHeading = catPos.heading();
@@ -210,7 +212,7 @@ function Boid(x, y) {
   this.acceleration = createVector(0, 0);
   this.velocity = createVector(random(-10, 10), random(-10, 10));
   this.position = createVector(x, y);
-  this.r = 3.0;
+  //this.r = 3.0;
   this.maxspeed = 5.0; // Maximum speed
   this.maxforce = 0.5 // Maximum steering force
   //   this.maxforce = 0.05; // Maximum steering force
@@ -275,12 +277,17 @@ Boid.prototype.seek = function(target) {
 Boid.prototype.render = function() {
   // Draw a triangle rotated in the direction of velocity
   let theta = this.velocity.heading(0, 0);
+  this.boid
+  // for(let j = 0; j <  boids.mice.length; j++) {
+  //   mice[j].run(boids.mice);
+  // }
   fill(127);
   stroke(200);
   push();
   translate(this.position.x, this.position.y);
   rotate(theta);
-  image(mice, this.r * 3, this.r * 3);
+
+  //image(mice, this.r * 3, this.r * 3);
   // beginShape();
   // vertex(0, -this.r * 2);
   // vertex(-this.r, this.r * 2);
@@ -291,10 +298,10 @@ Boid.prototype.render = function() {
 // --------------------- end render
 // Wraparound
 Boid.prototype.borders = function() {
-  if (this.position.x < this.r) this.position.x = width + this.r;
-  if (this.position.y < this.r) this.position.y = height + this.r;
-  if (this.position.x > width + this.r) this.position.x = this.r;
-  if (this.position.y > height + this.r) this.position.y = this.r;
+  if (this.position.x < -100) this.position.x = width + 100;
+  if (this.position.y < -100) this.position.y = height + 100;
+  if (this.position.x > width + 100) this.position.x = -100;
+  if (this.position.y > height + 100) this.position.y = -100;
 }
 //--------------------- end borders
 // Separation

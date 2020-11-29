@@ -1,5 +1,7 @@
 var chalk;
 var fontDiner;
+var robo;
+
 var grid;
 var myfloor;
 var angle = 0;
@@ -7,12 +9,33 @@ var bkgMusic
 var catPos;
 var myState = 0;
 var timer = 0;
-var myLegs, myBody, head;
+
 var mice = [];
 var pieces = [];
-var direction = [];
-var stomachX = 65;
-var stomachY = 214;
+
+//==============cat
+var catHead;
+var frontL;
+var frontR;
+var cattail;
+var backL;
+var backR;
+var marks;
+var stomachY = 64;
+var stomachX = 160;
+var catDirection = 1;
+//==============environment
+var woodFloor;
+var width = 0;
+var height = 0;
+
+//===============axis
+let x = 150,
+  y = 150,
+  angle1 = 0.0,
+  segLength = 100;
+
+//==================interface var
 var start;
 var win;
 var lose;
@@ -21,20 +44,27 @@ var loseSound;
 //------------------------------------------------------var end
 //------------------------------------------------------preload
 function preload() {
-  myLegs = loadImage('assets/legs.png');
-  myBody = loadImage('assets/body.png')
-  head = loadImage('assets/head_1.png');
-  grid = loadImage('assets/grid.png');
-  myfloor = loadImage('assets/woodFloor.jpg');
+  catHead = loadImage("assets/1x/head.png");
+  frontL = loadImage("assets/1x/frontL.png");
+  frontR = loadImage("assets/1x/frontR.png");
+  cattail = loadImage("assets/1x/tail.png");
+  backL = loadImage("assets/1x/backL.png");
+  backR = loadImage("assets/1x/backR.png");
+  myfloor = loadImage('assets/1x/myFloor.png');
   start = loadImage('assets/start.png');
   win = loadImage('assets/winCat.png');
-  lose = loadImage('assets/loss.png')
-  mice[0] = loadImage('assets/mice1.png');
-  mice[1] = loadImage('assets/mice2.png');
-  mice[2] = loadImage('assets/mice3.png');
-  mice[3] = loadImage('assets/mice4.png');
-  mice[4] = loadImage('assets/mice3.png');
-  mice[5] = loadImage('assets/mice2.png');
+  lose = loadImage('assets/loss.png');
+  //========================mice1
+  mice[0] = loadImage('assets/1x/mice1.png');
+  mice[1] = loadImage('assets/1x/mice2.png');
+  mice[2] = loadImage('assets/1x/mice3.png');
+  mice[3] = loadImage('assets/1x/mice4.png');
+  mice[4] = loadImage('assets/1x/mice5.png');
+  mice[5] = loadImage('assets/1x/mice4.png');
+  mice[6] = loadImage('assets/1x/mice3.png');
+  mice[7] = loadImage('assets/1x/mice2.png');
+
+
   bkgMusic = loadSound('assets/456797__anechoix__jazz-music-loop.mp3');
   winSound = loadSound('assets/396174__funwithsound__success-triumph-resolution-sound-effect_01.mp3')
   loseSound = loadSound('assets/174427__badly99__domino-sound-effect_01.mp3')
@@ -57,17 +87,14 @@ function setup() {
   angleMode(DEGREES);
   fontDiner = loadFont('assets/FontdinerSwanky-Regular.ttf');
   chalk = loadFont('assets/Chalkboard.ttc');
-  montMed = loadFont('assets/Montserrat-Medium.ttf');
+  robo = loadFont('assets/Roboto-Regular.ttf');
   grid = loadImage('assets/grid.png');
   bkgMusic.play();
 
 
-
-
-
   //--------------------------Spawn mice
   for (var i = 0; i < 30; i++) {
-    pieces.push(new Piece());
+    pieces.push(new Piece(random(width), random(height)));
   }
   //---------------------------spawn end
   catPos = createVector(width / 2, height / 2);
@@ -81,9 +108,9 @@ function setup() {
 function draw() {
   image(myfloor, width / 2, height / 2);
 
+  //============================cat motion
 
   textFont(fontDiner);
-
 
   switch (myState) {
 
@@ -98,8 +125,8 @@ function draw() {
       image(start, width / 2, height / 2 + 30);
       winSound.stop();
       loseSound.stop();
-      textSize(40);
-      textFont(montMed);
+      textSize(30);
+      textFont(robo);
       text("Click to Start Game", width / 2, height - 35);
 
 
@@ -236,22 +263,55 @@ function mousePressed() {
 }
 //----------------------------------------------------mouse keyPressed end
 
-//-----------------------------------------------------mouseDragged
-function mouseMoved() {
+function Cat() {
+  //------------------------attributes
+  this.dx = mouseX - x;
+  this.dy = mouseY - y;
+  this.angle1 = atan2(dy, dx);
+  this.x = mouseX - cos(angle1) * segLength;
+  this.y = mouseY - sin(angle1) * segLength;
 
-  catPos.x = mouseX - xOffset;
-  catPos.y = mouseY - yOffset;
-
-  if (mouseX + 1 > 1)
+  //------------------------drive
+  this.drive = function(x, y, a) {
     push();
-  translate(catPos.x, catPos.y);
+    translate(x, y);
+    rotate(a);
+    cat(0, 0);
+    line(0, 0, segLength, 0);
+    pop();
 
-  rotate(angle);
-  cat(catPos.x, catPos.y);
-  angle -= 10;
-  pop();
+    //Rotating point
+    segment(x, y, angle1);
+  }
+  this.display = function(){
+    push();
+    //==frontpaws
+    image(frontL, 63, -30 + -2 / 10 * (stomachY - 30))
+
+    image(frontR, 63, 35 + 2 / 10 * (stomachY - 35));
+
+    //back Legs left
+    image(backL, -63, -20 + -2 / 7 * (stomachY - 30));
+    //back right
+    image(backR, -63, 18 + 2 / 7 * (stomachY - 25));
+
+    //Cat body gets fat
+    fill(115, 99, 87);
+    stroke(0);
+    strokeWeight(2);
+    ellipse(-30, 0, 165, stomachY);
+    //body markings
+    noStroke();
+    image(marks, -30, 0, 160, stomachY);
+    //head and tail
+    image(catHead, 80, 0);
+    image(cattail, -160, 20);
+
+    pop();
+  }
 
 }
+
 
 
 //---------------------------------------------------------reset the game
@@ -286,19 +346,22 @@ function game() {
 
   translate(catPos.x - 100, catPos.y - 65);
 
-  cat();
+
   pop();
 
 }
 //------------------------------------------------------------ game end
-
+//==================================cat segment
+function segment(x, y, a) {
+  push();
+  translate(x, y);
+  rotate(a);
+  cat(0, 0);
+  line(0, 0, segLength, 0);
+  pop();
+}
 
 //--------------------------------------------------------------cat function
-function cat() {
-  push();
-  image(myLegs, 100, 165);
-  image(myBody, 104, 209, stomachX, stomachY);
-  image(head, 105, 226);
+function Cat() {
 
-  pop();
 }

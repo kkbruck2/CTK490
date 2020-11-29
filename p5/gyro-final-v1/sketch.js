@@ -160,11 +160,15 @@ function Flock() {
 
 Flock.prototype.run = function() {
   for (let i = 0; i < flock.boids.length; i++) {
+
     flock.boids[i].run(flock.boids); // Passing the entire list of boids to each boid individually
   }
 }
 
 Flock.prototype.addBoid = function(b) {
+  for(let j = 0; j <  boids.mice.length; j++) {
+    mice[j].push(boids.mice);
+  }
   flock.boids.push(b);
 }
 
