@@ -9,6 +9,8 @@ let boids = [];
 var flock;
 var woodFloor;
 var mice = [];
+let numFrame = 8;
+let currentFrame = 0;
 
 var catHead;
 var frontL;
@@ -39,6 +41,7 @@ let base = 150,
 var alpha, beta, gamma; // orientation data
 var xPosition = 0;
 var yPosition = 0;
+var zPosition = 0;
 var x = 0; // acceleratiobn data
 var y = 0;
 var z = 0;
@@ -46,16 +49,15 @@ var z = 0;
 
 function preload() {
   //================mice
-  mice = loadImage('assets/1x/mice5.png');
-  // mice[0] = loadImage('assets/1x/mice1.png');
-  // mice[1] = loadImage('assets/1x/mice2.png');
-  // mice[2] = loadImage('assets/1x/mice3.png');
-  // mice[3] = loadImage('assets/1x/mice4.png');
-  // mice[4] = loadImage('assets/1x/mice5.png');
-  // mice[5] = loadImage('assets/1x/mice4.png');
-  // mice[6] = loadImage('assets/1x/mice3.png');
-  // mice[7] = loadImage('assets/1x/mice2.png');
-
+  //mice = loadImage('assets/1x/mice5.png');
+  mice[0] = loadImage('assets/1x/mice1.png');
+  mice[1] = loadImage('assets/1x/mice2.png');
+  mice[2] = loadImage('assets/1x/mice3.png');
+  mice[3] = loadImage('assets/1x/mice4.png');
+  mice[4] = loadImage('assets/1x/mice5.png');
+  mice[5] = loadImage('assets/1x/mice4.png');
+  mice[6] = loadImage('assets/1x/mice3.png');
+  mice[7] = loadImage('assets/1x/mice2.png');
 
   //===============cat
   catHead = loadImage("assets/1x/head.png");
@@ -78,7 +80,7 @@ function setup() {
 
   flock = new Flock();
   // Add an initial set of boids into the system
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 20; i++) {
     let b = new Boid(random(width), random(height));
     flock.addBoid(b);
   }
@@ -89,6 +91,8 @@ function setup() {
   beta = 0;
   gamma = 0;
 
+  frameRate(8);
+
 }
 //==================draw
 function draw() {
@@ -96,7 +100,7 @@ function draw() {
   image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
 
   let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
-  let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
+
   drawAxis(catPos0, catPos);
 
 let myHeading = catPos.heading();
@@ -107,8 +111,9 @@ let myHeading = catPos.heading();
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
   //================switched x and y maps
-  yPosition = map(gamma, -60, 60, 0, width);
-  xPosition = map(beta, -30, 30, 0, height);
+  zPosition = map(alpha, 0, 0, 0, 0);
+  yPosition = map(gamma, 30, -30, 0, width);
+  xPosition = map(beta, 30, -30, 0, height);
 
 
   catPos.x = xPosition
@@ -156,9 +161,7 @@ function Flock() {
 }
 
 Flock.prototype.run = function() {
-  for (let i = 0; i < flock.boids.length; i++) {
-    flock.boids[i].run(flock.boids); // Passing the entire list of boids to each boid individually
-  }
+
 }
 
 Flock.prototype.addBoid = function(b) {
@@ -207,12 +210,12 @@ function Boid(x, y) {
   this.velocity = createVector(random(-10, 10), random(-10, 10));
   this.position = createVector(x, y);
   this.r = 3.0;
-  this.maxspeed = 5.0; // Maximum speed
+  this.maxspeed = 10; // Maximum speed
   this.maxforce = 0.5 // Maximum steering force
   //   this.maxforce = 0.05; // Maximum steering force
 }
 //---------------------end boid variables
-Boid.prototype.run = function(boids) {
+Boid.prototype.run = function() {
   //==================these are the prototypes for boid
   this.flock(boids);
   this.update();
@@ -228,13 +231,13 @@ Boid.prototype.applyForce = function(force) {
 }
 //--------------------- end force
 // We accumulate a new acceleration each time based on three rules
-Boid.prototype.flock = function(boids) {
+Boid.prototype.flock = function() {
   let sep = this.separate(boids); // Separation
   //let ali = this.align(boids); //align
   let coh = this.cohesion(boids); // Cohesion
   // Arbitrarily weight these forces
-  sep.mult(2.0);
-  coh.mult(0.0);
+  sep.mult(5.0);
+  coh.mult(0.05);
   // Add the force vectors to acceleration
   this.applyForce(sep);
   // this.applyForce(ali);
@@ -246,7 +249,7 @@ Boid.prototype.update = function() {
   // Update velocity
   this.velocity.add(this.acceleration);
   // Limit speed
-  this.velocity.limit(this.maxspeed);
+  //this.velocity.limit(this.maxspeed);
   this.position.add(this.velocity);
   // Reset accelertion to 0 each cycle
   this.acceleration.mult(0);
@@ -277,24 +280,29 @@ Boid.prototype.render = function() {
   push();
   translate(this.position.x, this.position.y);
   rotate(theta);
-  image(mice, this.r * 3, this.r * 3);
+
+  image(mice[currentFrame], 0, 0);
+  currentFrame++;
+  if (currentFrame == mice.length) {
+    currentFrame = 0;
+  }
 
   pop();
 }
 // --------------------- end render
 // Wraparound
 Boid.prototype.borders = function() {
-  if (this.position.x < -50) this.position.x = windowWidth + 50;
-  if (this.position.y < -50) this.position.y = windowHeight + 50;
-  if (this.position.x > windowWidth + 50) this.position.x = -50;
-  if (this.position.y > windowHeight + 50) this.position.y = -50;
+  if (this.position.x < -150) this.position.x = windowWidth + 150;
+  if (this.position.y < -150) this.position.y = windowHeight + 150;
+  if (this.position.x > windowWidth + 150) this.position.x = - 150;
+  if (this.position.y > windowHeight + 150) this.position.y = -150;
 }
 //--------------------- end borders
 // Separation
 // Method checks for nearby boids and steers away
 Boid.prototype.separate = function(boids) {
   let angle = 0;
-  let angleVel = 0.2;
+  let angleVel = 0.5;
   let desiredseparation = 160;
   let steer = createVector(0, 0);
   let count = 0;
@@ -327,31 +335,7 @@ Boid.prototype.separate = function(boids) {
   return steer;
 }
 //--------------------end Separation
-// Alignment
-// For every nearby boid in the system, calculate the average velocity
-Boid.prototype.align = function(boids) {
-  let neighbordist = 50;
-  let sum = createVector(0, 0);
-  let count = 0;
-  for (let i = 0; i < boids.length; i++) {
-    let d = p5.Vector.dist(this.position, boids[i].position);
-    if ((d > 0) && (d < neighbordist)) {
-      sum.add(boids[i].velocity);
-      count++;
-    }
-  }
-  if (count > 0) {
-    sum.div(count);
-    sum.normalize();
-    sum.mult(this.maxspeed);
-    let steer = p5.Vector.sub(sum, this.velocity);
-    steer.limit(this.maxforce);
-    return steer;
-  } else {
-    return createVector(0, 0);
-  }
-}
-//---------------------end align
+
 // Cohesion
 // For the average location (i.e. center) of all nearby boids, calculate steering vector towards that location
 Boid.prototype.cohesion = function(boids) {
@@ -390,7 +374,7 @@ function drawAxis(base, vec) {
 
 function cat() {
 
-    angle = -90;
+rotate(90);
 push();
 
 
