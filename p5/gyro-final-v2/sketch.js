@@ -75,7 +75,7 @@ function preload() {
 //===============setup
 function setup() {
   //createCanvas(1080, 720);
-  createCanvas(1080, 720);
+  createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
   imageMode(CENTER);
 
@@ -99,13 +99,14 @@ function setup() {
 function draw() {
   background(200, 150, 100);
   image(woodFloor, width / 2, height / 2);
+  background(200, 150, 100);
+  image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
 
-let catPos0 = createVector(0, 0);
-
-
+  let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
+  let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
   drawAxis(catPos0, catPos);
 
-let myHeading = catPos.heading();
+  let myHeading = catPos.heading();
 
   flock.run();
 
@@ -114,7 +115,7 @@ let myHeading = catPos.heading();
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
   //================switched x and y maps
   zPosition = map(alpha, 0, 0, 0, 0);
-  yPosition = map(gamma, 30, -30, 0, width);
+  yPosition = map(gamma, 60, -60, 0, width);
   xPosition = map(beta, 30, -30, 0, height);
 
 
