@@ -24,13 +24,14 @@ var stomachY = 159;
 var stomachX = 64;
 
 var catPos;
+var catPos0;
 var cat;
 var xdirection = 1;
 var ydirection = 1;
 //==============environment
 var woodFloor;
-var windowWidth = 0;
-var windowHeight = 0;
+var displayWidth = 0;
+var displayHeight = 0;
 
 //===============axis
 let base = 150,
@@ -74,18 +75,18 @@ function preload() {
 //===============setup
 function setup() {
   //createCanvas(1080, 720);
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(1080, 720);
   angleMode(DEGREES);
   imageMode(CENTER);
 
   flock = new Flock();
   // Add an initial set of boids into the system
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 50; i++) {
     let b = new Boid(random(width), random(height));
     flock.addBoid(b);
   }
 
-  catPos = createVector(windowWidth / 2, windowHeight / 2);
+  catPos = createVector(width / 2, width / 2);
 
   alpha = 0;
   beta = 0;
@@ -97,9 +98,10 @@ function setup() {
 //==================draw
 function draw() {
   background(200, 150, 100);
-  image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
+  image(woodFloor, width / 2, height / 2);
 
-  let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
+let catPos0 = createVector(base.x, base.y);
+
 
   drawAxis(catPos0, catPos);
 
@@ -207,10 +209,10 @@ Path.prototype.run = function(boids) {
 //===================== Boid start
 function Boid(x, y) {
   this.acceleration = createVector(0, 0);
-  this.velocity = createVector(random(-10, 10), random(-10, 10));
+  this.velocity = createVector(random(-20, 20), random(-20, 20));
   this.position = createVector(x, y);
   this.r = 3.0;
-  this.maxspeed = 10; // Maximum speed
+  this.maxspeed = 20; // Maximum speed
   this.maxforce = 0.5 // Maximum steering force
   //   this.maxforce = 0.05; // Maximum steering force
 }
@@ -219,10 +221,8 @@ Boid.prototype.run = function() {
   //==================these are the prototypes for boid
   this.flock(boids);
   this.update();
-  this.borders(100, 100);
+  this.borders();
   this.render();
-
-
 }
 //---------------------- end run
 Boid.prototype.applyForce = function(force) {
@@ -239,7 +239,7 @@ Boid.prototype.flock = function() {
   sep.mult(5.0);
   coh.mult(0.05);
   // Add the force vectors to acceleration
-  this.applyForce(sep);
+this.applyForce(sep);
   // this.applyForce(ali);
   this.applyForce(coh);
 }
@@ -292,17 +292,17 @@ Boid.prototype.render = function() {
 // --------------------- end render
 // Wraparound
 Boid.prototype.borders = function() {
-  if (this.position.x < -150) this.position.x = windowWidth + 150;
-  if (this.position.y < -150) this.position.y = windowHeight + 150;
-  if (this.position.x > windowWidth + 150) this.position.x = - 150;
-  if (this.position.y > windowHeight + 150) this.position.y = -150;
+  if (this.position.x < -150) this.position.x = displayWidth + 150;
+  if (this.position.y < -150) this.position.y = displayHeight + 150;
+  if (this.position.x > displayWidth + 150) this.position.x = - 150;
+  if (this.position.y > displayHeight + 150) this.position.y = -150;
 }
 //--------------------- end borders
 // Separation
 // Method checks for nearby boids and steers away
 Boid.prototype.separate = function(boids) {
   let angle = 0;
-  let angleVel = 0.5;
+  let angleVel = 0.3;
   let desiredseparation = 160;
   let steer = createVector(0, 0);
   let count = 0;
@@ -339,7 +339,7 @@ Boid.prototype.separate = function(boids) {
 // Cohesion
 // For the average location (i.e. center) of all nearby boids, calculate steering vector towards that location
 Boid.prototype.cohesion = function(boids) {
-  let neighbordist = 50;
+  let neighbordist = 100;
   let sum = createVector(0, 0); // Start with empty vector to accumulate all locations
   let count = 0;
   for (let i = 0; i < flock.boids.length; i++) {
