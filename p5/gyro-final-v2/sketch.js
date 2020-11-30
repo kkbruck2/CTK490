@@ -86,7 +86,7 @@ function setup() {
     flock.addBoid(b);
   }
 
-  catPos = createVector(width / 2, width / 2);
+  catPos = createVector(0, 0);
 
   alpha = 0;
   beta = 0;
