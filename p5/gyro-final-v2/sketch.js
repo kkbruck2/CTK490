@@ -46,6 +46,8 @@ var zPosition = 0;
 var x = 0; // acceleratiobn data
 var y = 0;
 var z = 0;
+var windowWidth = 0;
+var windowHeight = 0;
 
 
 function preload() {
@@ -109,6 +111,14 @@ function draw() {
   let myHeading = catPos.heading();
 
   flock.run();
+
+  if (catPos.x > windowWidth || catPos.x < windowWidth) {
+    xdirection *= -1;
+  }
+  if (catPos.y > windowHeight || catPos.Y < windowHeight) {
+    ydirection *= -1;
+  }
+
 
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
@@ -240,7 +250,7 @@ Boid.prototype.flock = function() {
   sep.mult(5.0);
   coh.mult(0.05);
   // Add the force vectors to acceleration
-this.applyForce(sep);
+  this.applyForce(sep);
   // this.applyForce(ali);
   this.applyForce(coh);
 }
@@ -293,10 +303,12 @@ Boid.prototype.render = function() {
 // --------------------- end render
 // Wraparound
 Boid.prototype.borders = function() {
-  if (this.position.x < -150) this.position.x = displayWidth + 150;
-  if (this.position.y < -150) this.position.y = displayHeight + 150;
-  if (this.position.x > displayWidth + 150) this.position.x = - 150;
-  if (this.position.y > displayHeight + 150) this.position.y = -150;
+  if (this.position.x > windowWidth || this.position.x < windowWidth) {
+    xdirection *= -1;
+  }
+  if (this.position.y > windowHeight || this.position.y < windowHeight) {
+    ydirection *= -1;
+  }
 }
 //--------------------- end borders
 // Separation
@@ -375,12 +387,12 @@ function drawAxis(base, vec) {
 
 function cat() {
 
-rotate(90);
-push();
+  rotate(90);
+  push();
 
 
   //left front leg
-  image(frontL, -36  + -2 / 10 * (stomachX -64), 15);
+  image(frontL, -36 + -2 / 10 * (stomachX - 64), 15);
 
   //right front Leg
   image(frontR, 39 + 2 / 10 * (stomachX - 64), 20);
@@ -406,5 +418,5 @@ push();
   //fill(150, 0, 150, 150);
   translate(-300, -300);
   //ellipse(300, 300, 70, 70);
-pop();
+  pop();
 }
