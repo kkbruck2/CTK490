@@ -100,7 +100,7 @@ function draw() {
   background(200, 150, 100);
   image(woodFloor, width / 2, height / 2);
 
-let catPos0 = createVector(base.x, base.y);
+let catPos0 = createVector(0, 0);
 
 
   drawAxis(catPos0, catPos);
@@ -365,7 +365,7 @@ function drawAxis(base, vec) {
   push();
   noStroke();
   translate(base.x, base.y);
-  line(0, 0, vec.x, vec.y);
+  line(base.x, base.y, vec.x, vec.y);
   rotate(vec.heading());
   translate(vec.mag(), 0);
   cat(vec.x, vec.y);
