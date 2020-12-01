@@ -83,7 +83,7 @@ function setup() {
 
   flock = new Flock();
   // Add an initial set of boids into the system
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 30; i++) {
     let b = new Boid(random(width), random(height));
     flock.addBoid(b);
   }
@@ -139,7 +139,7 @@ function draw() {
     flock.boids[i].run();
     if (flock.boids[i].position.dist(catPos) < 40) {
       flock.boids.splice(i, 1);
-      stomachX += 3;
+      stomachX += 2;
 
     }
 
