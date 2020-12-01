@@ -303,10 +303,10 @@ Boid.prototype.render = function() {
 // --------------------- end render
 // Wraparound
 Boid.prototype.borders = function() {
-  if (this.position.x < -50) this.position.x = windowWidth + 50;
-  if (this.position.y < -50) this.position.y = windowHeight + 50;
-  if (this.position.x > windowWidth + 50) this.position.x = -50;
-  if (this.position.y > windowHeight + 50) this.position.y = -50;
+  if (this.position.x < 0) this.position.x = windowWidth;
+  if (this.position.y < 0) this.position.y = windowHeight;
+  if (this.position.x > windowWidth) this.position.x = 0;
+  if (this.position.y > windowHeight) this.position.y = 0;
 }
 //--------------------- end borders
 // Separation
