@@ -112,12 +112,12 @@ function draw() {
 
   flock.run();
 
-  if (catPos.x > windowWidth || catPos.x < windowWidth) {
-    xdirection *= -1;
-  }
-  if (catPos.y > windowHeight || catPos.Y < windowHeight) {
-    ydirection *= -1;
-  }
+  // if (catPos.x > windowWidth || catPos.x < windowWidth) {
+  //   xdirection *= -1;
+  // }
+  // if (catPos.y > windowHeight || catPos.Y < windowHeight) {
+  //   ydirection *= -1;
+  // }
 
 
   // the map command !!!!
