@@ -125,8 +125,8 @@ function draw() {
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
   //================switched x and y maps
   zPosition = map(alpha, 0, 0, 0, 0);
-  yPosition = map(gamma, 60, -60, 0, width);
-  xPosition = map(beta, 30, -30, 0, height);
+  xPosition = map(gamma, 60, -60, 0, width);
+  yPosition = map(beta, 30, -30, 0, height);
 
 
   catPos.x = xPosition
