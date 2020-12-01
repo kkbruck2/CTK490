@@ -83,7 +83,7 @@ function setup() {
 
   flock = new Flock();
   // Add an initial set of boids into the system
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 20; i++) {
     let b = new Boid(random(width), random(height));
     flock.addBoid(b);
   }
@@ -125,8 +125,8 @@ function draw() {
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
   //================switched x and y maps
   zPosition = map(alpha, 0, 0, 0, 0);
-  xPosition = map(gamma, -30, 30, 0, width);
-  yPosition = map(beta, -60, 60, 0, height);
+  yPosition = map(gamma, -30, 30, 0, width);
+  xPosition = map(beta, -60, 60, 0, height);
 
 
   catPos.x = xPosition
