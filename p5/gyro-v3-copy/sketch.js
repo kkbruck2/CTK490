@@ -175,7 +175,7 @@ window.addEventListener('devicemotion', function(e) {
 //========================================================== cat definition
 function cat() {
 push();
-  rotate(90);
+//  rotate(90);
 
   //left front leg
   image(frontL, -36  + -2 / 10 * (stomachX -64), 15);
