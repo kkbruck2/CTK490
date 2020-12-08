@@ -81,7 +81,7 @@ function preload() {
   cattail = loadImage("assets/1x/tail.png");
   backL = loadImage("assets/1x/backL.png");
   backR = loadImage("assets/1x/backR.png");
-  woodFloor = loadImage("assets/1x/myFloor.png");
+  woodFloor = loadImage("assets/1x/myFloorV.png");
   marks = loadImage("assets/1x/marking.png");
   //=================interface images
   start = loadImage('assets/1x/start.png');
