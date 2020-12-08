@@ -48,7 +48,7 @@ function preload() {
 
 //===============================================================Set up
 function setup() {
-  createCanvas(displayWidth, displayHeight);
+  createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
   imageMode(CENTER);
   rectMode(CENTER);
@@ -66,7 +66,7 @@ function setup() {
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
-  catPos = createVector(displayWidth / 2, height - 80);
+  catPos = createVector(width / 2, height - 80);
 
   //------------------------------------------------- piece splice
 
@@ -77,12 +77,12 @@ function setup() {
 //=============================================================Draw
 function draw() {
   background('#CE9B64'); // background fill
-  image(woodFloor, displayWidth / 2, displayHeight / 2, displayWidth, displayHeight);
+  image(woodFloor, windowWidth / 2, windowHeight / 2, windowWidth, windowHeight);
 
 
   //-----------------------------
-  let catPos0 = createVector(displayWidth / 2, displayHeight / 2);
-  let catPos = createVector(xPosition - displayWidth / 2, yPosition - displayHeight / 2);
+  let catPos0 = createVector(windowWidth / 2, windowHeight / 2);
+  let catPos = createVector(xPosition - windowWidth / 2, yPosition - windowHeight / 2);
 
   drawArrow(catPos0, catPos, 'black');
 
@@ -104,10 +104,8 @@ function draw() {
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-  yPosition = map(gamma, -50, 50, 0, width);
-
-  xPosition = map(beta, -30, 30, 0, height);
-
+  yPosition = map(gamma, -30, 30, 0, width);
+  xPosition = map(beta, -60, 60, 0, height);
 
 
 
@@ -175,7 +173,7 @@ window.addEventListener('devicemotion', function(e) {
 //========================================================== cat definition
 function cat() {
 push();
-//  rotate(90);
+  //angle = 90;
 
   //left front leg
   image(frontL, -36  + -2 / 10 * (stomachX -64), 15);
