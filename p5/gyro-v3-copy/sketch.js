@@ -104,14 +104,10 @@ function draw() {
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-  yPosition = map(gamma, -30, 30, 0, width);
-  if (gamma < -30) {
-    gamma * -1;
-  }
-  xPosition = map(beta, -40, 40, 0, height);
-  if (beta > 40 || beta < -40) {
-    beta = 0;
-  }
+  xPosition = map(gamma, -50, 50, 0, width);
+
+  yPosition = map(beta, -30, 30, 0, height);
+
 
 
 
