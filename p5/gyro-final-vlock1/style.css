@@ -1,0 +1,83 @@
+/* // Breakpoints
+//
+// Defines available breakpoints for project and creates a mixin to allow easy use. Breakpoints are mobile first
+// working up in device width (based on min-width).
+//
+// The mixin also supports targeting portrait and landscape devices although this is not bound to any device width
+//
+// @TODO: currently the mixin does not support query ranges or directions other than up. Although use cases for these
+// scenarios is limited it may need to be extended in the future.
+//
+// Usage:
+//
+// .classname {
+//   @include breakpoint(small) {
+//     font-size: 12px;
+//   }
+// }
+//
+// Output:
+//
+// @media only screen and (min-width: 0) {
+//   .classname {
+//     font-size: 12px;
+//   }
+// }
+
+// Hacks for < ie8 */
+$media-query-support: true;
+
+$breakpoints: (
+	small: 0,
+	medium: 640px,
+	large: 769px,
+	xlarge: 1440px
+);
+/*
+// Exports breakpoint classes for the Grid */
+$breakpoints-export: (
+	small,
+	medium,
+	large
+);
+
+/* // Breakpoint
+//
+// Adds a media query for required breakpoint
+//
+// @param {string} $bp - size to target
+//
+// [landscape] - only screen and (orientation: laandscape)
+// [portrait] - only screen and (orientation: portrait)
+// [small|medium|large|xlarge|xxlarge] - Defined in $breakpoints map
+//
+// @output Required styles within media query */
+
+@mixin breakpoint($bp: small) {
+
+	/* // Eventual output */
+	$mq: "only screen";
+
+	// Orientation media queries have a unique syntax
+	@if $bp == "landscape" or $bp == "portrait" {
+		$mq: $mq + " and (orientation: #{$bp})";
+	} @else {
+		// Try to pull a named breakpoint out of the $breakpoints map
+		@if map-has-key($breakpoints, $bp) {
+			$bp: map-get($breakpoints, $bp);
+		}
+		@else {
+			@warn "ERROR: You must use a preset media query defined in the $breakpoints map";
+		}
+		$mq: $mq + " and (min-width: #{$bp})";
+	}
+
+	// Output
+	@if $media-query-support {
+		@media #{$mq} {
+			@content;
+		}
+	} @else {
+		@content;
+	}
+}
