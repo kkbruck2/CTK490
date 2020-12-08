@@ -66,7 +66,7 @@ function setup() {
   for (var i = 0; i < 20; i++) {
     cars.push(new car())
   }
-  catPos = createVector(width / 2, height - 80);
+  catPos = createVector(displayWidth / 2, height - 80);
 
   //------------------------------------------------- piece splice
 
@@ -104,11 +104,11 @@ function draw() {
   // the map command !!!!
   // takes your variable and maps it from range 1 to range 2
   // map(yourVar, range1_x, range1_y, range2_x, range2_y) ;
-  yPosition = map(gamma, -60, 60, 0, width);
+  yPosition = map(gamma, -30, 30, 0, width);
   if (gamma < -30) {
     gamma * -1;
   }
-  xPosition = map(beta, -30, 30, 0, height);
+  xPosition = map(beta, -40, 40, 0, height);
   if (beta > 40 || beta < -40) {
     beta = 0;
   }
@@ -179,7 +179,7 @@ window.addEventListener('devicemotion', function(e) {
 //========================================================== cat definition
 function cat() {
 push();
-  //angle = 90;
+  rotate(90);
 
   //left front leg
   image(frontL, -36  + -2 / 10 * (stomachX -64), 15);
