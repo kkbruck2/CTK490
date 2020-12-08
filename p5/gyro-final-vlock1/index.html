@@ -5,8 +5,10 @@
 	<title>Mouse Hunt Gyro</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
 	<meta name="viewport" content="user-scalable=yes,initial-scale=1,width=device-width">
+
+
+<!-- 	<meta name="viewport" content="user-scalable=yes,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width"> -->
 
 
 	<!-- p5js -->
@@ -14,9 +16,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.min.js"></script>
 
-	<button   id="request"  style="height: 50px; width: 150px; top: 20px; right: 20px; position: fixed; z-index: 5;">Request Permission</button>
+	<button   id="request"  style="padding: 6px 18px; font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: heavy; top: 60px; right: -20px; position: relative; z-index: 5; background: #534741; color: #ffffff; ">Request Permission</ br>
+  for Motion Sensors</button>
 
 <style> body {padding: 0; margin: 0;} body::-webkit-scrollbar { display: none; }</style>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
 
 <script>
 // if (location.protocol != 'https:') {
@@ -25,7 +32,7 @@
 
 function requestT () {
 
-	 if (typeof(DeviceMotionEvent) !== 'landscape' && typeof(DeviceMotionEvent.requestPermission) === 'function') {
+	 if (typeof(DeviceMotionEvent) !== 'undefined' && typeof(DeviceMotionEvent.requestPermission) === 'function') {
 			 alert('enter');
 			 DeviceMotionEvent.requestPermission()
 			 .then(response => {
@@ -64,13 +71,9 @@ new p5(sketch, 'container');
 
 	<!-- sketch -->
 	<script language="javascript" src="sketch.js"></script>
-	<style>
-		body {
-			padding: 0;
-			margin: 0;
-		}
-	</style>
 
+
+  <link rel="stylesheet" href="style.css">
 
 
 
@@ -78,7 +81,7 @@ new p5(sketch, 'container');
 </head>
 
 <body>
-	<div id='container' style="top: 0; right: 0; position: fixed; z-index: 1;"></div>
+	<div id="container" style="top: 0; right: 0; position: fixed; z-index: 1;"></div>
 
 
 
