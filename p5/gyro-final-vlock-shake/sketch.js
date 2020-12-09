@@ -140,10 +140,15 @@ function draw() {
     if (flock.boids[i].position.dist(catPos) < 40) {
       flock.boids.splice(i, 1);
       stomachX += 2;
-
+    }
+    if (flock.boids.length == 0) {
+      resetMice();
     }
 
+
   }
+
+
 
 }
 //================end draw
@@ -420,12 +425,13 @@ function cat() {
 }
 
 //shake to Reset
-let threshold = 30;
-let accChangeX = 0;
-let accChangeY = 0;
-let accChangeT = 0;
+
 
 function resetMice() {
+  let threshold = 30;
+  let accChangeX = 0;
+  let accChangeY = 0;
+  let accChangeT = 0;
 
   //=========================initial group of mice
   flock = new Flock();
