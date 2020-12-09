@@ -49,6 +49,11 @@ var z = 0;
 var windowWidth = 0;
 var windowHeight = 0;
 
+let threshold = 30;
+let accChangeX = 0;
+let accChangeY = 0;
+let accChangeT = 0;
+
 
 function preload() {
   //================mice
@@ -141,15 +146,9 @@ function draw() {
       flock.boids.splice(i, 1);
       stomachX += 2;
     }
-    if (flock.boids.length == 0) {
-      resetMice();
-    }
-
 
   }
-
-
-
+  checkForShake();
 }
 //================end draw
 
@@ -427,11 +426,9 @@ function cat() {
 //shake to Reset
 
 
+
 function resetMice() {
-  let threshold = 30;
-  let accChangeX = 0;
-  let accChangeY = 0;
-  let accChangeT = 0;
+
 
   //=========================initial group of mice
   flock = new Flock();
@@ -442,7 +439,7 @@ function resetMice() {
   }
   //===========================
 
-  checkForShake();
+
 }
 
 function checkForShake() {
@@ -451,19 +448,13 @@ function checkForShake() {
   accChangeY = abs(accelerationY - pAccelerationY);
   accChangeT = accChangeX + accChangeY;
   // If shake
-  if (accChangeT >= threshold) {
-    for (let i = 0; i < flock.boids.length; i++) {
-      this.flock(boids);
-      this.update();
-      this.borders();
-      this.render();
-    }
-  }
-  // If not shake
-  else {
-    for (let i = 0; i < flock.boids.length; i++) {
-      boids[i].stopShake();
+  if (accChangeT >= threshold && flock.boids.length == 0) {
+
+resetMice();
+
 
     }
   }
+  // If not shake
+
 }
