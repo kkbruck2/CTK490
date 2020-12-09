@@ -431,7 +431,6 @@ function resetMice() {
 
 
   //=========================initial group of mice
-  flock = new Flock();
   // Add an initial set of boids into the system
   for (let i = 0; i < 30; i++) {
     let b = new Boid(random(width), random(height));
@@ -450,11 +449,9 @@ function checkForShake() {
   // If shake
   if (accChangeT >= threshold && flock.boids.length == 0) {
 
-resetMice();
+    resetMice();
 
 
-    }
   }
-  // If not shake
-
 }
+// If not shake
