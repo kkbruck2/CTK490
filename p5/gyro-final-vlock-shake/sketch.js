@@ -436,6 +436,7 @@ function resetMice() {
     let b = new Boid(random(width), random(height));
     flock.addBoid(b);
   }
+    stomachX = 64;
   //===========================
 
 
